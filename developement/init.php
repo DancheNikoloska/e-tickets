@@ -12,14 +12,14 @@ if (!isset($_GET['krastavica']) || $_GET['krastavica'] != $_SESSION['krastavica'
 	if (mysqli_connect_errno()) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-	$status = run_sql_file($con, "../developement/ticketsdb.sql");
+	$status = run_sql_file($con, "ticketsdb.sql");
 	echo "<b>$status</b>";
-	seedEntities($con);
+	//seedEntities($con);
 	mysqli_close($con);
 	echo "<br/>deleted your database, have a nice day";
 }
 
-/*
+
 function run_sql_file($con, $location) {
 	//load file
 	$commands = file_get_contents($location);
@@ -42,6 +42,9 @@ function run_sql_file($con, $location) {
 	//return number of successful queries and total number of queries found
 	return "Executed total $total queries, out of which $success were succesfull";
 }
+
+
+ /*
 function seedEntities($con) {
 	$command = "INSERT INTO roles VALUES('admin','Administers the webpage, eats popcorn')";
 	mysqli_query($con, $command);
