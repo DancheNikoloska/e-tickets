@@ -12,7 +12,7 @@ if (!isset($_GET['krastavica']) || $_GET['krastavica'] != $_SESSION['krastavica'
 	if (mysqli_connect_errno()) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-	$status = run_sql_file($con, "ticketsdb.sql");
+	$status = run_sql_file($con, "ticketsdb1.sql");
 	echo "<b>$status</b>";
 	//seedEntities($con);
 	mysqli_close($con);
@@ -34,6 +34,7 @@ function run_sql_file($con, $location) {
 			$success += (mysqli_query($con, $command) == false ? 0 : 1);
 			if ($success == 0) {
 				echo "<p style='color:#FF0000'>FAILED MOFO</p>";
+			echo "";
 			}
 			//mysqli_query($con, $command);
 			$total++;
