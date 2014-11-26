@@ -22,8 +22,8 @@ if (isset($_POST['submit'])) {
 		
 		$flagloz2=0;
 	
-else { {	$salt = "turskicaj";
-			$lozinka = md5($salt . $lozinka);
+else { {	//$salt = "baklava";
+			//$lozinka = md5($salt . $lozinka);
 			$q = mysqli_query($link, "INSERT INTO users(username,password,email,usertype) VALUES('$user','$lozinka','$email','$tip')");
 			if ($q) {
 				header("Location: login.php");

@@ -18,9 +18,8 @@ function validateEmail($connection, $email) {
 	}
 }
 function validateLogin($connection, $lozinka, $user) {
-	$salt = "baklava";
-	$lozinka = md5($salt . $lozinka);
-	$lozinka = htmlspecialchars($lozinka, ENT_QUOTES, 'UTF-8');
+	//$salt = "baklava";
+	//$lozinka = md5($salt . $lozinka);
 	if (strlen($lozinka) > 0 && strlen($user) > 0) {
 		$q = mysqli_query($connection, "SELECT * FROM users WHERE password='$lozinka' AND username='$user'");
 		if (mysqli_num_rows($q) > 0) {

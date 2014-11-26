@@ -7,13 +7,17 @@ if (isset($_SESSION['username'])) {
 	$flag = 1;
 } else {
 	$flag = 0;
+	
+
 }
+
 //inaku ne e najaven i proveruvame dali bilo klinato submit na formata
 if (isset($_POST['sub'])) {
 	include_once 'database.php';
 	include_once 'user_validation.php';
 	$user = $_POST['user'];
 	$pass = $_POST['pass'];
+
 	if (validateLogin($link, $pass, $user) == true) {
 		//ovde doagjame ako ne bil prethodno najaven i e kliknato submit, i go najavuvame samo so toa so piseme u $_SESSION koj e najaven
 		$_SESSION['username'] = $user;
@@ -36,6 +40,8 @@ if (isset($_POST['sub'])) {
 			echo "err";
 		}
 	} else {
+		
+		
 		print '<span style=float:right;color:red>Невалидни податоци!&nbsp </span><br>';
 	}
 }
@@ -82,8 +88,8 @@ if (isset($_POST['sub'])) {
 
 					<form method="post" role="form">
 						<div class="form-group">
-							<label for="Email1">Корисничко име/емаил:</label>
-							<input type="user" class="form-control" name="user" id="Email1" placeholder="">
+							<label for="username1">Корисничко име:</label>
+							<input type="user" class="form-control" name="user" id="username1" placeholder="">
 						</div>
 						<div class="form-group">
 							<label for="Password1">Лозинка:</label>
