@@ -48,14 +48,14 @@ function run_sql_file($con, $location) {
  
 function seedEntities($con) {
 	$command = "INSERT INTO `categories`  VALUES
-(1, 'Спорт', 'Спортски натпревари'),
-(2, 'Музика', 'Музички концерти'),
-(3, 'Кино', 'Билети за кино'),
-(4, 'Театар', 'Билети за театарски претстави')";
+(1, N'Спорт', N'Спортски натпревари'),
+(2, N'Музика', N'Музички концерти'),
+(3, N'Кино', N'Билети за кино'),
+(4, N'Театар', N'Билети за театарски претстави')";
 	mysqli_query($con, $command);
 	$command = "INSERT INTO `events` (`id`, `name`, `placeId`, `categoryId`, `periodsId`, `description`) VALUES
-(1, 'Сомнително лице', 5, 4, 1, 'Театарска претстава там тарам'),
-(2, 'Концерт Каролина Гочева', 4, 2, 2, 'Промоција на албумот Македонско девојче II')";
+(1, N'Сомнително лице', 5, 4, 1, N'Театарска претстава там тарам'),
+(2, N'Концерт Каролина Гочева', 4, 2, 2, N'Промоција на албумот Македонско девојче II')";
 	mysqli_query($con, $command);
 	
 	$command = "INSERT INTO `periods` (`id`, `date`, `time`, `placeId`) VALUES
@@ -65,15 +65,15 @@ function seedEntities($con) {
 	$command = "
 
 INSERT INTO `places` (`id`, `address`, `name`, `image`, `capacity`) VALUES
-(2, 'Љубљанска бр.4', 'Cineplexx', 'images/cineplexx.jpg', 400),
-(3, 'Градски стадион б.б.', 'Национална арена Филип II', 'images/filipII.jpg', 10000),
-(4, '8 Септември бр.13', 'Спортска сала Борис Трајковски', 'images/boris_trajkovski.jpg', 5000),
-(5, 'Kej бр.23', 'Македонски народен театар', 'images/mnt', 800)";
+(2, N'Љубљанска бр.4', N'Cineplexx', 'images/cineplexx.jpg', 400),
+(3, N'Градски стадион б.б.', N'Национална арена Филип II', 'images/filipII.jpg', 10000),
+(4, N'8 Септември бр.13', N'Спортска сала Борис Трајковски', 'images/boris_trajkovski.jpg', 5000),
+(5, N'Kej бр.23', N'Македонски народен театар', 'images/mnt', 800)";
 	mysqli_query($con, $command);
 	$command = "INSERT INTO `ticket_types` (`id`, `name`, `state`, `price`) VALUES
-(1, 'Партер', 'Слободен', 300),
-(2, 'ВИП', 'Слободен', 500),
-(3, 'Трибина', 'Резервиран', 400)";
+(1, N'Партер', N'Слободен', 300),
+(2, N'ВИП', N'Слободен', 500),
+(3, N'Трибина', N'Резервиран', 400)";
 	mysqli_query($con, $command);
 	
 }
