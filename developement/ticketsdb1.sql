@@ -86,9 +86,8 @@ CREATE TABLE IF NOT EXISTS `users`
   `password` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
   `usertype` varchar(10) NOT NULL,
-  `ticketId` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `ticketId` (`ticketId` )
+  PRIMARY KEY (`id`)
+ 
 )  ;
 
 
@@ -124,6 +123,3 @@ ALTER TABLE  `periods`
   ADD CONSTRAINT `placeId2` FOREIGN KEY (`placeId`) REFERENCES `places` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
  ADD CONSTRAINT `eventId` FOREIGN KEY (`eventId`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE  `users`  
-ADD CONSTRAINT `ticketId` FOREIGN KEY (`ticketId`) REFERENCES `tickets` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
- 
