@@ -14,7 +14,7 @@ if (!isset($_GET['krastavica']) || $_GET['krastavica'] != $_SESSION['krastavica'
 	}
 	$status = run_sql_file($con, "ticketsdb1.sql");
 	echo "<b>$status</b>";
-	//seedEntities($con);
+	seedEntities($con);
 	mysqli_close($con);
 	echo "<br/>deleted your database, have a nice day";
 }
@@ -45,112 +45,37 @@ function run_sql_file($con, $location) {
 }
 
 
- /*
-function seedEntities($con) {
-	$command = "INSERT INTO roles VALUES('admin','Administers the webpage, eats popcorn')";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO roles VALUES('student','Learns stuff')";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO roles VALUES('professor','Teaches stuff')";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO permissions VALUES(1,'view_course_files')";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO permissions VALUES(2,'view_students_profile')";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO permissions VALUES(3,'add_lectures')";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO permissions VALUES(4,'edit_course')";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO permissions VALUES(5,'add_lecture_files')";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO permissions_assigned VALUES(1,'professor')";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO permissions_assigned VALUES(2,'professor')";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO permissions_assigned VALUES(3,'professor')";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO permissions_assigned VALUES(4,'professor')";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO permissions_assigned VALUES(5,'professor')";
-	mysqli_query($con, $command);
-    $command = "INSERT INTO users VALUES(1,'prof1@finki.com','prof1','a3bc80bfae7ad46112fa75e6ba63e387','professor')";
-    mysqli_query($con, $command);
-    $command = "INSERT INTO users VALUES(2,'prof2@finki.com','prof2','a3bc80bfae7ad46112fa75e6ba63e387','professor')";
-    mysqli_query($con, $command);
-    $command = "INSERT INTO users VALUES(3,'prof3@finki.com','prof3','a3bc80bfae7ad46112fa75e6ba63e387','professor')";
-    mysqli_query($con, $command);
-    $command = "INSERT INTO users VALUES(4,'stud1@finki.com','stud1','a3bc80bfae7ad46112fa75e6ba63e387','student')";
-    mysqli_query($con, $command);
-    $command = "INSERT INTO users VALUES(5,'stud2@finki.com','stud2','a3bc80bfae7ad46112fa75e6ba63e387','student')";
-    mysqli_query($con, $command);
-    $command = "INSERT INTO users VALUES(6,'stud3@finki.com','stud3','a3bc80bfae7ad46112fa75e6ba63e387','student')";
-    mysqli_query($con, $command);
-    $command = "INSERT INTO users VALUES(7,'lana@finki.com','lanaa','511427fe4e8c6240dd19f102ee8bacfc','student')";
-    mysqli_query($con, $command);
-    $command = "INSERT INTO users VALUES(8,'admin@admir.net','admin','a3bc80bfae7ad46112fa75e6ba63e387','admin')";
-    mysqli_query($con,$command);
-	$command = "INSERT INTO courses VALUES('course1',1,1,6)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO courses VALUES('course2',1,2,6)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO courses VALUES('course3',2,1,6)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO courses VALUES('course4',2,2,6)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO teaches_course VALUES('course1',1)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO teaches_course VALUES('course2',2)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO teaches_course VALUES('course3',2)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO teaches_course VALUES('course3',3)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO courses_taken VALUES('course1',6,1)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO courses_taken VALUES('course1',5,1)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO courses_taken VALUES('course2',6,2)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO courses_taken VALUES('course3',4,3)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO courses_taken VALUES('course3',5,2)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO courses_taken VALUES('course2',7,2)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO courses_taken VALUES('course1',7,1)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO courses_taken VALUES('course2',4,1)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO files VALUES(3, 'pdf', 'file3', 'course2', CURRENT_TIMESTAMP)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO lectures VALUES (1, 1, 'course1', 'Introduction', 'Introduction', 1)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO lectures VALUES (2, 0, 'course1', 'Data Flow', 'Data Flow', 2)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO lectures VALUES (3, 1, 'course2', 'Introduction C#', 'Introduction C#', 3)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO lecture_times VALUES (1, CURRENT_TIMESTAMP, 'Introduction' ,1)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO lecture_times VALUES (2, CURRENT_TIMESTAMP, 'Data Flow' ,2)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO lecture_times VALUES (3, CURRENT_TIMESTAMP, 'Introduction C#' ,3)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO attended_lectures VALUES (6,1)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO attended_lectures VALUES (5,1)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO attended_lectures VALUES (7,2)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO attended_lectures VALUES (5,2)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO attended_lectures VALUES (6,3)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO attended_lectures VALUES (7,3)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO attended_lectures VALUES (4,3)";
-	mysqli_query($con, $command);
  
+function seedEntities($con) {
+	$command = "INSERT INTO `categories`  VALUES
+(1, 'Спорт', 'Спортски натпревари'),
+(2, 'Музика', 'Музички концерти'),
+(3, 'Кино', 'Билети за кино'),
+(4, 'Театар', 'Билети за театарски претстави')";
+	mysqli_query($con, $command);
+	$command = "INSERT INTO `events` (`id`, `name`, `placeId`, `categoryId`, `periodsId`, `description`) VALUES
+(1, 'Сомнително лице', 5, 4, 1, 'Театарска претстава там тарам'),
+(2, 'Концерт Каролина Гочева', 4, 2, 2, 'Промоција на албумот Македонско девојче II')";
+	mysqli_query($con, $command);
+	
+	$command = "INSERT INTO `periods` (`id`, `date`, `time`, `placeId`) VALUES
+(1, '2014-11-25', '17:00:00', 2),
+(2, '2014-11-29', '20:00:00', 2)";
+	mysqli_query($con, $command);
+	$command = "
+
+INSERT INTO `places` (`id`, `address`, `name`, `image`, `capacity`) VALUES
+(2, 'Љубљанска бр.4', 'Cineplexx', 'images/cineplexx.jpg', 400),
+(3, 'Градски стадион б.б.', 'Национална арена Филип II', 'images/filipII.jpg', 10000),
+(4, '8 Септември бр.13', 'Спортска сала Борис Трајковски', 'images/boris_trajkovski.jpg', 5000),
+(5, 'Kej бр.23', 'Македонски народен театар', 'images/mnt', 800)";
+	mysqli_query($con, $command);
+	$command = "INSERT INTO `ticket_types` (`id`, `name`, `state`, `price`) VALUES
+(1, 'Партер', 'Слободен', 300),
+(2, 'ВИП', 'Слободен', 500),
+(3, 'Трибина', 'Резервиран', 400)";
+	mysqli_query($con, $command);
+	
 }
- *
- */
+ 
 ?>

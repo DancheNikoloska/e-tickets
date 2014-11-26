@@ -2,10 +2,12 @@ DROP TABLE IF EXISTS users ;
 DROP TABLE IF EXISTS tickets;
 DROP TABLE IF EXISTS ticket_types;
 
-DROP TABLE IF EXISTS events ;
-DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS periods ;
+
+DROP TABLE IF EXISTS events ;
 DROP TABLE IF EXISTS places ;
+
+DROP TABLE IF EXISTS categories;
 
 
 
@@ -22,10 +24,12 @@ CREATE TABLE IF NOT EXISTS `periods`
 (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
-  `time` time NOT NULL,
+   `time` time NOT NULL,
+ `eventId` int(11) NOT NULL,
   `placeId` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `placeId` (`placeId`)
+  KEY `placeId` (`placeId`),
+ KEY `eventId` (`eventId`)
 )  ;
 
 
@@ -50,11 +54,13 @@ CREATE TABLE IF NOT EXISTS `tickets`
  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(20) COLLATE utf8_bin NOT NULL,
-  `typeId` int(11) NOT NULL,
-  `eventId` int(11) NOT NULL,
+  `typeId` int(11) NOT NULL,  
+ `periodsId` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `typeId` (`typeId`,`eventId`),
-  KEY `eventId` (`eventId`)
+  KEY `typeId` (`typeId`),
+ KEY `periodsId` (`periodsId`)
+ 
+
 )  ;
 
 
@@ -80,7 +86,9 @@ CREATE TABLE IF NOT EXISTS `users`
   `password` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
   `usertype` varchar(10) NOT NULL,
-  PRIMARY KEY (`id`)
+  `ticketId` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ticketId` (`ticketId` )
 )  ;
 
 
@@ -90,22 +98,32 @@ CREATE TABLE IF NOT EXISTS `events`
   `name` varchar(30) NOT NULL,
   `placeId` int(11) NOT NULL,
   `categoryId` int(11) NOT NULL,
-  `periodsId` int(11) NOT NULL,
   `description` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `placeId` (`placeId`),
-  KEY `categoryId` (`categoryId`),
-  KEY `periodsId` (`periodsId`)
+  KEY `categoryId` (`categoryId`)
+ 
 )  ;
 
+ 
 
+
+ 
+ 
 
 ALTER TABLE `events`
-  ADD CONSTRAINT `periodsId` FOREIGN KEY (`periodsId`) REFERENCES `periods` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `categoryId` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `placeId` FOREIGN KEY (`placeId`) REFERENCES `places` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
-ALTER TABLE `tickets`
-  ADD CONSTRAINT `eventId` FOREIGN KEY (`eventId`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `typeId` FOREIGN KEY (`typeId`) REFERENCES `ticket_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE  `tickets`
+   ADD CONSTRAINT `typeId` FOREIGN KEY (`typeId`) REFERENCES `ticket_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `periodsId` FOREIGN KEY (`periodsId`) REFERENCES `periods` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE  `periods`
+  ADD CONSTRAINT `placeId2` FOREIGN KEY (`placeId`) REFERENCES `places` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ ADD CONSTRAINT `eventId` FOREIGN KEY (`eventId`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE  `users`  
+ADD CONSTRAINT `ticketId` FOREIGN KEY (`ticketId`) REFERENCES `tickets` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ 
