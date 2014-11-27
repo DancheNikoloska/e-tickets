@@ -7,8 +7,6 @@ if (isset($_SESSION['username'])) {
 	$flag = 1;
 } else {
 	$flag = 0;
-	
-
 }
 
 //inaku ne e najaven i proveruvame dali bilo klinato submit na formata

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
+<?php include_once 'database.php'?>
 <html lang="en">
-
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,10 +40,14 @@
 					<p class="lead">
 						Shop Name
 					</p>
+					
 					<div class="list-group">
-						<a href="#" class="list-group-item">Category 1</a>
-						<a href="#" class="list-group-item">Category 2</a>
-						<a href="#" class="list-group-item">Category 3</a>
+						<?php
+						$categories=mysqli_query($link, "SELECT name FROM categories");
+						while ($cat=mysqli_fetch_array($categories)) {	
+					?>
+						<a href="#" class="list-group-item"><?php echo$cat[0] ?></a>
+							<?php } ?>
 					</div>
 				</div>
 
