@@ -12,7 +12,7 @@ if (!isset($_GET['krastavica']) || $_GET['krastavica'] != $_SESSION['krastavica'
 	if (mysqli_connect_errno()) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-	$status = run_sql_file($con, "ticketsdb1.sql");
+	$status = run_sql_file($con, "ticketsdb.sql");
 	echo "<b>$status</b>";
 	seedEntities($con);
 	mysqli_close($con);
@@ -46,36 +46,89 @@ function run_sql_file($con, $location) {
 
 
  
-function seedEntities($con) {
-	$command = "INSERT INTO `categories`  VALUES
-(1, N'Спорт', N'Спортски натпревари'),
-(2, N'Музика', N'Музички концерти'),
-(3, N'Кино', N'Билети за кино'),
-(4, N'Театар', N'Билети за театарски претстави')";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO `events` (`id`, `name`, `placeId`, `categoryId`, `periodsId`, `description`) VALUES
-(1, N'Сомнително лице', 5, 4, 1, N'Театарска претстава там тарам'),
-(2, N'Концерт Каролина Гочева', 4, 2, 2, N'Промоција на албумот Македонско девојче II')";
-	mysqli_query($con, $command);
+function seedEntities($link) {
 	
-	$command = "INSERT INTO `periods` (`id`, `date`, `time`, `placeId`) VALUES
-(1, '2014-11-25', '17:00:00', 2),
-(2, '2014-11-29', '20:00:00', 2)";
-	mysqli_query($con, $command);
-	$command = "
-
-INSERT INTO `places` (`id`, `address`, `name`, `image`, `capacity`) VALUES
-(2, N'Љубљанска бр.4', N'Cineplexx', 'images/cineplexx.jpg', 400),
-(3, N'Градски стадион б.б.', N'Национална арена Филип II', 'images/filipII.jpg', 10000),
-(4, N'8 Септември бр.13', N'Спортска сала Борис Трајковски', 'images/boris_trajkovski.jpg', 5000),
-(5, N'Kej бр.23', N'Македонски народен театар', 'images/mnt', 800)";
-	mysqli_query($con, $command);
-	$command = "INSERT INTO `ticket_types` (`id`, `name`, `state`, `price`) VALUES
-(1, N'Партер', N'Слободен', 300),
-(2, N'ВИП', N'Слободен', 500),
-(3, N'Трибина', N'Резервиран', 400)";
-	mysqli_query($con, $command);
+	//insert into categories
+	$query = "INSERT INTO `categories`  VALUES
+(null, N'Спорт', N'Спортски натпревари'),
+(null, N'Музика', N'Музички концерти'),
+(null, N'Кино', N'Билети за кино'),
+(null, N'Театар', N'Билети за театарски претстави')";
+	mysqli_query($link, $query);
 	
+	//insert into events
+	$query= "INSERT INTO `events` VALUES
+	(null, N'Концерт на Каролина Гочева', N'Промоција на новиот албум - Македонско девојче',2),
+	(null, N'Сомнително лице', N'Комедија', 4),
+	(null, N'Концерт на Тони Цетински', N'Тони Цетински конечно во Македонија',2),
+	(null, N'Арсенал - Реал Мадрид', N'Големо дерби',1),
+	(null, 'Red riding hood', 'Set in a medieval village that is haunted by a werewolf, a young girl falls for an orphaned woodcutter, much to her familys displeasure.',3)";
+	mysqli_query($link, $query);
+	
+	//insert into users
+	$query="INSERT INTO `users` VALUES
+	(null, 'user1', 'user1pass', 'user1@gmail.com', N'Корисник'),
+	(null, 'user2', 'user2pass', 'user2@gmail.com', N'Корисник'),
+	(null, 'user3', 'user3pass', 'user3@gmail.com', N'Корисник'),
+	(null, 'user4', 'user4pass', 'user4@gmail.com', N'Корисник'),
+	(null, 'admin1', 'admin1pass', 'admin1@gmail.com', N'Администратор'),
+	(null, 'org1', 'org1pass', 'org1@gmail.com', N'Организатор'),
+	(null, 'org2', 'org2pass', 'org2@gmail.com', N'Организатор')";
+	mysqli_query($link, $query);
+	
+	//insert into places
+	$query="INSERT INTO `places` VALUES
+	(null, N'Метрополис Арена', N'Илинденска бр.14','metropolis.jpg',10000),
+	(null, N'Борис Трајковски', N'Љубљанска 15', 'boris.jpg', 7000),
+	(null, N'Кино Милениум', N'Даме Груев бр. 30', 'milenuim.jpg', 600),
+	(null, N'Македонски Народен Театар', N'Кеј бб', 'mnt.jpg', 800)";
+	mysqli_query($link, $query);
+	
+	//insert into periods
+	$query="INSERT INTO periods VALUES
+	(null, '2014-12-03','17:00:00'),
+	(null, '2014-12-18', '20:00:00'),
+	(null, '2014-12-18', '16:00:00'),
+	(null, '2015-01-16', '21:00:00')";
+	mysqli_query($link, $query);
+	
+	
+	//insert into events details
+	$query="INSERT INTO event_details VALUES
+	(null,2,1,1),
+	(null,1,2,4),
+	(null,3,3,5),
+	(null,4,4,2),
+	(null,3,2,3)";
+	mysqli_query($link, $query);
+	
+	
+	//insert into tickets
+	$query="INSERT INTO tickets VALUES
+	(null, N'abd33', N'ВИП', 300, 1),
+	(null, N'cde33', N'Трибина', 200, 4),
+	(null, N'ааае3', N'Сала 1', 150, 5),
+	(null, N'2p4o', N'Галерија 1', 100, 2),
+	(null, N'qei1', N'Партер', 500, 3),
+	(null, N'ar23', N'ВИП', 300, 1),
+	(null, N'c12333', N'Трибина', 200, 4),
+	(null, N'аhgs3', N'Сала 1', 150, 5),
+	(null, N'0123o', N'Галерија 1', 100, 2),
+	(null, N'0ej1g', N'Партер', 500, 3)";
+	mysqli_query($link, $query);
+	
+	//has ticket
+	$query="INSERT INTO has_ticket VALUES
+	(1,1),
+	(1,4),
+	(1,6),
+	(2,3),
+	(2,2),
+	(2,10),
+	(3,7),
+	(3,8)
+	";
+	mysqli_query($link, $query);
 }
  
 ?>
