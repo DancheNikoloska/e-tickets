@@ -38,7 +38,7 @@
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;border:0px; width:1280px;">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -46,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">e-tickets Admin</a>
+                <a class="navbar-brand" href="index.html" style="margin-left: 100px;">E-tickets Admin</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -71,12 +71,12 @@
             </ul>
             <!-- /.navbar-top-links -->
 
-            <div class="navbar-default sidebar" role="navigation">
+            <div class="navbar-default sidebar" role="navigation" style="margin-left: 100px;">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                       
                         <li>
-                            <a class="active" href="#"><i class="fa fa-home fa-fw"></i> Почетна</a>
+                            <a class="active" href="homeAdmin.php"><i class="fa fa-home fa-fw"></i> Почетна</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bell-o fa-fw"></i> Настани</a>
@@ -100,7 +100,7 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="width: 900px; margin-left: 350px;">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Почетна</h1>
@@ -109,7 +109,7 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-8">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
@@ -131,7 +131,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-8">
                     <div class="panel panel-green">
                         <div class="panel-heading">
                             <div class="row">
@@ -153,7 +153,9 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+               </div>
+               <div class="row">
+                <div class="col-lg-4 col-md-8">
                     <div class="panel panel-yellow">
                         <div class="panel-heading">
                             <div class="row">
@@ -175,7 +177,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-8">
                     <div class="panel panel-red">
                         <div class="panel-heading">
                             <div class="row">
