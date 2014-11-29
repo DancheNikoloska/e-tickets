@@ -58,11 +58,11 @@ function seedEntities($link) {
 	
 	//insert into events
 	$query= "INSERT INTO `events` VALUES
-	(null, N'Концерт на Каролина Гочева', N'Промоција на новиот албум - Македонско девојче',2),
-	(null, N'Сомнително лице', N'Комедија', 4),
-	(null, N'Концерт на Тони Цетински', N'Тони Цетински конечно во Македонија',2),
-	(null, N'Арсенал - Реал Мадрид', N'Големо дерби',1),
-	(null, 'Red riding hood', 'Set in a medieval village that is haunted by a werewolf, a young girl falls for an orphaned woodcutter, much to her familys displeasure.',3)";
+	(null, N'Концерт на Каролина Гочева', N'Промоција на новиот албум - Македонско девојче',2 , 'small_image', 'large_image'),
+	(null, N'Сомнително лице', N'Комедија', 4, 'small_image', 'large_image'),
+	(null, N'Концерт на Тони Цетински', N'Тони Цетински конечно во Македонија',2, 'small_image', 'large_image'),
+	(null, N'Арсенал - Реал Мадрид', N'Големо дерби',1, 'small_image', 'large_image' 'small_image', 'large_image'),
+	(null, 'Red riding hood', 'Set in a medieval village that is haunted by a werewolf, a young girl falls for an orphaned woodcutter, much to her familys displeasure.',3 ,'small_image', 'large_image')";
 	mysqli_query($link, $query);
 	
 	//insert into users
