@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 `categoryId` int(11) NOT NULL,
   `category_name` varchar(20) NOT NULL,
   `category_description` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 delete from categories;
 -- --------------------------------------------------------
 
@@ -48,8 +48,10 @@ CREATE TABLE IF NOT EXISTS `events` (
 `eventId` int(11) NOT NULL,
   `event_name` varchar(20)  NOT NULL,
   `event_description` varchar(200) NOT NULL,
-  `category_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `category_id` int(11) NOT NULL,
+  `event_largeImg` varchar(200) NOT NULL,
+  `event_smallImg` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 delete from events;
 -- --------------------------------------------------------
 
@@ -99,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `places` (
   `place_address` varchar(30)  NOT NULL,
   `place_image` varchar(30) NOT NULL,
   `place_capacity` varchar(30)  NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 delete from places;
 -- --------------------------------------------------------
 
