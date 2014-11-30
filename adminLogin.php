@@ -1,3 +1,44 @@
+ <?php
+session_start();
+$error='';
+//prvo mora da provereme dali nekoj e veke najaven, ako e prenasocuvame
+if (isset($_SESSION['username'])) {
+	//tuka namesto homepage ke se ide na logout ili ke se jave "you are logged in as Drn Drnko do you want to log out"
+	//header("Location: homepage.html");
+	$flag = 1;
+} else {
+	$flag = 0;
+}
+
+//inaku ne e najaven i proveruvame dali bilo klinato submit na formata
+if (isset($_POST['submit'])) {
+	include_once 'database.php';
+	include_once 'user_validation.php';
+	$user = $_POST['username'];
+	$pass = $_POST['password'];
+
+	if (validateLoginAdmin($link, $pass, $user) == true) {
+		//ovde doagjame ako ne bil prethodno najaven i e kliknato submit, i go najavuvame samo so toa so piseme u $_SESSION koj e najaven
+		$_SESSION['username'] = $user;
+		$q = mysqli_query($link, "SELECT * FROM users WHERE username='$user'");
+		if ($q) {
+			$row = mysqli_fetch_assoc($q);
+			$_SESSION['user_id']=$row["id"];
+			
+			header('Location: homeAdmin.php');
+			
+		} else {
+			echo "error so baza";
+		}
+	} else {
+		
+		$error='<span style=float:right;color:red>Невалидни податоци!&nbsp </span>';
+		
+	}
+}
+?>
+
+    
     <!DOCTYPE html>
     <html>
     	<body>
@@ -26,22 +67,23 @@
 
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                             
-                        <form id="loginform" class="form-horizontal" role="form">
+                        <form id="loginform" action="" method="post" class="form-horizontal" role="form">
                                     
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="корисничко име">                                        
+                                        <input id="username" type="text" class="form-control" name="username" value="" placeholder="корисничко име">                                        
                                     </div>
                                 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <input id="login-password" type="password" class="form-control" name="password" placeholder="лозинка">
+                                        <input id="password" type="password" class="form-control" name="password" placeholder="лозинка">
                                     </div>
                                     
 
-                                
+                                <span><?php echo $error; ?></span><br>
                             <div class="input-group">
                                       <div class="checkbox">
+                                      	
                                         <label>
                                           <input id="login-remember" type="checkbox" name="remember" value="1"> Запамети ме
                                         </label>
@@ -53,7 +95,8 @@
                                     <!-- Button -->
 
                                     <div class="col-sm-12 controls">
-                                      <a id="btn-login" href="homeAdmin.php" class="btn btn-success">Најава  </a>
+                                    	<input name="submit" type="submit" value="Најава" id="btn-login" class="btn btn-success" />
+                                      
                                      
 
                                     </div>

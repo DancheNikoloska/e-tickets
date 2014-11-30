@@ -1,4 +1,18 @@
 
+<?php
+session_start();
+
+if(!empty($_SESSION['username'])) {
+
+   $user=$_SESSION['username'];
+
+}else{
+
+  $user= "You're not logged in!!";
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,11 +60,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html" style="margin-left: 100px;">E-tickets Admin</a>
+                <a class="navbar-brand" href="index.html" style="margin-left: 100px;">E-tickets 
+                </a>
             </div>
             <!-- /.navbar-header -->
-
+	
             <ul class="nav navbar-top-links navbar-right">
+            	<li>
+            	<a href="#"> <?php echo $user?></a>
+            	</li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
