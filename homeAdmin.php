@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-
+<title>homeAdmin</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -101,6 +101,7 @@
         </nav>
 
         <div id="page-wrapper" style="width: 900px; margin-left: 350px;">
+        	<div class="row">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Почетна</h1>
@@ -108,8 +109,10 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            <div class="row" class="col-lg-12">
+            <div class="col-lg-8">
             <div class="row">
-                <div class="col-lg-4 col-md-8">
+                <div class="col-lg-6 col-md-8" >
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
@@ -131,7 +134,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-8">
+                <div class="col-lg-6 col-md-8" >
                     <div class="panel panel-green">
                         <div class="panel-heading">
                             <div class="row">
@@ -153,9 +156,10 @@
                         </a>
                     </div>
                 </div>
+                
                </div>
                <div class="row">
-                <div class="col-lg-4 col-md-8">
+                <div class="col-lg-6 col-md-8">
                     <div class="panel panel-yellow">
                         <div class="panel-heading">
                             <div class="row">
@@ -177,7 +181,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-8">
+                <div class="col-lg-6 col-md-8">
                     <div class="panel panel-red">
                         <div class="panel-heading">
                             <div class="row">
@@ -199,18 +203,60 @@
                         </a>
                     </div>
                 </div>
-            </div>
-            <!-- /.row -->
             
+            </div>
+            <!-- diagram -->
+            
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Продадени билети според категорија на настан
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="morris-area-chart"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+
+             <!--end of diagram-->
+    </div>
+            
+            <!--end od col-lg-8 -->
+            <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Продадени билети за престојните 5 настани
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="morris-donut-chart"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+           
             <!-- /.row -->
+         </div>   
+            <!-- /.row -->
+        </div>
+        <!--end of row -->
         </div>
         <!-- /#page-wrapper -->
 
-    </div>
+    
     <!-- /#wrapper -->
 
-  
+  <!-- jQuery -->
+    
    
 </body>
-
+	<script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>
+    
 </html>
+
