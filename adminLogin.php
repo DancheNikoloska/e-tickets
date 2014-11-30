@@ -43,6 +43,7 @@ if (isset($_POST['submit'])) {
     <html>
     	<body>
     		<head>
+    			<meta charset="UTF-8">
     			 <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
