@@ -79,7 +79,7 @@
                             <a class="active" href="homeAdmin.php"><i class="fa fa-home fa-fw"></i> Почетна</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bell-o fa-fw"></i> Настани</a>
+                            <a href="eventsAdmin.php"><i class="fa fa-bell-o fa-fw"></i> Настани</a>
                             
                         </li>
                         <li>
