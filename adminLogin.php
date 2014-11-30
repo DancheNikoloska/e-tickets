@@ -16,10 +16,10 @@
     		</head>
     <div class="container">    
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-            <div class="panel panel-info" >
-                    <div class="panel-heading">
-                        <div class="panel-title">Најавете се</div>
-                        <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Ја заборавивте вашата лозинка?</a></div>
+            <div class="panel panel-info" style="border: 1px solid #428bca;" >
+                    <div class="panel-heading" style="background-color: #428bca;">
+                        <div class="panel-title" style="color: white">Најавете се</div>
+                        <div style="float:right;  font-size: 80%; position: relative; top:-10px"><a href="#">Ја заборавивте вашата лозинка?</a></div>
                     </div>     
 
                     <div style="padding-top:30px" class="panel-body" >
