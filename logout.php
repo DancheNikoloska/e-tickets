@@ -2,6 +2,6 @@
 session_start();
 if(session_destroy()) // Destroying All Sessions
 {
-header("Location: dashboard.php"); // Redirecting To Home Page
+header("Location: homeUser.php"); // Redirecting To Home Page
 }
 ?>
