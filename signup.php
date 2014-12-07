@@ -1,6 +1,6 @@
 <?php
 include_once 'database.php';
-$flaguser=$flagemail=$flagloz=$flagloz2=1;
+$flaguser = $flagemail = $flagloz = $flagloz2 = 1;
 session_start();
 if (isset($_POST['submit'])) {
 	include 'user_validation.php';
@@ -9,28 +9,30 @@ if (isset($_POST['submit'])) {
 	$lozinka2 = $_POST['pass2'];
 	$email = $_POST['email'];
 	$tip = $_POST['role'];
-	if ($tip == "Корисник") {$tip="korisnik";}
-	if ($tip == "Организатор") {$tip="organizator";}
+	if ($tip == "Корисник") {$tip = "korisnik";
+	}
+	if ($tip == "Организатор") {$tip = "organizator";
+	}
 	//if ($tip == "Студент") {$tip="student";}
 	if (!validateUsername($link, $user))
-		$flaguser=0;
+		$flaguser = 0;
 	if (!validateEmail($link, $email))
-		$flagemail=0;
+		$flagemail = 0;
 	if (!validatePassword($link, $lozinka))
-		$flagloz=0;
+		$flagloz = 0;
 	if ($lozinka != $lozinka2)
-		
-		$flagloz2=0;
-	
-else { {	//$salt = "baklava";
-			//$lozinka = md5($salt . $lozinka);
-			$q = mysqli_query($link, "INSERT INTO users(username,password,email,usertype) VALUES('$user','$lozinka','$email','$tip')");
-			if ($q) {
-				header("Location: login.php");
-				print '<span style=float:right;color:blue>Успешна регистрација!&nbsp </span><br>';
-			} else
-				echo mysql_error();
-		}
+		$flagloz2 = 0;
+	if ($flaguser && $flagemail && $flagloz && $flagloz2)
+	 {	$salt = "baklava";
+		//$lozinka = md5($lozinka);
+		echo $lozinka;
+		$q = mysqli_query($link, "INSERT INTO users(username,password,email,usertype) VALUES('$user','$lozinka','$email','$tip')");
+		if ($q) {
+			header("Location: login.php");
+			print '<span style=float:right;color:blue>Успешна регистрација!&nbsp </span><br>';
+		} else
+			echo mysql_error();
+
 	}
 }
 ?>
@@ -43,7 +45,7 @@ else { {	//$salt = "baklava";
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		  <title>Е-tickets- електронски сајт за билети</title>
+		<title>Е-tickets- електронски сајт за билети</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.css" rel="stylesheet">
@@ -55,7 +57,9 @@ else { {	//$salt = "baklava";
 
 	<body>
 
-		<?php include_once 'navBar.php'; ?>
+		<?php
+	include_once 'navBar.php';
+ ?>
 
 		<div class="container">
 
@@ -82,14 +86,12 @@ else { {	//$salt = "baklava";
 						<div class="form-group">
 							<label for="User1">Корисничко име:</label>
 							<input type="user" class="form-control" name="user" id="User1" placeholder="" value=<?php
-								if (isset($_POST['user'])&&($flaguser))
-								{
-									echo $user;
-								}
+							if (isset($_POST['user']) && ($flaguser)) {
+								echo $user;
+							}
 							?>>
 							<?php
-							if (!$flaguser)
-							{
+							if (!$flaguser) {
 								print '<span style=color:red>Невалидно корисничко име/Корисничкото име веќе постои!&nbsp </span><br>';
 							}
 							?>
@@ -97,12 +99,11 @@ else { {	//$salt = "baklava";
 						<div class="form-group">
 							<label for="Email1">Eмаил:</label>
 							<input type="email" class="form-control" name="email" id="Email1" placeholder="" value=<?php
-								if (isset($_POST['email'])&&($flagemail))
-									echo $email;
+							if (isset($_POST['email']) && ($flagemail))
+								echo $email;
 							?>>
-							<?php 
-							if (!$flagemail)
-							{
+							<?php
+							if (!$flagemail) {
 								print '<span style=color:red>Невалидна емаил адреса/Емаил адресата веќе постои!&nbsp </span><br>';
 							}
 							?>
@@ -110,9 +111,8 @@ else { {	//$salt = "baklava";
 						<div class="form-group">
 							<label for="Password1">Лозинка:</label>
 							<input type="password" class="form-control" name="pass" id="Password1" placeholder="">
-							<?php 
-							if (!$flagloz)
-							{
+							<?php
+							if (!$flagloz) {
 								print '<span style=color:red>Лозинката мора да содржи најмалку 8 карактери и барем една цифра!&nbsp </span><br>';
 							}
 							?>
@@ -121,11 +121,9 @@ else { {	//$salt = "baklava";
 							<label for="Password1">Потврди лозинка:</label>
 							<input type="password" class="form-control" name="pass2" id="Password1" placeholder="">
 							<?php
-							if (!$flagloz2)
-							{
+							if (!$flagloz2) {
 								print '<span style=color:red>Лозинките не се совпаѓаат!&nbsp </span><br>';
 							}
-							
 							?>
 						</div>
 
@@ -134,7 +132,7 @@ else { {	//$salt = "baklava";
 							<select name="role" class="form-control">
 								<option>Корисник</option>
 								<option selected>Организатор</option>
-															</select>
+							</select>
 						</div>
 						<button type="submit" name="submit" class="btn btn-default">
 							Регистрација

@@ -19,6 +19,7 @@ if (isset($_POST['sub'])) {
 	if (validateLogin($link, $pass, $user) == true) {
 		//ovde doagjame ako ne bil prethodno najaven i e kliknato submit, i go najavuvame samo so toa so piseme u $_SESSION koj e najaven
 		$_SESSION['username'] = $user;
+		
 		$q = mysqli_query($link, "SELECT * FROM users WHERE username='$user'");
 		if ($q) {
 			$row = mysqli_fetch_assoc($q);
