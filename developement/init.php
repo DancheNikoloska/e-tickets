@@ -107,6 +107,21 @@ function seedEntities($link) {
 	(null,6,3,5)";
 	mysqli_query($link, $query);
 	
+	//insert into has_ticket
+	
+	$query="INSERT INTO has_ticket VALUES
+	(4,25),(4,26),(4,27),(2,40),(2,41),(2,44),(2,45),(3,100),(3,101),(3,115),(3,120),(4,121),(3,122),(4,123),(2,124),(5,135),
+	(5,136),(5,137),(5,138),(5,139),(5,160),(4,161),(4,162),(2,166),(2,168),(2,170)";
+	if (mysqli_query($link, $query))
+	{
+		echo "ok";
+	}
+else
+{
+	echo "GRESKA:" .mysqli_error($link);
+}
+	
+	
 	
 	//insert into tickets
 	for($i=0;$i<25;$i++)
@@ -140,20 +155,6 @@ function seedEntities($link) {
 	
 
 	
-	
-	
-	//has ticket
-	$query="INSERT INTO has_ticket VALUES
-	(1,1),
-	(1,4),
-	(1,6),
-	(2,3),
-	(2,2),
-	(2,10),
-	(3,7),
-	(3,8)
-	";
-	mysqli_query($link, $query);
 }
  
 ?>

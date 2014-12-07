@@ -6,10 +6,13 @@ if(!empty($_SESSION['username'])) {
 
    $user=$_SESSION['username'];
    $_SESSION["type"]="admin";
+   $flag=1;
 
 }else{
 
-  $user= "You're not logged in!!";
+  $user="Најавете се!";
+   
+  $flag=0;
 
 }
 ?>
@@ -75,7 +78,10 @@ $br_nastani=$n_nastani['novi_nastani'];
 	
             <ul class="nav navbar-top-links navbar-right">
             	<li>
-            	<a href="#"> <?php echo $user?></a>
+            		<?php if ($user=="Најавете се!")
+                	echo '<a href="adminLogin.php">Најавете се!</a>';
+					else
+                	echo '<a href="#">'. $user .'</a>'; ?>
             	</li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -91,11 +97,15 @@ $br_nastani=$n_nastani['novi_nastani'];
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
+                    <?php	if ($flag==1){ ?>
                     <ul class="dropdown-menu dropdown-messages">
                         <li>
+                        
                             <a href="logout.php">
                                 Logout
                             </a>
+                        <?php   } ?>
+                          
                         </li>
                     </ul>
                     
