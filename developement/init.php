@@ -107,8 +107,7 @@ function seedEntities($link) {
 	(null,6,3,5)";
 	mysqli_query($link, $query);
 	
-	
-	
+		
 	
 	
 	//insert into tickets
@@ -141,7 +140,8 @@ function seedEntities($link) {
 		mysqli_query($link, "INSERT INTO tickets VALUES (null,'fm$i', N'Партер',300,5)");
 	} 
 	
-//insert into has_ticket
+
+	//insert into has_ticket
 	
 	$query="INSERT INTO has_ticket VALUES
 	(4,25),(4,26),(4,27),(2,40),(2,41),(2,44),(2,45),(3,100),(3,101),(3,115),(3,120),(4,121),(3,122),(4,123),(2,124),(5,135),
@@ -154,6 +154,8 @@ else
 {
 	echo "GRESKA:" .mysqli_error($link);
 }
+
+	
 	
 }
  
