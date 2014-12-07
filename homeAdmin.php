@@ -5,6 +5,7 @@ session_start();
 if(!empty($_SESSION['username'])) {
 
    $user=$_SESSION['username'];
+   $_SESSION["type"]="admin";
 
 }else{
 

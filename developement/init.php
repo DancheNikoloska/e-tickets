@@ -1,4 +1,5 @@
 <?php
+ini_set('max_execution_time', 3000000);
 session_start();
 if (!isset($_GET['krastavica']) || $_GET['krastavica'] != $_SESSION['krastavica']) {
 	$number = mt_rand(0, 100);
@@ -58,11 +59,11 @@ function seedEntities($link) {
 	
 	//insert into events
 	$query= "INSERT INTO `events` VALUES
-	(null, N'Концерт на Каролина Гочева', N'Промоција на новиот албум - Македонско девојче',2 , 'small_image', 'large_image'),
-	(null, N'Сомнително лице', N'Комедија', 4, 'small_image', 'large_image'),
-	(null, N'Концерт на Тони Цетински', N'Тони Цетински конечно во Македонија',2, 'small_image', 'large_image'),
-	(null, N'Арсенал - Реал Мадрид', N'Големо дерби',1, 'small_image', 'large_image'),
-	(null, 'Red riding hood', 'Set in a medieval village that is haunted by a werewolf, a young girl falls for an orphaned woodcutter, much to her familys displeasure.',3 ,'small_image', 'large_image')";
+	(null, N'Концерт на Каролина Гочева', N'Промоција на новиот албум - Македонско девојче',2 , 'small_image', 'large_image',1),
+	(null, N'Сомнително лице', N'Комедија', 4, 'small_image', 'large_image',0),
+	(null, N'Концерт на Тони Цетински', N'Тони Цетински конечно во Македонија',2, 'small_image', 'large_image',1),
+	(null, N'Арсенал - Реал Мадрид', N'Големо дерби',1, 'small_image', 'large_image',1),
+	(null, 'Red riding hood', 'Set in a medieval village that is haunted by a werewolf, a young girl falls for an orphaned woodcutter, much to her familys displeasure.',3 ,'small_image', 'large_image',1)";
 	mysqli_query($link, $query);
 	
 	//insert into users
@@ -104,18 +105,38 @@ function seedEntities($link) {
 	
 	
 	//insert into tickets
-	$query="INSERT INTO tickets VALUES
-	(null, N'abd33', N'ВИП', 300, 1),
-	(null, N'cde33', N'Трибина', 200, 4),
-	(null, N'ааае3', N'Сала 1', 150, 5),
-	(null, N'2p4o', N'Галерија 1', 100, 2),
-	(null, N'qei1', N'Партер', 500, 3),
-	(null, N'ar23', N'ВИП', 300, 1),
-	(null, N'c12333', N'Трибина', 200, 4),
-	(null, N'аhgs3', N'Сала 1', 150, 5),
-	(null, N'0123o', N'Галерија 1', 100, 2),
-	(null, N'0ej1g', N'Партер', 500, 3)";
-	mysqli_query($link, $query);
+	for($i=0;$i<25;$i++)
+	{
+		mysqli_query($link, "INSERT INTO tickets VALUES (null,'abc$i', N'Партер',200,1)");
+	} 
+	for($i=0;$i<20;$i++)
+	{
+		mysqli_query($link, "INSERT INTO tickets VALUES (null,'abv$i', N'Трибина',300,1)");
+	} 
+	for($i=0;$i<50;$i++)
+	{
+		mysqli_query($link, "INSERT INTO tickets VALUES (null,'vip$i', N'ВИП',400,1)");
+	} 
+	for($i=0;$i<20;$i++)
+	{
+		mysqli_query($link, "INSERT INTO tickets VALUES (null,'ght$i', N'Сала 1',150,3)");
+	} 
+	for($i=0;$i<15;$i++)
+	{
+		mysqli_query($link, "INSERT INTO tickets VALUES (null,'lk$i', N'Трибина',100,2)");
+	} 
+	for($i=0;$i<15;$i++)
+	{
+		mysqli_query($link, "INSERT INTO tickets VALUES (null,'0w$i', N'Галерија 1',120,4)");
+	} 
+	for($i=0;$i<35;$i++)
+	{
+		mysqli_query($link, "INSERT INTO tickets VALUES (null,'fm$i', N'Партер',300,5)");
+	} 
+	
+
+	
+	
 	
 	//has ticket
 	$query="INSERT INTO has_ticket VALUES

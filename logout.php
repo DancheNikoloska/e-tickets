@@ -1,7 +1,14 @@
 <?php
 session_start();
+$type=$_SESSION["type"];
 if(session_destroy()) // Destroying All Sessions
 {
-header("Location: homeUser.php"); // Redirecting To Home Page
+if ($type=="admin"){
+	header("Location: adminLogin.php"); // Redirecting To Home Page
+}
+else {
+	header("Location: homeUser.php"); // Redirecting To Home Page	
+}
+
 }
 ?>

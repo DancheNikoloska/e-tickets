@@ -31,7 +31,7 @@ drop table if exists `categories`;
 --
 -- Table structure for table `categories`
 --
-DROP TABLE IF EXISTS 'categories';
+
 CREATE TABLE IF NOT EXISTS `categories` (
 `categoryId` int(11) NOT NULL,
   `category_name` varchar(20) NOT NULL,
@@ -46,11 +46,12 @@ delete from categories;
 
 CREATE TABLE IF NOT EXISTS `events` (
 `eventId` int(11) NOT NULL,
-  `event_name` varchar(20)  NOT NULL,
+  `event_name` varchar(50)  NOT NULL,
   `event_description` varchar(200) NOT NULL,
   `category_id` int(11) NOT NULL,
   `event_largeImg` varchar(200) NOT NULL,
-  `event_smallImg` varchar(200) NOT NULL
+  `event_smallImg` varchar(200) NOT NULL,
+  `activated` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 delete from events;
 -- --------------------------------------------------------
@@ -181,7 +182,7 @@ ALTER TABLE `places`
 -- Indexes for table `tickets`
 --
 ALTER TABLE `tickets`
- ADD PRIMARY KEY (`ticket_id`), ADD KEY `type_id` (`type_id`,`details_id`), ADD KEY `details_id` (`details_id`);
+ ADD PRIMARY KEY (`ticket_id`), ADD KEY `details_id` (`details_id`);
 
 --
 
@@ -264,8 +265,8 @@ ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DE
 -- Constraints for table `tickets`
 --
 ALTER TABLE `tickets`
-ADD CONSTRAINT `event_detailsId` FOREIGN KEY (`details_id`) REFERENCES `event_details` (`event_detailsId`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `type_id` FOREIGN KEY (`type_id`) REFERENCES `ticket_types` (`type_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `event_detailsId` FOREIGN KEY (`details_id`) REFERENCES `event_details` (`event_detailsId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
