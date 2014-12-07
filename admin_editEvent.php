@@ -1,6 +1,6 @@
 <?php 
 $eventid=$_GET['eventid'];
-echo $eventid;
+//echo $eventid;
 include_once 'database.php';
 session_start();
 $res=mysqli_query($link,"Select * from events where eventId=$eventid");

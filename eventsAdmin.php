@@ -135,6 +135,10 @@
 			$n=mysqli_query($link, $query3);
 			$num=mysqli_fetch_assoc($n);
 			$total_tickets=$num['no_tickets'];
+			//get sold tickets number
+			$sold=mysqli_query($link, "Select count(*) as sold from events e, event_details ed, tickets t, has_ticket ht where e.eventId=ed.event_id AND ed.event_detailsId=t.details_id AND t.ticket_id=ht.ticket_id AND e.eventId=$row[eventId]");
+			$s=mysqli_fetch_assoc($sold);
+			$sold_tickets=$s['sold'];
 			
 			
 			
@@ -144,7 +148,7 @@
 	  			echo "<tr class='info'>" .
 	  			 "<td class=\"text-center\"> $row[event_name] </td>".
 	  			 "<td class=\"text-center\">$datum</td>".
-	  			 "<td class=\"text-center\">10/$total_tickets</td>".
+	  			 "<td class=\"text-center\">$sold_tickets / $total_tickets</td>".
 	  			 "<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[eventId]\">Измени</a></td>".
 	  			 "<td class=\"text-center\"><a href=\"admin_activateEvent.php?eventid=$row[eventId]\">". ($row['activated']==1 ? 'Деактивирај' : 'Активирај'). "</a></td></tr>";
   			
@@ -154,7 +158,7 @@
   				echo "<tr>".
   				"<td class=\"text-center\"> $row[event_name]</td>".
   				"<td class=\"text-center\">$datum</td>".
-  				"<td class=\"text-center\">10/$total_tickets</td>".
+  				"<td class=\"text-center\">$sold_tickets / $total_tickets</td>".
   				"<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[eventId]\">Измени</a></td>".
   				"<td class=\"text-center\"><a href=\"admin_activateEvent.php?eventid=$row[eventId]\">". ($row['activated']==1 ? 'Деактивирај' : 'Активирај'). "</a></td></tr>";
   			
