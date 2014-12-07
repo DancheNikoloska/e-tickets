@@ -32,8 +32,8 @@ if (isset($_POST['sub'])) {
 				header('Location: studentoverview.php');
 			}*/
 			
-			header('Location: dashboard.php');
-			//header('Location: homepage.php');
+			
+			header('Location: homeOrganizator.php');
 			//echo "Welcome " . $_SESSION['username'];
 		} else {
 			echo "err";

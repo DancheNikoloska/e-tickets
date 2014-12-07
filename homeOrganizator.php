@@ -2,18 +2,18 @@
 <?php
 session_start();
 
-if(!empty($_SESSION['username'])) {
+if(isset($_SESSION['username'])) {
 
    $user=$_SESSION['username'];
    $_SESSION["type"]="organizator";
    $flag=1;
-
+echo $_SESSION['username'];
+echo $_SESSION['user_id'];
 }else{
 
-  $user="Најавете се!";
-   
+  $user="Најавете се!";   
   $flag=0;
-
+  header("Location: login.php");
 }
 ?>
 
@@ -21,14 +21,14 @@ if(!empty($_SESSION['username'])) {
 <html lang="en">
 
 <head>
-<title>homeAdmin</title>
+<title>home Organizator</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>SB Admin 2 - Bootstrap  Theme</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -119,13 +119,11 @@ $br_nastani=$n_nastani['novi_nastani'];
                             <a class="active" href="homeOrganizator.php"><i class="fa fa-home fa-fw"></i> Почетна</a>
                         </li>
                         <li>
-                            <a href="eventsAdmin.php"><i class="fa fa-bell-o fa-fw"></i> Настани</a>
+                            <a href="listEventOrganizator.php"><i class="fa fa-bell-o fa-fw"></i> Настани</a>
                             
                         </li>
                        
-                        <li>
-                            <a href="#"><i class="fa fa-users fa-fw"></i> Корисници </a>
-                        </li>
+                       
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Статистики </a>
                            
@@ -196,53 +194,7 @@ $br_nastani=$n_nastani['novi_nastani'];
                 </div>
                 
                </div>
-               <div class="row">
-                <div class="col-lg-6 col-md-8">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-male fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">3</div>
-                                    <div>Нови организатори!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Детали</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-8">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-users fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">17</div>
-                                    <div>Нови корисници!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Детали</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
             
-            </div>
             <!-- diagram -->
             
                     <div class="panel panel-default">

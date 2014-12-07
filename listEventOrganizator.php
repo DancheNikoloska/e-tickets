@@ -2,7 +2,7 @@
 <html lang="en">
 
 	<head>
-		<title>homeAdmin</title>
+		<title>home Organizator</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,7 +69,7 @@
 						<ul class="nav" id="side-menu">
 
 							<li>
-								<a href="#"><i class="fa fa-home fa-fw"></i> Почетна</a>
+								<a href="homeOrganizator.php"><i class="fa fa-home fa-fw"></i> Почетна</a>
 							</li>
 							<li>
 								<a class="active" href="listEventOrganizator.php"> <i class="fa fa-bell-o fa-fw"></i> Настани</a>
@@ -100,70 +100,74 @@
 						<!-- /.col-lg-12 -->
 					</div>
 					<!-- /.row -->
-					<div class="col-lg-12">
 
-						<table class="table table-striped table-hover">
-							<tr class="active" align="center">
-								<th class="text-center">Име на настан</th>
-								<th class="text-center">Датум</th>
-								<th class="text-center">Продадени билети</th>
-								<th class="text-center">Измени</th>
-								<th class="text-center">Активирај</th>
-							</tr>
-							<?php
+					<table class="table table-striped table-hover">
+						<tr class="active" align="center">
+							<th class="text-center">Име на настан</th>
+							<th class="text-center">Датум</th>
+							<th class="text-center">Продадени билети</th>
+							<th class="text-center">Измени</th>
+							<th class="text-center">Активирај</th>
+						</tr>
+						<?php
 
-							include_once 'database.php';
+						include_once 'database.php';
 
-							if (!empty($_SESSION['username'])) {
+						session_start();
 
-								$user = $_SESSION['username'];
-								$_SESSION["type"] = "organizator";
-								$flag = 1;
+						if (isset($_SESSION['username'])) {
 
-							} else {
+							$user = $_SESSION['username'];
+							$_SESSION["type"] = "organizator";
+							$flag = 1;
+							echo $_SESSION['username'];
+							echo $_SESSION['user_id'];
+						} else {
 
-								$user = "Најавете се!";
-								header("Location: login.php");
+							$user = "Најавете се!";
+							$flag = 0;
+							header("Location: login.php");
+						}
 
-							}
-							$query = "Select * from events  where org_id=8";
-							$res = mysqli_query($link, $query);
-							while ($row = mysqli_fetch_assoc($res)) {
-								//get period
-								$query2 = "Select period_date from events e, event_details ed, periods p where ed.event_id=e.eventId AND ed.period_id=p.periodId AND e.eventId=$row[eventId]";
-								$d = mysqli_query($link, $query2);
-								$res_datum = mysqli_fetch_assoc($d);
-								$datum = $res_datum['period_date'];
-								//get tickets number
-								$query3 = "Select count(*) as no_tickets from tickets t, events e, event_details ed where t.details_id=ed.event_detailsId AND ed.event_id=e.eventId and e.eventId=$row[eventId]";
-								$n = mysqli_query($link, $query3);
-								$num = mysqli_fetch_assoc($n);
-								$total_tickets = $num['no_tickets'];
+						$id=$_SESSION['user_id'];
+						$query = "Select * from events  where org_id= '$id'";
+						$res = mysqli_query($link, $query);
+						while ($row = mysqli_fetch_assoc($res)) {
+						//get period
+						$query2 = "Select period_date from events e, event_details ed, periods p where ed.event_id=e.eventId AND ed.period_id=p.periodId AND e.eventId=$row[eventId]";
+						$d = mysqli_query($link, $query2);
+						$res_datum = mysqli_fetch_assoc($d);
+						$datum = $res_datum['period_date'];
+						//get tickets number
+						$query3 = "Select count(*) as no_tickets from tickets t, events e, event_details ed where t.details_id=ed.event_detailsId AND ed.event_id=e.eventId and e.eventId=$row[eventId]";
+						$n = mysqli_query($link, $query3);
+						$num = mysqli_fetch_assoc($n);
+						$total_tickets = $num['no_tickets'];
 
-								if ($row['eventId'] % 2 == 0) {
+						if ($row['eventId'] % 2 == 0) {
 
-									echo "<tr class='info'>" . "<td class=\"text-center\"> $row[event_name] </td>" . "<td class=\"text-center\">$datum</td>" . "<td class=\"text-center\">10/$total_tickets</td>" . "<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[eventId]\">Измени</a></td>" . "<td class=\"text-center\"><a href=\"admin_activateEvent.php?eventid=$row[eventId]\">" . ($row['activated'] == 1 ? 'Деактивирај' : 'Активирај') . "</a></td></tr>";
+						echo "<tr class='info'>" . "<td class=\"text-center\"> $row[event_name] </td>" . "<td class=\"text-center\">$datum</td>" . "<td class=\"text-center\">10/$total_tickets</td>" . "<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[eventId]\">Измени</a></td>" . "<td class=\"text-center\"><a href=\"admin_activateEvent.php?eventid=$row[eventId]\">" . ($row['activated'] == 1 ? 'Деактивирај' : 'Активирај') . "</a></td></tr>";
 
-								} else {
-									echo "<tr>" . "<td class=\"text-center\"> $row[event_name]</td>" . "<td class=\"text-center\">$datum</td>" . "<td class=\"text-center\">10/$total_tickets</td>" . "<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[eventId]\">Измени</a></td>" . "<td class=\"text-center\"><a href=\"admin_activateEvent.php?eventid=$row[eventId]\">" . ($row['activated'] == 1 ? 'Деактивирај' : 'Активирај') . "</a></td></tr>";
+						} else {
+						echo "<tr>" . "<td class=\"text-center\"> $row[event_name]</td>" . "<td class=\"text-center\">$datum</td>" . "<td class=\"text-center\">10/$total_tickets</td>" . "<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[eventId]\">Измени</a></td>" . "<td class=\"text-center\"><a href=\"admin_activateEvent.php?eventid=$row[eventId]\">" . ($row['activated'] == 1 ? 'Деактивирај' : 'Активирај') . "</a></td></tr>";
 
-								}
+						}
 
-							}
-							?>
-						</table>
+						}
+						?>
+					</table>
 
-						<!-- /.row -->
-					</div>
 					<!-- /.row -->
 				</div>
-				<!--end of row -->
+				<!-- /.row -->
 			</div>
-			<!-- /#page-wrapper -->
+			<!--end of row -->
+		</div>
+		<!-- /#page-wrapper -->
 
-			<!-- /#wrapper -->
+		<!-- /#wrapper -->
 
-			<!-- jQuery -->
+		<!-- jQuery -->
 
 	</body>
 	<script src="js/jquery.js"></script>

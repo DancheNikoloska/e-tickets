@@ -1,9 +1,9 @@
 <?php
 include_once 'database.php';
-session_start();
 
 
-if(!empty($_SESSION['username'])) {
+
+if(isset($_SESSION['username'])) {
 
    $user=$_SESSION['username'];
    $_SESSION["type"]="organizator";
@@ -12,7 +12,8 @@ if(!empty($_SESSION['username'])) {
 }else{
 
   $user="Најавете се!";
-  header("Location: login.php");
+  $flag=0;
+  //header("Location: login.php");
    
  
 
