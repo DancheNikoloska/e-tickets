@@ -52,7 +52,8 @@ echo $_SESSION['user_id'];
 </head>
 <?php 
 include_once 'database.php';
-$query=mysqli_query($link,"Select count(*) as novi_nastani from events where activated=0");
+$idd=$_SESSION['user_id'];
+$query=mysqli_query($link,"Select count(*) as novi_nastani from events where activated=0 and org_id='$idd'");
 $n_nastani=mysqli_fetch_assoc($query);
 $br_nastani=$n_nastani['novi_nastani'];
 
@@ -161,14 +162,18 @@ $br_nastani=$n_nastani['novi_nastani'];
                                 </div>
                             </div>
                         </div>
-                        <a href="eventsAdmin.php">
+                      
+                        <a href="listEventOrganizator.php">
                             <div class="panel-footer">
                                 <span class="pull-left">Детали</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
                         </a>
+                       
                     </div>
+             
+                      
                 </div>
                 <div class="col-lg-6 col-md-8" >
                     <div class="panel panel-green">
@@ -191,7 +196,31 @@ $br_nastani=$n_nastani['novi_nastani'];
                             </div>
                         </a>
                     </div>
+                    
                 </div>
+                </div>
+                 <div class="row">
+                <div class="col-lg-4" >
+                	      
+                     <a href="addEvent.php">
+                            <div class="btn btn-primary " >
+                                <span class="h1">Додади настан</span>
+                                
+                            </div>
+                        </a>
+                   
+                	</div>
+                	
+                	 <div class="col-lg-4 col-lg-offset-2">
+                     <a href="#">
+                            <div class="btn btn-success" >
+                                <span class="h1">Додади билети</span>
+                                
+                            </div>
+                        </a>
+                    </div>
+                
+               
                 
                </div>
             

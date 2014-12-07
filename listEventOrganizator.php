@@ -76,9 +76,7 @@
 
 							</li>
 
-							<li>
-								<a href="#"><i class="fa fa-users fa-fw"></i> Корисници </a>
-							</li>
+							
 							<li>
 								<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Статистики </a>
 
