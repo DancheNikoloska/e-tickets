@@ -53,8 +53,8 @@ if (isset($_POST['submit'])) {
 			//header('Location: upload.php');
 			echo " <p > Успешно прикачување! <p>";
 			$now = date("Y-m-d H:i");
-			$n = "images/" . "/" . $_FILES["file"]["name"];
-			$n1 = "images/" . "/" . $_FILES["file1"]["name"];
+			$n = $_FILES["file"]["name"];
+			$n1 = $_FILES["file1"]["name"];
 			$t = $_FILES["file"]["type"];
 			$flag = true;
 

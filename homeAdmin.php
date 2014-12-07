@@ -47,7 +47,14 @@ if(!empty($_SESSION['username'])) {
 
    
 </head>
+<?php 
+include_once 'database.php';
+$query=mysqli_query($link,"Select count(*) as novi_nastani from events where activated=0");
+$n_nastani=mysqli_fetch_assoc($query);
+$br_nastani=$n_nastani['novi_nastani'];
 
+
+?>
 <body>
 
     <div id="wrapper">
@@ -146,12 +153,12 @@ if(!empty($_SESSION['username'])) {
                                     <i class="fa fa-bell-o fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">4</div>
+                                    <div class="huge"><?php echo $br_nastani; ?></div>
                                     <div>Нови настани!</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="eventsAdmin.php">
                             <div class="panel-footer">
                                 <span class="pull-left">Детали</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

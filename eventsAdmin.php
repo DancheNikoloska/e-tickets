@@ -79,7 +79,7 @@
                             <a href="homeAdmin.php"><i class="fa fa-home fa-fw"></i> Почетна</a>
                         </li>
                         <li>
-                            <a class="active" href="eventsAdmin"><i class="fa fa-bell-o fa-fw"></i> Настани</a>
+                            <a class="active" href="eventsAdmin.php"><i class="fa fa-bell-o fa-fw"></i> Настани</a>
                             
                         </li>
                         <li>
@@ -145,8 +145,8 @@
 	  			 "<td class=\"text-center\"> $row[event_name] </td>".
 	  			 "<td class=\"text-center\">$datum</td>".
 	  			 "<td class=\"text-center\">10/$total_tickets</td>".
-	  			 "<td class=\"text-center\"><a href=\"#\">Измени</a></td>".
-	  			 "<td class=\"text-center\"><a href=\"#\">". ($row['activated']==1 ? 'Деактивирај' : 'Активирај'). "</a></td></tr>";
+	  			 "<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[eventId]\">Измени</a></td>".
+	  			 "<td class=\"text-center\"><a href=\"admin_activateEvent.php?eventid=$row[eventId]\">". ($row['activated']==1 ? 'Деактивирај' : 'Активирај'). "</a></td></tr>";
   			
   			}
 
@@ -155,8 +155,8 @@
   				"<td class=\"text-center\"> $row[event_name]</td>".
   				"<td class=\"text-center\">$datum</td>".
   				"<td class=\"text-center\">10/$total_tickets</td>".
-  				"<td class=\"text-center\"><a href=\"#\">Измени</a></td>".
-  				"<td class=\"text-center\"><a href=\"#\">". ($row['activated']==1 ? 'Деактивирај' : 'Активирај'). "</a></td></tr>";
+  				"<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[eventId]\">Измени</a></td>".
+  				"<td class=\"text-center\"><a href=\"admin_activateEvent.php?eventid=$row[eventId]\">". ($row['activated']==1 ? 'Деактивирај' : 'Активирај'). "</a></td></tr>";
   			
 				}
 				
