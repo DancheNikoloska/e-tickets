@@ -13,7 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
- 
+
     <!-- Custom CSS -->
     <link href="css/shop-item.css" rel="stylesheet">
 </head>
@@ -22,7 +22,7 @@
 
     <!-- Navigation -->
     <?php
-	include_once 'navBar.php';
+		include_once 'navBar.php';
  ?>			
     <!-- Page Content -->
     <div class="container">
@@ -32,11 +32,11 @@
 
             <div class="col-md-9">
             	<?php 
-            		$eventID=0;				
+            		$eid=0;				
 				     if (isset($_GET['ev'])) {
-					    $eventID=$_GET['ev'];
+					    $eid=$_GET['ev'];
 					 }
-            		$events=mysqli_query($link, "SELECT * FROM events WHERE eventId LIKE '$eventID'");
+            		$events=mysqli_query($link, "SELECT * FROM events WHERE eventId LIKE '$eid'");
 					   while ($event=mysqli_fetch_assoc($events)) {	
 				?>
                 <div class="thumbnail">
@@ -47,52 +47,45 @@
                         </h4>
                         <p><?php echo $event['event_description']?></p>
                         <?php 
-                       		$periodsID=array();
-							$placeID;
-							//selektiranje na detali za nastanot, potocno na lokacija, i site vreminja na nastanot
-                        	$details=mysqli_query($link, "SELECT * FROM event_details WHERE event_id LIKE '$eventID'");
+                        	$details=mysqli_query($link, "SELECT * FROM event_details WHERE event_id LIKE '$eid'");
 					   		while ($dets=mysqli_fetch_assoc($details)) {
 					   			$placeID=$dets['place_id'];
-								array_push($periodsID,$dets['period_id']);
-							}
-							//selekcija na podatoci za mestoto na odrzuvanje na nastanot so pomos na id-to za mesto zemeno od prethodnoto kveri
-							$location=mysqli_query($link, "SELECT * FROM places WHERE placeId LIKE '$placeID'");
-					   		while ($places=mysqli_fetch_assoc($location)) {
-					   			$place=$places['place_name'];
-								$adress=$places['place_address'];
-						?>						
-						<p><strong>Место на настанот: </strong> <?php echo $place; ?> </p>
-						<p><strong>Адреса: </strong> <?php echo $adress; ?> </p>			
-                             <?php } ?>           
-                   	
-                    </div>                    
+								$periodID=$dets['period_id'];
+								echo "Place:"+$placeID;
+								//echo "Periond:"+$periodID;
+								$place=mysqli_query($link, "SELECT * FROM place WHERE placeId LIKE '$placeID'");
+								while ($p=mysqli_fetch_assoc($place)) {
+									
+								
+								?>
+						<p><strong>Локација: </strong> <?php echo $p['place_name']+"      "+$p['place_address'] ?>  </p>		
+						<?php	}
+								$periods=mysqli_query($link, "SELECT * FROM periods WHERE periodId LIKE '$periodID'");
+								while($per=mysqli_fetch_assoc($periods)){
+								    
+								}
+							};
+					   	?>
+                                        
+                          <div class="dropdown">
+							  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+							    Dropdown
+							    <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+							  </ul>
+						</div>
+                    </div>                   
                 </div>
-					 <?php } ?>	
-									 
-					 <div class="col-md-4 pull-left">	
-					 	<label for="sel1">Одбери термин: </label>				
-						<select id="sel1" class="form-control" >
-							<?php
-							  	//vo dropdown forma se prikazuvaat site termini vo koi ke se odrzuva nastanot
-							  	for($i=0;$i<count($periodsID);$i++){
-							  		$tmp=$periodsID[$i];
-							  	 $per=mysqli_query($link, "SELECT * FROM periods WHERE periodId LIKE '$tmp'");
-					   			 while ($periods=mysqli_fetch_assoc($per)) {
-					   			 	 $pID=$periods['periodId'];
-					   			 	 $period=$periods['period_date'];
-									 $time=$periods['period_time']
-					   			 	?>
-						    <option id='<?php echo "option".$pID; ?>'><?php echo $period . " | " . $time; ?></option>
-						    <?php }} ?>
-						  </select>	
-					</div>	
-               		
-               			<br />
+					 <?php } ?>
+               
                     <div class="text-right">
-                        <a class="btn btn-info" href="#">Продолжи со одбирање место</a>
+                        <a class="btn btn-success">Стави во кошничка</a>
                     </div>  
-   					
-					</div>                    
            
 
             </div>
@@ -123,7 +116,6 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/selectPeriod.js"></script>
 
 </body>
 
