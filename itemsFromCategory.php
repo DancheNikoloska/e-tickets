@@ -32,7 +32,8 @@
 					
 					<div class="row">
 							<?php
-							$events=mysqli_query($link, "SELECT * FROM events WHERE category_id LIKE '$id'");
+							// selekcija na site aktivni nastani od odbranata kategorija
+							$events=mysqli_query($link, "SELECT * FROM events WHERE activated LIKE 1 AND category_id LIKE '$id'");
 								while ($event=mysqli_fetch_assoc($events)) {
 									$eventID=$event['eventId'];		
 							?>
@@ -40,8 +41,8 @@
 							<div class="thumbnail">
 								<img src="http://placehold.it/320x150" alt="">
 								<div class="caption">
-									<!--<h4 class="pull-right">$24.99</h4> -->
-									<h4><a href='<?php echo "item.php?еv=$eventID&id=$id"?>'><?php echo $event['event_name'] ?></a></h4>
+									<!--<h4 class="pull-right">$24.99</h4>  &id=$id-->
+									<h4><a href='<?php echo "item.php?ev=$eventID&id=$id"?>'><?php echo $event['event_name'] ?></a></h4>
 									<p>
 										<?php echo $event['event_description']?>
 									</p>

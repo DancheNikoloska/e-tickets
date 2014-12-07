@@ -90,7 +90,9 @@ function seedEntities($link) {
 	(null, '2014-12-03','17:00:00'),
 	(null, '2014-12-18', '20:00:00'),
 	(null, '2014-12-18', '16:00:00'),
-	(null, '2015-01-16', '21:00:00')";
+	(null, '2015-01-16', '21:00:00'),
+	(null, '2014-12-18', '20:00:00'),
+	(null, '2014-12-19', '16:00:00')";
 	mysqli_query($link, $query);
 	
 	
@@ -100,7 +102,9 @@ function seedEntities($link) {
 	(null,1,2,4),
 	(null,3,3,5),
 	(null,4,4,2),
-	(null,3,2,3)";
+	(null,3,2,3),
+	(null,5,3,5),
+	(null,6,3,5)";
 	mysqli_query($link, $query);
 	
 	

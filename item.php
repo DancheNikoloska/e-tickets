@@ -21,7 +21,9 @@
 <body>
 
     <!-- Navigation -->
-    <?php include_once 'navBar.php'; ?>			
+    <?php
+		include_once 'navBar.php';
+ ?>			
     <!-- Page Content -->
     <div class="container">
 
@@ -32,13 +34,10 @@
             	<?php 
             		$eid=0;				
 				     if (isset($_GET['ev'])) {
-				     	echo $_GET['ev'];
 					    $eid=$_GET['ev'];
 					 }
-						 echo  $eid;
             		$events=mysqli_query($link, "SELECT * FROM events WHERE eventId LIKE '$eid'");
-					   while ($event=mysqli_fetch_assoc($events)) {
-					   	echo $events['eventId'];	
+					   while ($event=mysqli_fetch_assoc($events)) {	
 				?>
                 <div class="thumbnail">
                     <img class="img-responsive" src="http://placehold.it/800x300" alt="">
@@ -47,18 +46,47 @@
                         <h4><a href="#"><?php echo $event['event_name'] ?></a>
                         </h4>
                         <p><?php echo $event['event_description']?></p>
-                        <p>Want to make these reviews work? Check out
-                            <strong><a href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this building a review system tutorial</a>
-                            </strong>over at maxoffsky.com!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                        <?php 
+                        	$details=mysqli_query($link, "SELECT * FROM event_details WHERE event_id LIKE '$eid'");
+					   		while ($dets=mysqli_fetch_assoc($details)) {
+					   			$placeID=$dets['place_id'];
+								$periodID=$dets['period_id'];
+								echo "Place:"+$placeID;
+								//echo "Periond:"+$periodID;
+								$place=mysqli_query($link, "SELECT * FROM place WHERE placeId LIKE '$placeID'");
+								while ($p=mysqli_fetch_assoc($place)) {
+									
+								
+								?>
+						<p><strong>Локација: </strong> <?php echo $p['place_name']+"      "+$p['place_address'] ?>  </p>		
+						<?php	}
+								$periods=mysqli_query($link, "SELECT * FROM periods WHERE periodId LIKE '$periodID'");
+								while($per=mysqli_fetch_assoc($periods)){
+								    
+								}
+							};
+					   	?>
+                                        
+                          <div class="dropdown">
+							  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+							    Dropdown
+							    <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+							  </ul>
+						</div>
                     </div>                   
                 </div>
-					 <?php }?>
-                <div class="well">
+					 <?php } ?>
+               
                     <div class="text-right">
                         <a class="btn btn-success">Стави во кошничка</a>
                     </div>  
-                </div>
+           
 
             </div>
 
