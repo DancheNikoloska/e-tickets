@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `event_name` varchar(50)  NOT NULL,
   `event_description` varchar(200) NOT NULL,
   `category_id` int(11) NOT NULL,
+  `org_id` int(11) NOT NULL,
   `event_largeImg` varchar(200) NOT NULL,
   `event_smallImg` varchar(200) NOT NULL,
   `activated` int(11) NOT NULL
@@ -152,7 +153,7 @@ ALTER TABLE `categories`
 -- Indexes for table `events`
 --
 ALTER TABLE `events`
- ADD PRIMARY KEY (`eventId`), ADD KEY `category_id` (`category_id`);
+ ADD PRIMARY KEY (`eventId`), ADD KEY `category_id` (`category_id`),  ADD KEY `org_id` (`org_id`);
 
 --
 -- Indexes for table `event_details`
@@ -245,6 +246,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 ALTER TABLE `events`
 ADD CONSTRAINT `category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`categoryId`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `org_id` FOREIGN KEY (`org_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `event_details`
@@ -271,3 +273,22 @@ ADD CONSTRAINT `event_detailsId` FOREIGN KEY (`details_id`) REFERENCES `event_de
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
