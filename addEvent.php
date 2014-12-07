@@ -1,6 +1,22 @@
 <?php
 include_once 'database.php';
 session_start();
+
+
+if(!empty($_SESSION['username'])) {
+
+   $user=$_SESSION['username'];
+   $_SESSION["type"]="organizator";
+   $flag=1;
+
+}else{
+
+  $user="Најавете се!";
+  header("Location: login.php");
+   
+ 
+
+}
 $eventName = "";
 $des = "";
 $date = "";
