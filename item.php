@@ -89,7 +89,7 @@
                		
                			<br />
                     <div class="text-right">
-                        <a class="btn btn-info" href="#">Продолжи со одбирање место</a>
+                        <a class="btn btn-info" href="chooseSeat.php">Продолжи со одбирање место</a>
                     </div>  
    					
 					</div>                    
@@ -123,7 +123,6 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/selectPeriod.js"></script>
 
 </body>
 

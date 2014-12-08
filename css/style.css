@@ -1,0 +1,22 @@
+.first-class { 
+   
+    background-color: #D3D0F7;
+    border: solid;
+	padding: 2px;
+	width: 60px;
+	height: 30px;
+	border-radius: 10px;
+	text-align: center;
+	/*height: 15px;*/
+}
+.economy-class {
+    size: 20px;
+    background-color: #183C60;
+    border: solid;
+	padding: 2px;
+	width: 50px;
+}
+
+.proba-class{
+	color: #2C4762;
+}
