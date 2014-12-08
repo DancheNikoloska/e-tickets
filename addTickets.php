@@ -23,32 +23,28 @@ $price = "";
 $auto = "";
 
 if (isset($_POST['submit'])) {
-/*
-function rand_string($len, $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
-{
-    $string = '';
-    for ($i = 0; $i < $len; $i++)
-    {
-        $pos = rand(0, strlen($chars)-1);
-        $string .= $chars{$pos};
-    }
-    return $string;
-}
-$r=rand_string(15);
-//echo $r;
-*/
-	
+
+	function rand_string($len, $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') {
+		$string = '';
+		for ($i = 0; $i < $len; $i++) {
+			$pos = rand(0, strlen($chars) - 1);
+			$string .= $chars{$pos};
+		}
+		return $string;
+	}
+
+	//$r=rand_string(15);
+	//echo $r;
 
 	$num = $_POST['num'];
 	$type = $_POST['type'];
 	$price = $_POST['price'];
 	$msg = "";
-	$code = rand_string(15);
 
 	$event = $_POST['event'];
 	$auto = $_POST['code'];
 
-	if ($event != null && $num != null && $type != null && $price != null && $auto != null && $code!=null) {
+	if ($event != null && $num != null && $type != null && $price != null && $auto != null) {
 
 		$query = "SELECT * FROM event_details WHERE event_id LIKE '$event'";
 		$result = mysqli_query($link, $query);
@@ -56,24 +52,27 @@ $r=rand_string(15);
 
 			$row1 = mysqli_fetch_assoc($result);
 			$event_id = $row1['event_detailsId'];
-for($i=0; $i=$num; $i++)
-{}
-			$query1 = "INSERT INTO tickets (code, type, ticket_price, details_id)
-	 				VALUES('" . $code . "','" . $type . "','" . $price . "','" . $event_id . "')";
-			if (mysqli_query($link, $query1)) {
-				$msg = "Успешно додадени билети! ";
-				//header('Location: homeOrganizator.php');
+			for ($i = 0; $i < $num; $i++) {
+				$code = rand_string(15);
 
-			} else {
-				$msg = "Билетите не беа додадени, обидете се повторно! ";
-				//$msg += $cat;
+				$query1 = "INSERT INTO tickets (code, type, ticket_price, details_id)
+	 				VALUES('" . $code . "','" . $type . "','" . $price . "','" . $event_id . "')";
+				if (mysqli_query($link, $query1)) {
+					$msg = "Успешно додадени билети! uspeh";
+					//header('Location: homeOrganizator.php');
+
+				} else {
+					$msg = "Билетите не беа додадени, обидете се повторно! povtorno ";
+					//$msg += $cat;
+				}
+
 			}
 
 		} else {
-			$msg = "Неточно ID на настан";
+			$msg = "Неточно ID на настан netocno";
 		}
 	} else {
-		$msg = "Пополнете ги сите полиња";
+		$msg = "Пополнете ги сите полиња polinja";
 		//$msg+=$cat;
 	}
 }
@@ -102,87 +101,87 @@ for($i=0; $i=$num; $i++)
 
 		<?php
 		include_once 'navBar.php';
-		?>
+	?>
 
-		<div class="container">
+<div class="container">
 
-			<div class="row">
+<div class="row">
 
-				<div class="col-md-8">
+<div class="col-md-8">
 
-					<?php
-					if (isset($_POST['submit'])) {
-						echo "<h5 style=color:red>" . $msg . "</h5>";
-					}
-					?>
-					<h3 style="color:gray">Внесување на билети за настан</h3>
-					<br />
+<?php
+if (isset($_POST['submit'])) {
+	echo "<h5 style=color:red>" . $msg . "</h5>";
+}
+?>
+<h3 style="color:gray">Внесување на билети за настан</h3>
+<br />
 
-					<form action="" method="post"  enctype="multipart/form-data" >
-						<div class="form-group">
-							<label for="event"> Избери настан </label>
-							<?php
-							$id = $_SESSION['user_id'];
-							$query = "SELECT * FROM events where org_id='$id' ";
-							//select na vekepostoecki kategorii
-							print "<select name='event' id='event'>";
-							$result = mysqli_query($link, $query);
-							if ($result) {
-								while ($row = mysqli_fetch_assoc($result)) {
-									print "<option value='" . $row['eventId'] . "' ";
+<form action="" method="post"  enctype="multipart/form-data" >
+<div class="form-group">
+<label for="event"> Избери настан </label>
+<?php
+$id = $_SESSION['user_id'];
+$query = "SELECT * FROM events where org_id='$id' ";
+//select na vekepostoecki kategorii
+print "<select name='event' id='event'>";
+$result = mysqli_query($link, $query);
+if ($result) {
+	while ($row = mysqli_fetch_assoc($result)) {
+		print "<option value='" . $row['eventId'] . "' ";
 
-									print ">" . $row['event_name'] . "</option>";
-								}
-							}
-							print "</select><br/>";
-							?>
+		print ">" . $row['event_name'] . "</option>";
+	}
+}
+print "</select><br/>";
+?>
 
-							<label for="des">Број на билети:</label>
-							<input type="text" class="form-control" name="num" id="num" value="<?php echo $num; ?>">
+<label for="des">Број на билети:</label>
+<input type="text" class="form-control" name="num" id="num" value="<?php echo $num; ?>">
 
-							<label for="date"> Тип на билет: </label>
-							<br/>
-							<input type="text" class="form-control" name="type" id="type" value="<?php echo $type; ?>">
-							<label for="time"> Цена на билет: </label>
-							<br/>
-							<input type="text" class="form-control" name="price" id="price" value="<?php echo $price; ?>">
+<label for="date"> Тип на билет: </label>
+<br/>
+<input type="text" class="form-control" name="type" id="type" value="<?php echo $type; ?>">
+<label for="time"> Цена на билет: </label>
+<br/>
+<input type="text" class="form-control" name="price" id="price" value="<?php echo $price; ?>">
 
-							<input type='checkbox' name='code' value='yes' id='code'  >
-							Автоматско генерирање код</input>
-							<br/>
+<input type='checkbox' name='code' value='yes' name='code' id='code'  >
+Автоматско генерирање код</input>
+<br/>
 
-							<input  class="btn btn-default" type="submit"  value="Додади билети" name="submit" id="submit"  />
+<input  class="btn btn-default" type="submit"  value="Додади билети" name="submit" id="submit"  />
 
-					</form>
-				</div>
+</form>
+</div>
 
-			</div>
-		</div>
+</div>
+</div>
 
-		<!-- Team Member Profiles -->
+<!-- Team Member Profiles -->
 
-		<div class="container">
-			<footer>
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="row well">
+<div class="container">
+<footer>
+<div class="row">
+<div class="col-lg-12">
+<div class="row well">
 
-							<p align="center">
-								2013  ФИНКИ |    Факултет за информатички науки и компјутерско инженерство
-							</p>
-						</div>
+<p align="center">
+2013  ФИНКИ |    Факултет за информатички науки и компјутерско инженерство
+</p>
+</div>
 
-					</div>
-				</div>
-			</footer>
+</div>
+</div>
+</footer>
 
-		</div><!-- /.container -->
+</div><!-- /.container -->
 
-		<!-- Bootstrap core JavaScript -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="js/jquery.js"></script>
-		<script src="js/bootstrap.js"></script>
-		<script src="js/modern-business.js"></script>
+<!-- Bootstrap core JavaScript -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/modern-business.js"></script>
 
-	</body>
+</body>
 </html>
