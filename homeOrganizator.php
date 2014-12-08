@@ -212,7 +212,7 @@ $br_nastani=$n_nastani['novi_nastani'];
                 	</div>
                 	
                 	 <div class="col-lg-4 col-lg-offset-2">
-                     <a href="#">
+                     <a href="addTickets.php">
                             <div class="btn btn-success" >
                                 <span class="h1">Додади билети</span>
                                 
