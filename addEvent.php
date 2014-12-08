@@ -1,23 +1,22 @@
 <?php
 include_once 'database.php';
 
+session_start();
+if (isset($_SESSION['username'])) {
 
+	$user = $_SESSION['username'];
+	$_SESSION["type"] = "organizator";
+	$flag = 1;
+	echo $_SESSION['username'];
+	echo $_SESSION['user_id'];
+} else {
 
-if(isset($_SESSION['username'])) {
-
-   $user=$_SESSION['username'];
-   $_SESSION["type"]="organizator";
-   $flag=1;
-
-}else{
-
-  $user="Најавете се!";
-  $flag=0;
-  //header("Location: login.php");
-   
- 
-
+	$user = "Најавете се!";
+	$flag = 0;
+	header("Location: login.php");
 }
+
+
 $eventName = "";
 $des = "";
 $date = "";
@@ -96,8 +95,9 @@ if (isset($_POST['submit'])) {
 				$query1 = "INSERT INTO periods (period_date, period_time)
 	 				VALUES('" . $date . "','" . $time . "')";
 				if (mysqli_query($link, $query1)) {
-					$query = "INSERT INTO events(event_name, event_description, category_id, event_largeImg, event_smallImg)
-	 				VALUES('" . $eventName . "','" . $des . "','" . $cat . "' ,'" . $n . "','" . $n1 . "')";
+					$org=$_SESSION['user_id'];
+					$query = "INSERT INTO events(event_name, event_description, category_id, org_id, event_largeImg, event_smallImg)
+	 				VALUES('" . $eventName . "','" . $des . "','" . $cat . "' ,'" . $org . "' ,'" . $n . "','" . $n1 . "')";
 
 					if (mysqli_query($link, $query)) {
 						
@@ -110,58 +110,65 @@ if (isset($_POST['submit'])) {
 							$row = mysqli_fetch_assoc($re);
 							$event_id = $row['eventId'];
 						}
-						$tt=$time+":00";
-						$re1 = mysqli_query($link, "SELECT periodId FROM periods WHERE period_date LIKE '0000-00-00' AND period_time LIKE '00:00:00' ");
+						//$tt=$time+":00";
+						$re1 = mysqli_query($link, "SELECT periodId FROM periods WHERE period_date LIKE '$date' AND period_time LIKE '$time' ");
 						
 						if($re1)
 						{
 							$row1 = mysqli_fetch_assoc($re1);
 							$period_id = $row1['periodId'];
-						}
+					//	
 						
 
 						if ($event_id != null && $period_id != null ) {
-							if($place_id!=null)
-							{
+							
+							
 								$query2 = "INSERT INTO event_details (period_id ,  event_id, place_id)	
 							VALUES('" . $period_id . "','" . $event_id . "','" . $place_id . "')";
 							if (mysqli_query($link, $query2)) {
 								$msg = "Успешно додаден настан! ";
 							} else {
-								$msg="Неуспешно поврзување на табелите";
+								$msg="Неуспешно поврзување на табелите tabeli";
 							}
 							
 								
-							}
+							
+						}
 							else
 								{
 									$msg="Неуспешно читање од lista";
 								}
 							
-						}
+							}
 						else {
-							$msg="Неуспешно читање од база";
+							$msg="Неуспешно читање од база (period)";
 						}
 						
-						
+
 						
 
 					} else {
-								$msg = "Настанот не беше додаден, обидете се повторно! ";
+								$msg = "Настанот не беше додаден, обидете се повторно! ne nastan ";
 						//$msg += $cat;
 					}
 
-				} else {
-					$msg = "Периодот не беше додаден, обидете се повторно! ";
+				}
+
+
+ else {
+					$msg = "Периодот не беше додаден, обидете се повторно! ne period ";
 					//$msg += $cat;
 				}
 
-			}
-		} else {
-			$msg = "Пополнете ги сите полиња";
+			
+		}
+		}
+
+ else {
+			$msg = "Пополнете ги сите полиња site";
 			//$msg+=$cat;
 		}
-	}
+		}
 
 }
 ?>
@@ -213,7 +220,7 @@ if (isset($_POST['submit'])) {
 <label for="des">Опис:</label>
 <input type="text" class="form-control" name="des" id="des" value="<?php echo $des; ?>">
 
-<label for="date"> Датум: (gggg/mm/dd) </label>
+<label for="date"> Датум: (gggg-mm-dd) </label>
 <br/>
 <input type="text" class="form-control" name="date" id="date" value="<?php echo $date; ?>">
 <label for="time"> Времe: (hh:mm)</label>
