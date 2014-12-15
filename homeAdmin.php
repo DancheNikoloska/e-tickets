@@ -126,10 +126,10 @@ $br_nastani=$n_nastani['novi_nastani'];
                             
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-male fa-fw"></i> Организатори </a>
+                            <a href="orgAdmin.php"><i class="fa fa-male fa-fw"></i> Организатори </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-users fa-fw"></i> Корисници </a>
+                            <a href="usersAdmin.php"><i class="fa fa-users fa-fw"></i> Корисници </a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Статистики </a>

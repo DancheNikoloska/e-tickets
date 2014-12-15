@@ -29,6 +29,9 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <style>
+    	a:hover,a:focus {text-decoration: none;}
+    </style>
 
    
 </head>
@@ -79,11 +82,11 @@
                             <a href="homeAdmin.php"><i class="fa fa-home fa-fw"></i> Почетна</a>
                         </li>
                         <li>
-                            <a class="active" href="eventsAdmin.php"><i class="fa fa-bell-o fa-fw"></i> Настани</a>
+                            <a href="eventsAdmin.php"><i class="fa fa-bell-o fa-fw"></i> Настани</a>
                             
                         </li>
                         <li>
-                            <a href="orgAdmin.php"><i class="fa fa-male fa-fw"></i> Организатори </a>
+                            <a class="active" href="orgAdmin.php"><i class="fa fa-male fa-fw"></i> Организатори </a>
                         </li>
                         <li>
                             <a href="usersAdmin.php"><i class="fa fa-users fa-fw"></i> Корисници </a>
@@ -104,72 +107,45 @@
         	<div class="row">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header" style="margin-left: 15px;">Настани</h1>
+                    <h1 class="page-header" style="margin-left: 15px;">Организатори</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="col-lg-12">
+<!--toggle navigation -->
+<?php 
+include_once 'database.php';
+$q=mysqli_query($link,"select * from users where usertype='Организатор'");
+$counter=0;
+while($row=mysqli_fetch_assoc($q))
+{
 
-            <table class="table table-striped table-hover">
-  			<tr class="active" align="center">
-  				<th class="text-center">Име на настан</th>
-  				<th class="text-center">Датум</th>
-  				<th class="text-center">Продадени билети</th>
-  				<th class="text-center">Измени</th>
-  				<th class="text-center">Активирај</th>
-  			</tr>
-  			<?php 
-  			include_once 'database.php';
-			$query="Select * from events";
-			$res=mysqli_query($link, $query);
-			while($row=mysqli_fetch_assoc($res))
-			{
-			//get period
-			$query2="Select period_date from events e, event_details ed, periods p where ed.event_id=e.eventId AND ed.period_id=p.periodId AND e.eventId=$row[eventId]";
-			$d=mysqli_query($link,$query2);
-			$res_datum=mysqli_fetch_assoc($d);
-			$datum=$res_datum['period_date'];
-			//get tickets number
-			$query3="Select count(*) as no_tickets from tickets t, events e, event_details ed where t.details_id=ed.event_detailsId AND ed.event_id=e.eventId and e.eventId=$row[eventId]";
-			$n=mysqli_query($link, $query3);
-			$num=mysqli_fetch_assoc($n);
-			$total_tickets=$num['no_tickets'];
-			//get sold tickets number
-			$sold=mysqli_query($link, "Select count(*) as sold from events e, event_details ed, tickets t, has_ticket ht where e.eventId=ed.event_id AND ed.event_detailsId=t.details_id AND t.ticket_id=ht.ticket_id AND e.eventId=$row[eventId]");
-			$s=mysqli_fetch_assoc($sold);
-			$sold_tickets=$s['sold'];
-			
-			
-			
-			if ($row['eventId']%2==0){
-			
-  			
-	  			echo "<tr class='info'>" .
-	  			 "<td class=\"text-center\"> $row[event_name] </td>".
-	  			 "<td class=\"text-center\">$datum</td>".
-	  			 "<td class=\"text-center\">$sold_tickets / $total_tickets</td>".
-	  			 "<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[eventId]\">Измени</a></td>".
-	  			 "<td class=\"text-center\"><a href=\"admin_activateEvent.php?eventid=$row[eventId]\">". ($row['activated']==1 ? 'Деактивирај' : 'Активирај'). "</a></td></tr>";
-  			
-  			}
+$e=mysqli_query($link,"select * from events e, users u where e.org_id=u.id and u.id=$row[id]");
 
-			else{
-  				echo "<tr>".
-  				"<td class=\"text-center\"> $row[event_name]</td>".
-  				"<td class=\"text-center\">$datum</td>".
-  				"<td class=\"text-center\">$sold_tickets / $total_tickets</td>".
-  				"<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[eventId]\">Измени</a></td>".
-  				"<td class=\"text-center\"><a href=\"admin_activateEvent.php?eventid=$row[eventId]\">". ($row['activated']==1 ? 'Деактивирај' : 'Активирај'). "</a></td></tr>";
-  			
-				}
-				
-			}
-			?>
-			</table>
+?>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+			<h4 class="panel-title">
+			<?php echo	"<a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapse$counter\"> <b> $row[username]: </b> $row[email]</a>"; ?>
+			</h4>
+	</div>
+	<?php echo "<div id=\"collapse$counter\" class=\"panel-collapse collapse\">"; ?>
+		<div class="panel-body">
+			<ul> 
+				<?php while ($row=mysqli_fetch_assoc($e))
+				{
+					echo "<a href=\"item.php?ev=$row[eventId]\"><li> $row[event_name] </li></a>";
+				} ?>
+			</ul>
+		</div>
+   </div>
+</div>           
            
-           
-            <!-- /.row -->
+ <?php $counter=$counter+1; } ?>           
+ 
+ <!-- /.row -->
          </div>   
             <!-- /.row -->
         </div>
