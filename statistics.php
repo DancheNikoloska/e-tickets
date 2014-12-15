@@ -1,12 +1,4 @@
-<?php 
-include_once 'database.php';
-if(isset($_GET['userid'])) 
-{
-	$userid=$_GET['userid'];
-	$q=mysqli_query($link, "Delete from users where id=$userid");
-	header('Location: usersAdmin.php');
-}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,6 +29,9 @@ if(isset($_GET['userid']))
 
     <!-- Custom Fonts -->
     <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <style>
+    	a:hover,a:focus {text-decoration: none;}
+    </style>
 
    
 </head>
@@ -94,10 +89,10 @@ if(isset($_GET['userid']))
                             <a  href="orgAdmin.php"><i class="fa fa-male fa-fw"></i> Организатори </a>
                         </li>
                         <li>
-                            <a class="active" href="usersAdmin.php"><i class="fa fa-users fa-fw"></i> Корисници </a>
+                            <a href="usersAdmin.php"><i class="fa fa-users fa-fw"></i> Корисници </a>
                         </li>
                         <li>
-                            <a href="statistics.php"><i class="fa fa-bar-chart-o fa-fw"></i> Статистики </a>
+                            <a class="active" href="statistics.php"><i class="fa fa-bar-chart-o fa-fw"></i> Статистики </a>
                            
                         </li>
                                                
@@ -112,65 +107,34 @@ if(isset($_GET['userid']))
         	<div class="row">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header" style="margin-left: 15px;">Корисници</h1>
+                    <h1 class="page-header" style="margin-left: 15px;">Статистики</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="col-lg-12">
+<!--toggle navigation -->
+<!--tabs-->
+<ul class="nav nav-tabs" role="tablist" id="myTab">
+  <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Kатегории</a></li>
+  <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Организатори</a></li>
+  <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Временски период</a></li>
+  <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Корисници</a></li>
+</ul>
 
-            <table class="table table-striped table-hover">
-  			<tr class="active" align="center">
-  				<th class="text-center">Корисничко име</th>
-  				<th class="text-center">Емаил адреса</th>
-  				<th class="text-center">Вкупно купени билети</th>
-  				<th class="text-center">Избриши корисник</th>
-  			</tr>
-  			<?php 
-  			include_once 'database.php';
-			$query="select * from users where usertype='Корисник'";
-			$res=mysqli_query($link, $query);
-			while($row=mysqli_fetch_assoc($res))
-			{
-			//get total tickets per user
-			$tic=mysqli_query($link, "select count(*) as totalTickets from has_ticket where user_id=$row[id]");
-			$t=mysqli_fetch_assoc($tic);
-			$ticketsNo=$t['totalTickets'];
-			
-			
-			
-			
-			if ($row['id']%2==0){
-			
-  			
-	  			echo "<tr class='info'>" .
-	  			 "<td class=\"text-center\"> $row[username] </td>".
-	  			 "<td class=\"text-center\">$row[email]</td>".
-	  			 "<td class=\"text-center\">$ticketsNo</td>".
-	  			 "<td class=\"text-center\"><a href=\"usersAdmin.php?userid=$row[id]\" onclick=\"return confirm('Дали сте сигурни дека сакате да го избришете корисникот?')\">Избриши</a>".
-	  			 "</td>";
-	  			
-  			
-  			}
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="home">tab1</div>
+  <div role="tabpanel" class="tab-pane" id="profile">tab2</div>
+  <div role="tabpanel" class="tab-pane" id="messages">tab3</div>
+  <div role="tabpanel" class="tab-pane" id="settings">tab4</div>
+</div>
 
-			else{
-  				echo "<tr>".
-  				"<td class=\"text-center\"> $row[username]</td>".
-  				"<td class=\"text-center\">$row[email]</td>".
-  				"<td class=\"text-center\">$ticketsNo</td>".
-  				"<td class=\"text-center\"><a href=\"usersAdmin.php?userid=$row[id]\" onclick=\"return confirm('Дали сте сигурни дека сакате да го избришете корисникот?')\">Избриши</a>".
-	  			 "</td>";
-  				
-  			
-				}
-				
-			}
-			?>
-			</table>
-           
-          
-           
-            <!-- /.row -->
+<script>
+  $(function () {
+    $('#myTab a:last').tab('show')
+  })
+</script>
+ <!-- /.row -->
          </div>   
             <!-- /.row -->
         </div>
@@ -192,4 +156,5 @@ if(isset($_GET['userid']))
   
     
 </html>
+
 
