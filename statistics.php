@@ -123,17 +123,16 @@
 </ul>
 
 <div class="tab-content">
-  <div role="tabpanel" class="tab-pane active" id="home">tab1</div>
+  <div role="tabpanel" class="tab-pane active" id="home">
+  	tab1
+  	
+  </div>
   <div role="tabpanel" class="tab-pane" id="profile">tab2</div>
   <div role="tabpanel" class="tab-pane" id="messages">tab3</div>
   <div role="tabpanel" class="tab-pane" id="settings">tab4</div>
 </div>
 
-<script>
-  $(function () {
-    $('#myTab a:last').tab('show')
-  })
-</script>
+
  <!-- /.row -->
          </div>   
             <!-- /.row -->
@@ -153,7 +152,11 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/plugins/morris/raphael.min.js"></script>
     <script src="js/plugins/morris/morris.min.js"></script>
-  
+  	<script>
+  $(function () {
+    $('#myTab a:last').tab('show')
+  })
+	</script>
     
 </html>
 
