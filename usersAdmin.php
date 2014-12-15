@@ -1,4 +1,12 @@
-
+<?php 
+include_once 'database.php';
+if(isset($_GET['userid'])) 
+{
+	$userid=$_GET['userid'];
+	$q=mysqli_query($link, "Delete from users where id=$userid");
+	header('Location: usersAdmin.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -111,8 +119,56 @@
             <!-- /.row -->
             <div class="col-lg-12">
 
-            
+            <table class="table table-striped table-hover">
+  			<tr class="active" align="center">
+  				<th class="text-center">Корисничко име</th>
+  				<th class="text-center">Емаил адреса</th>
+  				<th class="text-center">Вкупно купени билети</th>
+  				<th class="text-center">Избриши корисник</th>
+  			</tr>
+  			<?php 
+  			include_once 'database.php';
+			$query="select * from users where usertype='Корисник'";
+			$res=mysqli_query($link, $query);
+			while($row=mysqli_fetch_assoc($res))
+			{
+			//get total tickets per user
+			$tic=mysqli_query($link, "select count(*) as totalTickets from has_ticket where user_id=$row[id]");
+			$t=mysqli_fetch_assoc($tic);
+			$ticketsNo=$t['totalTickets'];
+			
+			
+			
+			
+			if ($row['id']%2==0){
+			
+  			
+	  			echo "<tr class='info'>" .
+	  			 "<td class=\"text-center\"> $row[username] </td>".
+	  			 "<td class=\"text-center\">$row[email]</td>".
+	  			 "<td class=\"text-center\">$ticketsNo</td>".
+	  			 "<td class=\"text-center\"><a href=\"usersAdmin.php?userid=$row[id]\" onclick=\"return confirm('Дали сте сигурни дека сакате да го избришете корисникот?')\">Избриши</a>".
+	  			 "</td>";
+	  			
+  			
+  			}
+
+			else{
+  				echo "<tr>".
+  				"<td class=\"text-center\"> $row[username]</td>".
+  				"<td class=\"text-center\">$row[email]</td>".
+  				"<td class=\"text-center\">$ticketsNo</td>".
+  				"<td class=\"text-center\"><a href=\"usersAdmin.php?userid=$row[id]\" onclick=\"return confirm('Дали сте сигурни дека сакате да го избришете корисникот?')\">Избриши</a>".
+	  			 "</td>";
+  				
+  			
+				}
+				
+			}
+			?>
+			</table>
            
+          
            
             <!-- /.row -->
          </div>   
