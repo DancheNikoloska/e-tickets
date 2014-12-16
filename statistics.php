@@ -116,20 +116,39 @@
 <!--toggle navigation -->
 <!--tabs-->
 <ul class="nav nav-tabs" role="tablist" id="myTab">
-  <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Kатегории</a></li>
+  <li role="presentation"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Категории</a></li>
   <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Организатори</a></li>
   <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Временски период</a></li>
-  <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Корисници</a></li>
+  <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Продадени билети</a></li>
 </ul>
 
 <div class="tab-content">
-  <div role="tabpanel" class="tab-pane active" id="home">
-  	tab1
-  	
+  <div role="tabpanel" class="tab-pane" id="home">
+  	<!-- tab1 -->  	
   </div>
-  <div role="tabpanel" class="tab-pane" id="profile">tab2</div>
-  <div role="tabpanel" class="tab-pane" id="messages">tab3</div>
-  <div role="tabpanel" class="tab-pane" id="settings">tab4</div>
+  <div role="tabpanel" class="tab-pane" id="profile">
+	<!-- tab2 -->
+  </div>
+  <div role="tabpanel" class="tab-pane" id="messages">
+  		<!-- tab3 -->
+  </div>
+  <div role="tabpanel" class="tab-pane active" id="settings">
+  		 <!-- diagram -->
+            <br>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Број на продадени билети месечно
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="morris-area-chart"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+
+             <!--end of diagram-->
+  </div>
 </div>
 
 
@@ -156,6 +175,96 @@
   $(function () {
     $('#myTab a:last').tab('show')
   })
+	</script>
+
+<script>
+
+<?php
+include_once 'database.php';
+//diagram 
+//oktomvri
+$d=mysqli_query($link, "select c.category_name, count(*) as sold from categories c, events e, event_details ed, tickets t, has_ticket ht, periods p where c.categoryId=e.category_id and e.eventId=ed.event_id and ed.period_id=p.periodId and t.details_id=ed.event_detailsId and t.ticket_id=ht.ticket_id and p.period_date between '2015-10-01' and '2015-11-01' group by c.category_name");
+$oktomvri = array("Спорт"=>"0", "Музика"=>"0", "Кино"=>"0", "Театар"=>"0");
+while($row=mysqli_fetch_assoc($d))
+{
+	if ($row['category_name']=='Спорт') {$oktomvri['Спорт']=$row['sold'];}
+	if ($row['category_name']=='Музика') {$oktomvri['Музика']=$row['sold'];}
+	if ($row['category_name']=='Кино') {$oktomvri['Кино']=$row['sold'];}
+	if ($row['category_name']=='Театар') {$oktomvri['Театар']=$row['sold'];}
+	
+}
+//noemvri
+$d=mysqli_query($link, "select c.category_name, count(*) as sold from categories c, events e, event_details ed, tickets t, has_ticket ht, periods p where c.categoryId=e.category_id and e.eventId=ed.event_id and ed.period_id=p.periodId and t.details_id=ed.event_detailsId and t.ticket_id=ht.ticket_id and p.period_date between '2015-11-01' and '2015-12-01' group by c.category_name");
+$noemvri = array("Спорт"=>"0", "Музика"=>"0", "Кино"=>"0", "Театар"=>"0");
+while($row=mysqli_fetch_assoc($d))
+{
+	if ($row['category_name']=='Спорт') {$noemvri['Спорт']=$row['sold'];}
+	if ($row['category_name']=='Музика') {$noemvri['Музика']=$row['sold'];}
+	if ($row['category_name']=='Кино') {$noemvri['Кино']=$row['sold'];}
+	if ($row['category_name']=='Театар') {$noemvri['Театар']=$row['sold'];}
+	
+}
+//dekemvri
+$d=mysqli_query($link, "select c.category_name, count(*) as sold from categories c, events e, event_details ed, tickets t, has_ticket ht, periods p where c.categoryId=e.category_id and e.eventId=ed.event_id and ed.period_id=p.periodId and t.details_id=ed.event_detailsId and t.ticket_id=ht.ticket_id and p.period_date between '2014-12-01' and '2015-01-01' group by c.category_name");
+$dekemvri = array("Спорт"=>"0", "Музика"=>"0", "Кино"=>"0", "Театар"=>"0");
+while($row=mysqli_fetch_assoc($d))
+{
+	if ($row['category_name']=='Спорт') {$dekemvri['Спорт']=$row['sold'];}
+	if ($row['category_name']=='Музика') {$dekemvri['Музика']=$row['sold'];}
+	if ($row['category_name']=='Кино') {$dekemvri['Кино']=$row['sold'];}
+	if ($row['category_name']=='Театар') {$dekemvri['Театар']=$row['sold'];}
+	
+}
+//januari
+$d=mysqli_query($link, "select c.category_name, count(*) as sold from categories c, events e, event_details ed, tickets t, has_ticket ht, periods p where c.categoryId=e.category_id and e.eventId=ed.event_id and ed.period_id=p.periodId and t.details_id=ed.event_detailsId and t.ticket_id=ht.ticket_id and p.period_date between '2015-01-01' and '2015-02-01' group by c.category_name");
+$januari = array("Спорт"=>"0", "Музика"=>"0", "Кино"=>"0", "Театар"=>"0");
+while($row=mysqli_fetch_assoc($d))
+{
+	if ($row['category_name']=='Спорт') {$januari['Спорт']=$row['sold'];}
+	if ($row['category_name']=='Музика') {$januari['Музика']=$row['sold'];}
+	if ($row['category_name']=='Кино') {$januari['Кино']=$row['sold'];}
+	if ($row['category_name']=='Театар') {$januari['Театар']=$row['sold'];}
+	
+}
+?>
+
+  
+Morris.Area({
+        element: 'morris-area-chart',
+        data: [{
+            period: 'Октомври 2014',
+            sport: '<?php echo $oktomvri['Спорт']; ?>',
+            muzika: '<?php echo $oktomvri['Музика']; ?>',
+            kino: '<?php echo $oktomvri['Кино']; ?>',
+            teatar: '<?php echo $oktomvri['Театар']; ?>'
+        }, {
+            period: 'Ноември 2014',
+             sport: '<?php echo $noemvri['Спорт']; ?>',
+            muzika: '<?php echo $noemvri['Музика']; ?>',
+            kino: '<?php echo $noemvri['Кино']; ?>',
+            teatar: '<?php echo $noemvri['Театар']; ?>'
+            
+        }, {
+            period: 'Декември 2014',
+            sport: '<?php echo $dekemvri['Спорт']; ?>',
+            muzika: '<?php echo $dekemvri['Музика']; ?>',
+            kino: '<?php echo $dekemvri['Кино']; ?>',
+            teatar: '<?php echo $dekemvri['Театар']; ?>'
+        }, {
+            period: 'Јануари 2014',
+            sport: '<?php echo $januari['Спорт']; ?>',
+            muzika: '<?php echo $januari['Музика']; ?>',
+            kino: '<?php echo $januari['Кино']; ?>',
+            teatar: '<?php echo $januari['Театар']; ?>'
+        }],
+        xkey: 'period',
+        ykeys: ['sport', 'muzika', 'kino','teatar'],
+        labels: ['Спорт', 'Музика', 'Кино','Театар'],
+        pointSize: 2,
+        hideHover: 'auto',
+        parseTime: false,
+        resize: true
+    });
 	</script>
     
 </html>

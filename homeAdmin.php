@@ -50,84 +50,25 @@ if(!empty($_SESSION['username'])) {
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/plugins/morris/raphael.min.js"></script>
     <script src="js/plugins/morris/morris.min.js"></script>
-   
-    <script type="text/javascript">
-    	
-<?php 
-include_once 'database.php';
-//donut
-$q=mysqli_query($link,"select distinct e.event_name,e.eventId from events e, event_details ed, periods p where e.eventId=ed.event_id and ed.period_id=p.periodId order by p.period_date, p.period_time limit 5");
-$ar=array();
-while($row=mysqli_fetch_assoc($q))
-{
-	array_push($ar,$row['event_name']);
-}
-$sold=mysqli_query($link, "Select count(*) as sold from events e, periods p, event_details ed, tickets t, has_ticket ht where e.eventId=ed.event_id AND ed.event_detailsId=t.details_id AND t.ticket_id=ht.ticket_id and p.periodId=ed.period_id group by e.eventId order by p.period_date,p.period_time limit 5");
-$ar_t=array();
-while($s=mysqli_fetch_assoc($sold)){
-array_push($ar_t,$s['sold']);
-}
 
-//diagram 
-//oktomvri
-$d=mysqli_query($link, "select c.category_name, count(*) as sold from categories c, events e, event_details ed, tickets t, has_ticket ht, periods p where c.categoryId=e.category_id and e.eventId=ed.event_id and ed.period_id=p.periodId and t.details_id=ed.event_detailsId and t.ticket_id=ht.ticket_id and p.period_date between '2015-10-01' and '2015-11-01' group by c.category_name");
-$oktomvri = array("Спорт"=>"0", "Музика"=>"0", "Кино"=>"0", "Театар"=>"0");
-while($row=mysqli_fetch_assoc($d))
-{
-	if ($row['category_name']=='Спорт') {$oktomvri['Спорт']=$row['sold'];}
-	if ($row['category_name']=='Музика') {$oktomvri['Музика']=$row['sold'];}
-	if ($row['category_name']=='Кино') {$oktomvri['Кино']=$row['sold'];}
-	if ($row['category_name']=='Театар') {$oktomvri['Театар']=$row['sold'];}
-	
-}
-//noemvri
-$d=mysqli_query($link, "select c.category_name, count(*) as sold from categories c, events e, event_details ed, tickets t, has_ticket ht, periods p where c.categoryId=e.category_id and e.eventId=ed.event_id and ed.period_id=p.periodId and t.details_id=ed.event_detailsId and t.ticket_id=ht.ticket_id and p.period_date between '2015-11-01' and '2015-12-01' group by c.category_name");
-$noemvri = array("Спорт"=>"0", "Музика"=>"0", "Кино"=>"0", "Театар"=>"0");
-while($row=mysqli_fetch_assoc($d))
-{
-	if ($row['category_name']=='Спорт') {$noemvri['Спорт']=$row['sold'];}
-	if ($row['category_name']=='Музика') {$noemvri['Музика']=$row['sold'];}
-	if ($row['category_name']=='Кино') {$noemvri['Кино']=$row['sold'];}
-	if ($row['category_name']=='Театар') {$noemvri['Театар']=$row['sold'];}
-	
-}
-//dekemvri
-$d=mysqli_query($link, "select c.category_name, count(*) as sold from categories c, events e, event_details ed, tickets t, has_ticket ht, periods p where c.categoryId=e.category_id and e.eventId=ed.event_id and ed.period_id=p.periodId and t.details_id=ed.event_detailsId and t.ticket_id=ht.ticket_id and p.period_date between '2014-12-01' and '2015-01-01' group by c.category_name");
-$dekemvri = array("Спорт"=>"0", "Музика"=>"0", "Кино"=>"0", "Театар"=>"0");
-while($row=mysqli_fetch_assoc($d))
-{
-	if ($row['category_name']=='Спорт') {$dekemvri['Спорт']=$row['sold'];}
-	if ($row['category_name']=='Музика') {$dekemvri['Музика']=$row['sold'];}
-	if ($row['category_name']=='Кино') {$dekemvri['Кино']=$row['sold'];}
-	if ($row['category_name']=='Театар') {$dekemvri['Театар']=$row['sold'];}
-	
-}
-//januari
-$d=mysqli_query($link, "select c.category_name, count(*) as sold from categories c, events e, event_details ed, tickets t, has_ticket ht, periods p where c.categoryId=e.category_id and e.eventId=ed.event_id and ed.period_id=p.periodId and t.details_id=ed.event_detailsId and t.ticket_id=ht.ticket_id and p.period_date between '2015-01-01' and '2015-02-01' group by c.category_name");
-$januari = array("Спорт"=>"0", "Музика"=>"0", "Кино"=>"0", "Театар"=>"0");
-while($row=mysqli_fetch_assoc($d))
-{
-	if ($row['category_name']=='Спорт') {$januari['Спорт']=$row['sold'];}
-	if ($row['category_name']=='Музика') {$januari['Музика']=$row['sold'];}
-	if ($row['category_name']=='Кино') {$januari['Кино']=$row['sold'];}
-	if ($row['category_name']=='Театар') {$januari['Театар']=$row['sold'];}
-	
-}
-
-?>
-
-
-    
-
-    </script>
     
    
 </head>
 <?php 
 include_once 'database.php';
-$query=mysqli_query($link,"Select count(*) as novi_nastani from events where activated=0");
+$query=mysqli_query($link,"Select count(*) as novi_nastani from events where activated=1");
 $n_nastani=mysqli_fetch_assoc($query);
 $br_nastani=$n_nastani['novi_nastani'];
+$query2=mysqli_query($link, "Select count(*) as orgNo from users where usertype='Организатор'");
+$n_org=mysqli_fetch_assoc($query2);
+$br_org=$n_org['orgNo'];
+$query3=mysqli_query($link, "Select count(*) as korNo from users where usertype='Корисник'");
+$n_kor=mysqli_fetch_assoc($query3);
+$br_kor=$n_kor['korNo'];
+$query4=mysqli_query($link, "select distinct count(*) as sold from has_ticket");
+$s=mysqli_fetch_assoc($query4);
+$sold=$s['sold'];
+
 
 
 ?>
@@ -225,7 +166,7 @@ $br_nastani=$n_nastani['novi_nastani'];
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row" class="col-lg-12">
+            <div class="row" class="col-lg-12" style="margin-top: 20px;">
             <div class="col-lg-8">
             <div class="row">
                 <div class="col-lg-6 col-md-8" >
@@ -237,7 +178,7 @@ $br_nastani=$n_nastani['novi_nastani'];
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><?php echo $br_nastani; ?></div>
-                                    <div>Нови настани!</div>
+                                    <div>Активни настани!</div>
                                 </div>
                             </div>
                         </div>
@@ -258,12 +199,12 @@ $br_nastani=$n_nastani['novi_nastani'];
                                     <i class="fa fa-ticket fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">+12</div>
+                                    <div class="huge"><?php echo $sold;?></div>
                                     <div>Продадени билети!</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="statistics.php">
                             <div class="panel-footer">
                                 <span class="pull-left">Детали</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -283,12 +224,12 @@ $br_nastani=$n_nastani['novi_nastani'];
                                     <i class="fa fa-male fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">3</div>
-                                    <div>Нови организатори!</div>
+                                    <div class="huge"><?php echo $br_org;?></div>
+                                    <div>Организатори!</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="orgAdmin.php">
                             <div class="panel-footer">
                                 <span class="pull-left">Детали</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -305,12 +246,12 @@ $br_nastani=$n_nastani['novi_nastani'];
                                     <i class="fa fa-users fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">17</div>
-                                    <div>Нови корисници!</div>
+                                    <div class="huge"><?php echo $br_kor;?></div>
+                                    <div>Корисници!</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="usersAdmin.php">
                             <div class="panel-footer">
                                 <span class="pull-left">Детали</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -321,37 +262,38 @@ $br_nastani=$n_nastani['novi_nastani'];
                 </div>
             
             </div>
-            <!-- diagram -->
-            
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Број на продадени билети по месеци
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div id="morris-area-chart"></div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-
-             <!--end of diagram-->
+          
     </div>
             
-            <!--end od col-lg-8 -->
-            <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Продадени билети за престојните 5 настани
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div id="morris-donut-chart"></div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
+            <!--end of col-lg-8 -->
+            
+            <div class="col-lg-3" style="margin-left: 25px; margin-top: -15px;">
+            	<h5><b>Продадени билети за престојните 5 настани</b></h5>
+            	<?php
+            	//progress bars percentage
+				$events=mysqli_query($link, "select distinct e.event_name,e.eventId from events e, event_details ed, periods p where e.eventId=ed.event_id and ed.period_id=p.periodId order by p.period_date, p.period_time limit 5");
+				while ($row=mysqli_fetch_assoc($events)){
+				//get tickets number
+				$query3="Select count(*) as no_tickets from tickets t, events e, event_details ed where t.details_id=ed.event_detailsId AND ed.event_id=e.eventId and e.eventId=$row[eventId]";
+				$n=mysqli_query($link, $query3);
+				$num=mysqli_fetch_assoc($n);
+				$total_tickets=$num['no_tickets'];
+				//get sold tickets number
+				$sold=mysqli_query($link, "Select count(*) as sold from events e, event_details ed, tickets t, has_ticket ht where e.eventId=ed.event_id AND ed.event_detailsId=t.details_id AND t.ticket_id=ht.ticket_id AND e.eventId=$row[eventId]");
+				$s=mysqli_fetch_assoc($sold);
+				$sold_tickets=$s['sold'];
+				$percent=$sold_tickets/$total_tickets*100;
+				
+            	 ?>
+            	 <h5><?php echo $row['event_name']; ?></h5>
+	            <div class="progress">
+	  			<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $percent."%" ?>">
+	    		<span><?php echo round($percent,1)."%"; ?></span>
+	    		</div>
+				</div>
+				<?php } ?>
              </div>
+              <!--end of donut chart -->
            
             <!-- /.row -->
          </div>   
@@ -363,68 +305,6 @@ $br_nastani=$n_nastani['novi_nastani'];
     
    
 </body>
-<script>
-	Morris.Donut({
-        element: 'morris-donut-chart',
-        data: [{
-            label: '<?php echo $ar[0]; ?>',
-            value: '<?php if(sizeof($ar_t)>=1) echo $ar_t[0]; else echo "0";  ?>'
-        }, {
-            label: '<?php echo $ar[1]; ?>',
-            value: '<?php if(sizeof($ar_t)>=2) echo $ar_t[1]; else echo "0";  ?>'
-        }, {
-            label: '<?php echo $ar[2]; ?>',
-            value: '<?php if(sizeof($ar_t)>=3) echo $ar_t[2]; else echo "0";  ?>'
-        }, {
-            label: '<?php echo $ar[3]; ?>',
-            value: '<?php if(sizeof($ar_t)>=4) echo $ar_t[3]; else echo "0";  ?>'
-        }, {
-            label: '<?php echo $ar[4]; ?>',
-            value: '<?php if(sizeof($ar_t)>=5) echo $ar_t[4]; else echo "0";  ?>'
-        }],
-        resize: true
-    });
 
-   
-
-
-
-    Morris.Area({
-        element: 'morris-area-chart',
-        data: [{
-            period: 'Октомври 2014',
-            sport: '<?php echo $oktomvri['Спорт']; ?>',
-            muzika: '<?php echo $oktomvri['Музика']; ?>',
-            kino: '<?php echo $oktomvri['Кино']; ?>',
-            teatar: '<?php echo $oktomvri['Театар']; ?>'
-        }, {
-            period: 'Ноември 2014',
-             sport: '<?php echo $noemvri['Спорт']; ?>',
-            muzika: '<?php echo $noemvri['Музика']; ?>',
-            kino: '<?php echo $noemvri['Кино']; ?>',
-            teatar: '<?php echo $noemvri['Театар']; ?>'
-            
-        }, {
-            period: 'Декември 2014',
-            sport: '<?php echo $dekemvri['Спорт']; ?>',
-            muzika: '<?php echo $dekemvri['Музика']; ?>',
-            kino: '<?php echo $dekemvri['Кино']; ?>',
-            teatar: '<?php echo $dekemvri['Театар']; ?>'
-        }, {
-            period: 'Јануари 2014',
-            sport: '<?php echo $januari['Спорт']; ?>',
-            muzika: '<?php echo $januari['Музика']; ?>',
-            kino: '<?php echo $januari['Кино']; ?>',
-            teatar: '<?php echo $januari['Театар']; ?>'
-        }],
-        xkey: 'period',
-        ykeys: ['sport', 'muzika', 'kino','teatar'],
-        labels: ['Спорт', 'Музика', 'Кино','Театар'],
-        pointSize: 2,
-        hideHover: 'auto',
-        parseTime: false,
-        resize: true
-    });
-</script>
 </html>
 
