@@ -127,7 +127,56 @@
   	<!-- tab1 -->  	
   </div>
   <div role="tabpanel" class="tab-pane" id="profile">
-	<!-- tab2 -->
+  	<div style="margin-left:100px; margin-top: 20px;">
+  			<table style="border-collapse: separate; border-spacing: 5px;">
+  <tr>
+	<td width="26" height="20" align="center" valign="middle" bgcolor="red"  style="color:#FFFFFF;" title="Редица: 3 |   Столче: 7">1</td>
+
+    <td id="st8" width="36" height="20" align="center" valign="middle" bgcolor="#666666" onclick="func(st8)"  style="color:#FFFFFF; cursor:pointer;" title="Редица: 3 |   Столче: 8">8</td>
+
+    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"   style="color:#FFFFFF;cursor:pointer;" title="Редица: 3 |   Столче: 9">9</td>
+
+    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"   style="color:#FFFFFF;cursor:pointer;" title="Редица: 3 |   Столче: 10">10</td>
+
+    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"  style="cursor:pointer; color:#FFFFFF" title="Редица: 3 |   Столче: 11">11</td>
+
+    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666" style="cursor:pointer; color:#FFFFFF" title="Редица: 3 |   Столче: 12">12</td>
+    <td width="26" height="20" align="center" valign="middle" bgcolor="red"  style="color:#FFFFFF; cursor:pointer;" title="Редица: 3 |   Столче: 7">1</td>
+</tr>
+<tr>
+	<td width="26" height="20" align="center" valign="middle" bgcolor="red"  style="color:#FFFFFF; cursor:pointer;" title="Редица: 3 |   Столче: 7">2</td>
+
+    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"   style="color:#FFFFFF; cursor:pointer;" title="Редица: 3 |   Столче: 8">8</td>
+
+    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"   style="color:#FFFFFF;cursor:pointer;" title="Редица: 3 |   Столче: 9">9</td>
+
+    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"   style="color:#FFFFFF;cursor:pointer;" title="Редица: 3 |   Столче: 10">10</td>
+
+    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"  style="cursor:pointer; color:#FFFFFF" title="Редица: 3 |   Столче: 11">11</td>
+
+    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666" style="cursor:pointer; color:#FFFFFF" title="Редица: 3 |   Столче: 12">12</td>
+    <td width="26" height="20" align="center" valign="middle" bgcolor="red"  style="color:#FFFFFF; cursor:pointer;" title="Редица: 3 |   Столче: 7">2</td>
+
+</tr>
+<tr>
+	<td width="26" height="20" align="center" valign="middle" bgcolor="red"  style="color:#FFFFFF; cursor:pointer;" title="Редица: 3 |   Столче: 7">3</td>
+
+    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"   style="color:#FFFFFF; cursor:pointer;" title="Редица: 3 |   Столче: 8">8</td>
+
+    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"   style="color:#FFFFFF;cursor:pointer;" title="Редица: 3 |   Столче: 9">9</td>
+
+    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"   style="color:#FFFFFF;cursor:pointer;" title="Редица: 3 |   Столче: 10">10</td>
+
+    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"  style="cursor:pointer; color:#FFFFFF" title="Редица: 3 |   Столче: 11">11</td>
+
+    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666" style="cursor:pointer; color:#FFFFFF" title="Редица: 3 |   Столче: 12">12</td>
+    <td width="26" height="20" align="center" valign="middle" bgcolor="red"  style="color:#FFFFFF; cursor:pointer;" title="Редица: 3 |   Столче: 7">3</td>
+
+</tr>
+
+
+</table>
+</div>
   </div>
   <div role="tabpanel" class="tab-pane" id="messages">
   		<!-- tab3 -->
@@ -266,7 +315,12 @@ Morris.Area({
         resize: true
     });
 	</script>
-    
+    <script>
+    	function func (st) {
+    		document.getElementById(st).style.color = "blue";
+		  
+		}
+    </script>
 </html>
 
 

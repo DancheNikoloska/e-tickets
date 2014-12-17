@@ -1,6 +1,6 @@
 <div class="col-md-3">
 					<p class="lead">
-						Shop Name
+						Драмски видови
 					</p>
 					
 					<div class="list-group">
