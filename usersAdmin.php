@@ -133,21 +133,21 @@ if(isset($_GET['userid']))
 			while($row=mysqli_fetch_assoc($res))
 			{
 			//get total tickets per user
-			$tic=mysqli_query($link, "select count(*) as totalTickets from has_ticket where user_id=$row[id]");
+			$tic=mysqli_query($link, "select count(*) as totalTickets from boughttickets where user_id=$row[user_id]");
 			$t=mysqli_fetch_assoc($tic);
 			$ticketsNo=$t['totalTickets'];
 			
 			
 			
 			
-			if ($row['id']%2==0){
+			if ($row['user_id']%2==0){
 			
   			
 	  			echo "<tr class='info'>" .
 	  			 "<td class=\"text-center\"> $row[username] </td>".
 	  			 "<td class=\"text-center\">$row[email]</td>".
 	  			 "<td class=\"text-center\">$ticketsNo</td>".
-	  			 "<td class=\"text-center\"><a href=\"usersAdmin.php?userid=$row[id]\" onclick=\"return confirm('Дали сте сигурни дека сакате да го избришете корисникот?')\">Избриши</a>".
+	  			 "<td class=\"text-center\"><a href=\"usersAdmin.php?userid=$row[user_id]\" onclick=\"return confirm('Дали сте сигурни дека сакате да го избришете корисникот?')\">Избриши</a>".
 	  			 "</td>";
 	  			
   			
@@ -158,7 +158,7 @@ if(isset($_GET['userid']))
   				"<td class=\"text-center\"> $row[username]</td>".
   				"<td class=\"text-center\">$row[email]</td>".
   				"<td class=\"text-center\">$ticketsNo</td>".
-  				"<td class=\"text-center\"><a href=\"usersAdmin.php?userid=$row[id]\" onclick=\"return confirm('Дали сте сигурни дека сакате да го избришете корисникот?')\">Избриши</a>".
+  				"<td class=\"text-center\"><a href=\"usersAdmin.php?userid=$row[user_id]\" onclick=\"return confirm('Дали сте сигурни дека сакате да го избришете корисникот?')\">Избриши</a>".
 	  			 "</td>";
   				
   			

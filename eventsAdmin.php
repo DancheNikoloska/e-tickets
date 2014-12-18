@@ -126,31 +126,33 @@
 			while($row=mysqli_fetch_assoc($res))
 			{
 			//get period
-			$query2="Select period_date from events e, event_details ed, periods p where ed.event_id=e.eventId AND ed.period_id=p.periodId AND e.eventId=$row[eventId]";
+			$query2="Select period_date from events";
 			$d=mysqli_query($link,$query2);
 			$res_datum=mysqli_fetch_assoc($d);
 			$datum=$res_datum['period_date'];
 			//get tickets number
-			$query3="Select count(*) as no_tickets from tickets t, events e, event_details ed where t.details_id=ed.event_detailsId AND ed.event_id=e.eventId and e.eventId=$row[eventId]";
-			$n=mysqli_query($link, $query3);
-			$num=mysqli_fetch_assoc($n);
-			$total_tickets=$num['no_tickets'];
+			//$query3="Select count(*) as no_tickets from boughttickets t, events e where t.event_id=e.event_id AND ed.event_id=e.eventId and e.eventId=$row[event_id]";
+			//$n=mysqli_query($link, $query3);
+			//$num=mysqli_fetch_assoc($n);
+			$total_tickets=750;
+			// $num['no_tickets'];
 			//get sold tickets number
-			$sold=mysqli_query($link, "Select count(*) as sold from events e, event_details ed, tickets t, has_ticket ht where e.eventId=ed.event_id AND ed.event_detailsId=t.details_id AND t.ticket_id=ht.ticket_id AND e.eventId=$row[eventId]");
+			$sold=mysqli_query($link, "Select count(*) as no_tickets from boughttickets t, events e where t.event_id=e.event_id AND  e.event_id=$row[event_id]");
 			$s=mysqli_fetch_assoc($sold);
-			$sold_tickets=$s['sold'];
+			$sold_tickets=$s['no_tickets'];
 			
 			
 			
-			if ($row['eventId']%2==0){
+			if ($row['event_id']%2==0){
 			
   			
 	  			echo "<tr class='info'>" .
 	  			 "<td class=\"text-center\"> $row[event_name] </td>".
 	  			 "<td class=\"text-center\">$datum</td>".
 	  			 "<td class=\"text-center\">$sold_tickets / $total_tickets</td>".
-	  			 "<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[eventId]\">Измени</a></td>".
-	  			 "<td class=\"text-center\"><a href=\"admin_activateEvent.php?eventid=$row[eventId]\">". ($row['activated']==1 ? 'Деактивирај' : 'Активирај'). "</a></td></tr>";
+	  			 "<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[event_id]\">Измени</a></td>".
+	  			// "<td class=\"text-center\"><a href=\"admin_activateEvent.php?eventid=$row[eventId]\">". ($row['activated']==1 ? 'Деактивирај' : 'Активирај').
+	  			 "</a></td></tr>";
   			
   			}
 
@@ -159,8 +161,9 @@
   				"<td class=\"text-center\"> $row[event_name]</td>".
   				"<td class=\"text-center\">$datum</td>".
   				"<td class=\"text-center\">$sold_tickets / $total_tickets</td>".
-  				"<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[eventId]\">Измени</a></td>".
-  				"<td class=\"text-center\"><a href=\"admin_activateEvent.php?eventid=$row[eventId]\">". ($row['activated']==1 ? 'Деактивирај' : 'Активирај'). "</a></td></tr>";
+  				"<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[event_id]\">Измени</a></td>".
+  			//	"<td class=\"text-center\"><a href=\"admin_activateEvent.php?eventid=$row[eventId]\">". ($row['activated']==1 ? 'Деактивирај' : 'Активирај'). 
+  			"</a></td></tr>";
   			
 				}
 				

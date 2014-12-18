@@ -56,16 +56,14 @@ if(!empty($_SESSION['username'])) {
 </head>
 <?php 
 include_once 'database.php';
-$query=mysqli_query($link,"Select count(*) as novi_nastani from events where activated=1");
+$query=mysqli_query($link,"Select count(*) as novi_nastani from events");
 $n_nastani=mysqli_fetch_assoc($query);
 $br_nastani=$n_nastani['novi_nastani'];
-$query2=mysqli_query($link, "Select count(*) as orgNo from users where usertype='Организатор'");
-$n_org=mysqli_fetch_assoc($query2);
-$br_org=$n_org['orgNo'];
+
 $query3=mysqli_query($link, "Select count(*) as korNo from users where usertype='Корисник'");
 $n_kor=mysqli_fetch_assoc($query3);
 $br_kor=$n_kor['korNo'];
-$query4=mysqli_query($link, "select distinct count(*) as sold from has_ticket");
+$query4=mysqli_query($link, "select distinct count(*) as sold from boughttickets");
 $s=mysqli_fetch_assoc($query4);
 $sold=$s['sold'];
 
@@ -223,10 +221,7 @@ $sold=$s['sold'];
                                 <div class="col-xs-3">
                                     <i class="fa fa-male fa-5x"></i>
                                 </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"><?php echo $br_org;?></div>
-                                    <div>Организатори!</div>
-                                </div>
+                              
                             </div>
                         </div>
                         <a href="orgAdmin.php">
