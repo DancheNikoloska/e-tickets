@@ -9,7 +9,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>SB Admin 2 - Bootstrap Admin Theme</title>
+		<title>E-tickets</title>
 
 		<!-- Bootstrap Core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -112,11 +112,11 @@
 						include_once 'database.php';
 
 						session_start();
-
+//proverka dali ima najaven korisnik
 						if (isset($_SESSION['username'])) {
 
 							$user = $_SESSION['username'];
-							$_SESSION["type"] = "organizator";
+						
 							$flag = 1;
 							echo $_SESSION['username'];
 							echo $_SESSION['user_id'];

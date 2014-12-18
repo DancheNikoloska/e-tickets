@@ -1,25 +1,19 @@
 <?php
 include_once 'database.php';
-
 session_start();
 if (isset($_SESSION['username'])) {
 
 	$user = $_SESSION['username'];
-	
 	$flag = 1;
-	echo $_SESSION['username'];
-	echo $_SESSION['user_id'];
+	//echo $_SESSION['username'];
+	//echo $_SESSION['user_id'];
 } else {
 
 	$user = "Најавете се!";
 	$flag = 0;
 	header("Location: login.php");
 }
-
-
-
-	
-	
+//varijabli
 $eventName = "";
 $des = "";
 $date = "";
@@ -27,7 +21,7 @@ $time = "";
 $cat = "";
 $n = "";
 $flag = false;
-$msg="";
+$msg = "";
 /*if(isset($_GET['ci']))
  {
  $title="Направи ги потребните измени за курсот ".$_GET['ci'];
@@ -43,7 +37,7 @@ $msg="";
  }*/
 
 if (isset($_POST['submit'])) {
-
+//zemanje na vrednosti
 	$eventName = $_POST['event'];
 	$des = $_POST['des'];
 	$date = $_POST['date'];
@@ -59,12 +53,13 @@ if (isset($_POST['submit'])) {
 	//print_r($_FILES);
 
 	$imageFileType = $_FILES["file"]["type"];
-
+//proverka na promenlivi dali imaat vrednost
 	if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
 		if ($_FILES["file"]["error"] > 0) {
 			echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
 			$flag = false;
 		} else {
+			//kreiraj folder
 			if (!file_exists("images")) {
 				mkdir("images");
 			}
@@ -73,7 +68,7 @@ if (isset($_POST['submit'])) {
 			move_uploaded_file($_FILES["file1"]["tmp_name"], "images/" . $_FILES["file1"]["name"]);
 			//header('Location: upload.php');
 			//echo " <p > Успешно прикачување! <p>";
-			$msg1="Успешно прикачување на сликите!";
+			$msg1 = "Успешно прикачување на сликите!";
 			$now = date("Y-m-d H:i");
 			$n = $_FILES["file"]["name"];
 			$n1 = $_FILES["file1"]["name"];
@@ -89,7 +84,7 @@ if (isset($_POST['submit'])) {
 	}
 
 	if ($flag) {
-
+//vnesuvanje vo baza
 		if ($eventName != null && $des != null && $date != null && $time != null && $cat != null) {
 			$query = "SELECT * FROM events WHERE event_name LIKE '$eventName'";
 			$result = mysqli_query($link, $query);
@@ -97,32 +92,26 @@ if (isset($_POST['submit'])) {
 			if (mysqli_num_rows($result) > 0) {
 				$msg = "Веќе постои настан со истото име!";
 			} else {
-				
-				$query1="INSERT INTO events(event_name, event_description, period_date, period_time, genre_id, small_img, big_img, scene)
+
+				$query1 = "INSERT INTO events(event_name, event_description, period_date, period_time, genre_id, small_img, big_img, scene)
 				 VALUES('$eventName','$des','$date','$time','$cat','$n','$n1', '$place_id') ";
-				 $row=mysqli_query($link, $query1);
-				 if($row)
-				 {
-				 	$msg="Успешно додадовте претстава!";
-					
-				 }
-				 else {
-					 $msg="Неуспешно додадавање, Обидете се повторно.";
-				 }
+				$row = mysqli_query($link, $query1);
+				if ($row) {
+					$msg = "Успешно додадовте претстава!";
 
+				} else {
+					$msg = "Неуспешно додадавање, Обидете се повторно.";
+				}
 
-		}
-	}
-
- else {
+			}
+		} else {
 			$msg = "Пополнете ги сите полиња site";
 			//$msg+=$cat;
 		}
-		}
-	else {
-		$msg="Неуспешно прикачување.";
+	} else {
+		$msg = "Неуспешно прикачување.";
 	}
-	
+//funkcija za kodovite za karttite- random
 	function rand_string($len, $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') {
 		$string = '';
 		for ($i = 0; $i < $len; $i++) {
@@ -131,40 +120,38 @@ if (isset($_POST['submit'])) {
 		}
 		return $string;
 	}
+
+	$query = "SELECT event_id FROM events WHERE event_name LIKE '$eventName'";
+	$result = mysqli_query($link, $query);
+	$row1 = mysqli_fetch_assoc($result);
+	$event = $row1['event_id'];
+
+	$num = 600;
+	//$type = "";
+	//$price = "";
+	//$auto = "";
 	
-		$query = "SELECT event_id FROM events WHERE event_name LIKE '$eventName'";
-			$result = mysqli_query($link, $query);			
-			$row1 = mysqli_fetch_assoc($result);
-			$event= $row1['event_id'];
-			
-$num = 600;
-//$type = "";
-//$price = "";
-//$auto = "";
-for($i=1;$i<=30;$i++)
-	{
-		$ticket_row= $i  ;
-		for($j=1; $j<=20;$j++)
-		{
-			$ticket_seat=$j;
+	//dodavanje na bileti
+	for ($i = 1; $i <= 30; $i++) {
+		$ticket_row = $i;
+		for ($j = 1; $j <= 20; $j++) {
+			$ticket_seat = $j;
 			$code = rand_string(10);
+			$prices = mysqli_query($link, "SELECT * FROM tickets WHERE event_id LIKE '$eventID'");
+			$pr = mysqli_fetch_assoc($prices);
+			$price = $pr['price'];
 			//echo "ROW: ". $ticket_row . "SEAT: ". $ticket_seat;
-			$query1="INSERT INTO tickets(row, seat, code, event_id)
-				 VALUES('$ticket_row','$ticket_seat','$code','$event') ";
-				 $row=mysqli_query($link, $query1);
-				 if(!$row)
-				 {
-				 	$msg="Неуспешно додадени билети!";
-					
-				 }
-				 
-			
+			$query1 = "INSERT INTO tickets(row, seat, code, event_id, price)
+				 VALUES('$ticket_row','$ticket_seat','$code','$event','$price') ";
+			$row = mysqli_query($link, $query1);
+			if (!$row) {
+				$msg = "Неуспешно додадени билети!";
+
+			}
+
 		}
-		
+
 	}
-	
-	
-	
 
 }
 ?>
@@ -187,22 +174,19 @@ for($i=1;$i<=30;$i++)
 <link href="css/modern-business.css" rel="stylesheet">
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 </head>
-
 <body>
 
 <?php
-include_once 'navBar.php';
+	include_once 'navBar.php';
 ?>
-
 <div class="container">
-
 <div class="row">
-
 <div class="col-md-8">
 
 <?php
+//html kod
 if (isset($_POST['submit'])) {
-	echo "<h5 style=color:red>" . $msg . $msg1. "</h5>";
+	echo "<h5 style=color:red>" . $msg . $msg1 . "</h5>";
 }
 ?>
 <h3 style="color:gray">Внесување на нова претстава</h3>
@@ -220,6 +204,8 @@ if (isset($_POST['submit'])) {
 <br/>
 <input type="text" class="form-control" name="date" id="date" value="<?php echo $date; ?>">
 <label for="time"> Времe: (hh:mm:ss)</label>
+<br/>
+<input type="text" class="form-control" name="price" id="price" value="<?php echo $price; ?>">
 <br/>
 <input type="text" class="form-control" name="time" id="time" value="<?php echo $time; ?>">
 <label> Категорија:</label>

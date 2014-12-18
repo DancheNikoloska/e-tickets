@@ -1,5 +1,7 @@
 <?php
 function validateEmail($connection, $email) {
+	
+	//funkcii za validacija na vlezovite pri logiranje
 	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 		return false;
 	} else {

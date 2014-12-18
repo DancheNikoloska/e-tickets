@@ -73,6 +73,8 @@
 
 					<ul class="pagination">
 						<?php
+						
+						//stranicenje
 						  $prevPage=$page-1; 
 						  $nextPage=$page+1;
 						?>

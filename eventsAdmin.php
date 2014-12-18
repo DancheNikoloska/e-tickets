@@ -69,7 +69,7 @@
                 </li>
                 <!-- /.dropdown -->
             </ul>
-            <!-- /.navbar-top-links -->
+            <!-- /.navbar-top-links-->
 
             <div class="navbar-default sidebar" role="navigation" style="margin-left: 100px;">
                 <div class="sidebar-nav navbar-collapse">

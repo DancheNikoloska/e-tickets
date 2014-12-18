@@ -32,6 +32,7 @@
 
             <div class="col-md-9">
             	<?php 
+            	//zemanje na eventId 
             		$eventID=0;				
 				     if (isset($_GET['ev'])) {
 					    $eventID=$_GET['ev'];
@@ -40,6 +41,7 @@
 					   while ($event=mysqli_fetch_assoc($events)) {	
 				?>
 				<?php
+				//citanje od baza za cena, data i vreme
                         		$events=mysqli_query($link, "SELECT * FROM events WHERE event_id LIKE '$eventID'");
 								$event=mysqli_fetch_assoc($events);
 									$time=$event['period_time'];

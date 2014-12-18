@@ -24,6 +24,7 @@ if (isset($_POST['sub'])) {
 		if ($q) {
 			$row = mysqli_fetch_assoc($q);
 			$_SESSION['user_id']=$row["id"];
+			//$_SESSION['username']=$row["username"];
 		/*	if ($row['role_type'] == 'professor') {
 				header('Location: dashboard.php');
 			} else if ($row['role_type'] == 'admin') {

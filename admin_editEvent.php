@@ -3,6 +3,8 @@ $eventid=$_GET['eventid'];
 //echo $eventid;
 include_once 'database.php';
 session_start();
+
+//selektiraj vrednosti  promenlivi
 $res=mysqli_query($link,"Select * from events where event_id=$eventid");
 $row=mysqli_fetch_assoc($res);
 $event_name=$row['event_name'];
@@ -22,7 +24,7 @@ $flag = false;
 $imgL=false;
 $imgS=false;
 if (isset($_POST['submit'])) {
-
+//upload
 	$msg = "";
 	$ext = explode(".", $_FILES["file"]["name"]);
 	$extension = $ext[count($ext) - 1];
@@ -60,7 +62,7 @@ if (isset($_POST['submit'])) {
 	//if ($flag) {
 
 		if ($event_name != null && $des != null && $date != null && $time != null) {
-			 
+			//promeni vo baza 
 			  $q="UPDATE events e  set e.event_name='$_POST[event]', e.event_description='$_POST[des]', e.genre_id='$_POST[cat]',  e.period_date='$_POST[date]', e.period_time='$_POST[time]' WHERE and e.event_id=$eventid";
 				if (mysqli_query($link, $q))
 				{

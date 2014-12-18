@@ -56,13 +56,15 @@ if(!empty($_SESSION['username'])) {
 </head>
 <?php 
 include_once 'database.php';
+//citanje od podatoci od baza broj na nastani
 $query=mysqli_query($link,"Select count(*) as novi_nastani from events");
 $n_nastani=mysqli_fetch_assoc($query);
 $br_nastani=$n_nastani['novi_nastani'];
-
+//citanje od podatoci od baza broj na korsnici
 $query3=mysqli_query($link, "Select count(*) as korNo from users where usertype='Корисник'");
 $n_kor=mysqli_fetch_assoc($query3);
 $br_kor=$n_kor['korNo'];
+//citanje od podatoci od baza broj na kupeni bileti
 $query4=mysqli_query($link, "select distinct count(*) as sold from boughttickets");
 $s=mysqli_fetch_assoc($query4);
 $sold=$s['sold'];

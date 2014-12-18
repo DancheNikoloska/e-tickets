@@ -21,7 +21,9 @@
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 
 					<ul class="nav navbar-nav navbar-right">
-						<?php if ($flag) 
+						<?php 
+						//proverka za najaven korsnik
+						if ($flag) 
 						{
 							echo '<li><a href="homepage.php">Почетна</a></li>';
 						} 

@@ -4,6 +4,7 @@ $flaguser = $flagemail = $flagloz = $flagloz2 = 1;
 session_start();
 if (isset($_POST['submit'])) {
 	include 'user_validation.php';
+	//promenlivi
 	$user = $_POST['user'];
 	$lozinka = $_POST['pass'];
 	$lozinka2 = $_POST['pass2'];
@@ -11,8 +12,7 @@ if (isset($_POST['submit'])) {
 	$tip = $_POST['role'];
 	if ($tip == "Корисник") {$tip = "korisnik";
 	}
-	if ($tip == "Организатор") {$tip = "organizator";
-	}
+
 	//if ($tip == "Студент") {$tip="student";}
 	if (!validateUsername($link, $user))
 		$flaguser = 0;
@@ -26,6 +26,7 @@ if (isset($_POST['submit'])) {
 	 {	$salt = "baklava";
 		//$lozinka = md5($lozinka);
 		echo $lozinka;
+		//zapisuvanje vo baza za noviot korsnik
 		$q = mysqli_query($link, "INSERT INTO users(username,password,email,usertype) VALUES('$user','$lozinka','$email','$tip')");
 		if ($q) {
 			header("Location: login.php");
