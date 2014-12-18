@@ -36,62 +36,77 @@
 				     if (isset($_GET['ev'])) {
 					    $eventID=$_GET['ev'];
 					 }
-            		$events=mysqli_query($link, "SELECT * FROM events WHERE eventId LIKE '$eventID'");
+            		$events=mysqli_query($link, "SELECT * FROM events WHERE event_id LIKE '$eventID'");
 					   while ($event=mysqli_fetch_assoc($events)) {	
 				?>
+				<?php
+                        		$events=mysqli_query($link, "SELECT * FROM events WHERE event_id LIKE '$eventID'");
+								$event=mysqli_fetch_assoc($events);
+									$time=$event['period_time'];
+									$date=$event['period_date'];
+									
+								
+                        ?>
                 <div class="thumbnail">
                     <img class="img-responsive" src="http://placehold.it/800x300" alt="">
                     <div class="caption-full">
                       <!--  <h4 class="pull-right">$24.99</h4> -->
-                        <h4><a href="#"><?php echo $event['event_name'] ?></a>
-                        </h4>
+                      
+                      <div class="col-md-12">
+                      	<div class="col-md-6">
+                        <h3 class="text-left"><a href="#"><?php echo $event['event_name']?></a>
+                        </h3>
+                        </div>
+                        
+                        <div class="col-md-6">
+                        
+                          <h3 class="text-right"><?php echo $time. $date ?>
+                        </h3>
+                        </div>
+                         <div class="col-md-12">
                         <p><?php echo $event['event_description']?></p>
-                        <?php 
-                       		$periodsID=array();
-							$placeID;
-							//selektiranje na detali za nastanot, potocno na lokacija, i site vreminja na nastanot
-                        	$details=mysqli_query($link, "SELECT * FROM event_details WHERE event_id LIKE '$eventID'");
-					   		while ($dets=mysqli_fetch_assoc($details)) {
-					   			$placeID=$dets['place_id'];
-								array_push($periodsID,$dets['period_id']);
-							}
-							//selekcija na podatoci za mestoto na odrzuvanje na nastanot so pomos na id-to za mesto zemeno od prethodnoto kveri
-							$location=mysqli_query($link, "SELECT * FROM places WHERE placeId LIKE '$placeID'");
-					   		while ($places=mysqli_fetch_assoc($location)) {
-					   			$place=$places['place_name'];
-								$adress=$places['place_address'];
-						?>						
-						<p><strong>Место на настанот: </strong> <?php echo $place; ?> </p>
-						<p><strong>Адреса: </strong> <?php echo $adress; ?> </p>			
-                             <?php } ?>           
-                   	
-                    </div>                    
-                </div>
-					 <?php } ?>	
-									 
-					 <div class="col-md-4 pull-left">	
-					 	<label for="sel1">Одбери термин: </label>				
-						<select id="sel1" class="form-control" >
-							<?php
-							  	//vo dropdown forma se prikazuvaat site termini vo koi ke se odrzuva nastanot
-							  	for($i=0;$i<count($periodsID);$i++){
-							  		$tmp=$periodsID[$i];
-							  	 $per=mysqli_query($link, "SELECT * FROM periods WHERE periodId LIKE '$tmp'");
-					   			 while ($periods=mysqli_fetch_assoc($per)) {
-					   			 	 $pID=$periods['periodId'];
-					   			 	 $period=$periods['period_date'];
-									 $time=$periods['period_time']
-					   			 	?>
-						    <option id='<?php echo "option".$pID; ?>'><?php echo $period . " | " . $time; ?></option>
-						    <?php }} ?>
-						  </select>	
-					</div>	
-               		
-               			<br />
-                    <div class="text-right">
+                        </div>
+                        
+                         </div>
+                         <div class="col-md-12">
+                       <div class="col-md-8">
+                         
+					<div class="huge"> <h3>Цена на билет:</h3></div>         
+                       </div>
+                       
+                        <div class="col-md-4 col-md-offset-0"  >
                         <a class="btn btn-info" href="chooseSeat.php">Продолжи со одбирање место</a>
                     </div>  
    					
+					 				
+						
+					</div>	
+                        <?php 
+                       		//$periodsID=array();
+							$placeID;
+							//selektiranje na detali za nastanot, potocno na lokacija, i site vreminja na nastanot
+                        	//$details=mysqli_query($link, "SELECT * FROM event_details WHERE event_id LIKE '$eventID'");
+					   		//while ($dets=mysqli_fetch_assoc($details)) {
+					   			//$placeID=$dets['place_id'];
+								//array_push($periodsID,$dets['period_id']);
+							}
+							//selekcija na podatoci za mestoto na odrzuvanje na nastanot so pomos na id-to za mesto zemeno od prethodnoto kveri
+							//$location=mysqli_query($link, "SELECT * FROM places WHERE placeId LIKE '$placeID'");
+					   	//	while ($places=mysqli_fetch_assoc($location)) {
+					   		//	$place=$places['place_name'];
+							//	$adress=$places['place_address'];
+						?>						
+							
+                                   
+                   	
+                                       
+                </div>
+					 	
+									 
+					 
+               		
+               		
+                   
 					</div>                    
            
 
