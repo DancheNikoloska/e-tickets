@@ -3,24 +3,20 @@ $eventid=$_GET['eventid'];
 //echo $eventid;
 include_once 'database.php';
 session_start();
-$res=mysqli_query($link,"Select * from events where eventId=$eventid");
+$res=mysqli_query($link,"Select * from events where event_id=$eventid");
 $row=mysqli_fetch_assoc($res);
 $event_name=$row['event_name'];
 $des = $row['event_description'];
-$largeImg=$row['event_largeImg'];
-$smallImg=$row['event_smallImg'];
-$res3=mysqli_query($link, "Select period_date, period_time from events e, event_details ed, periods p where ed.event_id=e.eventId AND ed.period_id=p.periodId AND e.eventId=$eventid");
-$row3=mysqli_fetch_assoc($res3);
-$date = $row3['period_date'];
-$time = $row3['period_time'];
-$catId = $row['category_id'];
-$res2=mysqli_query($link, "Select category_name from categories where categoryId=$catId");
+$largeImg=$row['big_img'];
+$smallImg=$row['small_img'];
+
+$date = $row['period_date'];
+$time = $row['period_time'];
+$catId = $row['genre_id'];
+$res2=mysqli_query($link, "Select name from genres where id=$catId");
 $row2=mysqli_fetch_assoc($res2);
-$cat=$row2['category_name'];
-$res4=mysqli_query($link, "Select * from events e, event_details ed, places p where ed.event_id=e.eventId AND ed.place_id=p.placeId AND e.eventId=$eventid");
-$row4=mysqli_fetch_assoc($res4);
-$place_id=$row4['placeId'];
-$place=$row4['place_name'];
+$cat=$row2['name'];
+
 $n = "";
 $flag = false;
 $imgL=false;
@@ -65,7 +61,7 @@ if (isset($_POST['submit'])) {
 
 		if ($event_name != null && $des != null && $date != null && $time != null) {
 			 
-			  $q="UPDATE events e,event_details ed,periods p set e.event_name='$_POST[event]', e.event_description='$_POST[des]', e.category_id='$_POST[cat]', ed.place_id='$_POST[place]', p.period_date='$_POST[date]', p.period_time='$_POST[time]' where p.periodId=ed.period_id and ed.event_id=e.eventId and e.eventId=$eventid";
+			  $q="UPDATE events e  set e.event_name='$_POST[event]', e.event_description='$_POST[des]', e.genre_id='$_POST[cat]',  e.period_date='$_POST[date]', e.period_time='$_POST[time]' WHERE and e.event_id=$eventid";
 				if (mysqli_query($link, $q))
 				{
 					header("Location: eventsAdmin.php");
@@ -220,38 +216,22 @@ if (isset($_POST['submit'])) {
 		<input type="text" class="form-control" name="time" id="time" value="<?php echo $time; ?>">
 		<label> Категорија:</label>
 		<br/>
-		<?php $query = "SELECT * FROM categories ";
+		<?php $query = "SELECT * FROM genres ";
 			//select na vekepostoecki kategorii
 			print "<select name='cat' id='cat'>";
 			$result = mysqli_query($link, $query);
 			if ($result) {
 				while ($row = mysqli_fetch_assoc($result)) {
-					print "<option value='" . $row['categoryId'] . "' ";
+					print "<option value='" . $row['id'] . "' ";
 		
-					($row['category_name']==$cat? print " selected ": print "");
-					print ">" . $row['category_name'] . "</option>";
+					($row['name']==$cat? print " selected ": print "");
+					print ">" . $row['name'] . "</option>";
 				}
 			}
 			print "</select><br/>";
 		?>
 		
-		<label> Место:</label>
-		<br/>
 		
-		<?php
-		$query = "SELECT * FROM places ";
-		//select na vekepostoecki mesta
-		print "<select name='place' id='place'>";
-		$result = mysqli_query($link, $query);
-		if ($result) {
-			while ($row = mysqli_fetch_assoc($result)) {
-				print "<option value='" . $row['placeId'] . "' ";
-				($row['placeId']==$place_id? print " selected ": print "");
-				print ">" . $row['place_name'] . "</option>";
-			}
-		}
-		print "</select><br/>";
-		?>
 		
 		</div>
 		
