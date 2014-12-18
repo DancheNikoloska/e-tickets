@@ -67,7 +67,10 @@ $query4=mysqli_query($link, "select distinct count(*) as sold from boughttickets
 $s=mysqli_fetch_assoc($query4);
 $sold=$s['sold'];
 
-
+//total events
+ $query4=mysqli_query($link, "select distinct count(*) as total from events");
+ $t=mysqli_fetch_assoc($query4);
+$total=$t['total'];
 
 ?>
 <body>
@@ -219,12 +222,15 @@ $sold=$s['sold'];
                                 <div class="col-xs-3">
                                     <i class="fa fa-male fa-5x"></i>
                                 </div>
-                              
+                                 <div class="col-xs-9 text-right">
+                                    <div class="huge"><?php echo $total;?></div>
+                                    <div>Додади претстава!</div>
+                                </div>                              
                             </div>
                         </div>
-                        <a href="orgAdmin.php">
+                        <a href="addEvent.php">
                             <div class="panel-footer">
-                                <span class="pull-left">Детали</span>
+                                <span class="pull-left">Додади</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
@@ -263,6 +269,9 @@ $sold=$s['sold'];
             <div class="col-lg-3" style="margin-left: 25px; margin-top: -15px;">
             	<h5><b>Продадени билети за престојните 5 настани</b></h5>
             	<?php
+            	
+            	
+			
             	//progress bars percentage
 				$events=mysqli_query($link, "select distinct e.event_id, e.event_name,e.event_id from events e order by e.period_date, e.period_time limit 5");
 				while ($row=mysqli_fetch_assoc($events)){

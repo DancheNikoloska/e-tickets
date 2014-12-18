@@ -5,7 +5,7 @@ session_start();
 if (isset($_SESSION['username'])) {
 
 	$user = $_SESSION['username'];
-	$_SESSION["type"] = "organizator";
+	
 	$flag = 1;
 	echo $_SESSION['username'];
 	echo $_SESSION['user_id'];
