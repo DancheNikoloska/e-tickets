@@ -90,9 +90,7 @@ if(isset($_GET['userid']))
                             <a href="eventsAdmin.php"><i class="fa fa-bell-o fa-fw"></i> Настани</a>
                             
                         </li>
-                        <li>
-                            <a  href="orgAdmin.php"><i class="fa fa-male fa-fw"></i> Организатори </a>
-                        </li>
+                
                         <li>
                             <a class="active" href="usersAdmin.php"><i class="fa fa-users fa-fw"></i> Корисници </a>
                         </li>

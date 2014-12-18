@@ -85,9 +85,7 @@
                             <a href="eventsAdmin.php"><i class="fa fa-bell-o fa-fw"></i> Настани</a>
                             
                         </li>
-                        <li>
-                            <a  href="orgAdmin.php"><i class="fa fa-male fa-fw"></i> Организатори </a>
-                        </li>
+                  
                         <li>
                             <a href="usersAdmin.php"><i class="fa fa-users fa-fw"></i> Корисници </a>
                         </li>
@@ -117,7 +115,7 @@
 <!--tabs-->
 <ul class="nav nav-tabs" role="tablist" id="myTab">
   <li role="presentation"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Категории</a></li>
-  <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Организатори</a></li>
+ 
   <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Временски период</a></li>
   <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Продадени билети</a></li>
 </ul>
