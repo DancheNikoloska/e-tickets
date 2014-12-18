@@ -133,24 +133,25 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 `ticket_id` int(11) NOT NULL,
   `row` int(11) NOT NULL,
   `seat` int(11) NOT NULL,
-  `code` varchar(100) NOT NULL
+  `code` varchar(100) NOT NULL,
+  `event_id` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tickets`
 --
 
-INSERT INTO `tickets` (`ticket_id`, `row`, `seat`, `code`) VALUES
-(1, 1, 10, 'ABS7777'),
-(15, 3, 6, '89NNNK'),
-(16, 1, 3, 'OIM9i9i'),
-(17, 3, 5, '7d8s7dh'),
-(18, 1, 2, 'htbt8e8'),
-(19, 2, 2, 'grji889'),
-(20, 1, 2, 'dadm777'),
-(21, 1, 11, 'ABS7778'),
-(23, 10, 5, 'GFG263'),
-(24, 10, 6, 'JNJN888');
+INSERT INTO `tickets` (`ticket_id`, `row`, `seat`, `code`, `event_id`) VALUES
+(1, 1, 10, 'ABS7777', 1),
+(15, 3, 6, '89NNNK',1),
+(16, 1, 3, 'OIM9i9i',1),
+(17, 3, 5, '7d8s7dh',1),
+(18, 1, 2, 'htbt8e8',1),
+(19, 2, 2, 'grji889',1),
+(20, 1, 2, 'dadm777',1),
+(21, 1, 11, 'ABS7778',1),
+(23, 10, 5, 'GFG263',1),
+(24, 10, 6, 'JNJN888',1);
 
 -- --------------------------------------------------------
 
@@ -210,7 +211,7 @@ ALTER TABLE `genres`
 -- Indexes for table `tickets`
 --
 ALTER TABLE `tickets`
- ADD PRIMARY KEY (`ticket_id`);
+ ADD PRIMARY KEY (`ticket_id`), ADD KEY `event_id` (`event_id`);
 
 --
 -- Indexes for table `users`
@@ -259,6 +260,8 @@ MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- Constraints for table `boughttickets`
 --
+
+
 ALTER TABLE `boughttickets`
 ADD CONSTRAINT `boughttickets_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
 ADD CONSTRAINT `boughttickets_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `events` (`event_id`),
@@ -272,11 +275,18 @@ ADD CONSTRAINT `buyback_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`use
 ADD CONSTRAINT `buyback_ibfk_2` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`ticket_id`),
 ADD CONSTRAINT `buyback_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `events` (`event_id`);
 
+
 --
 -- Constraints for table `events`
 --
+
+ALTER TABLE `tickets`
+ADD CONSTRAINT `event_id` FOREIGN KEY (`event_id`) REFERENCES `events` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 ALTER TABLE `events`
 ADD CONSTRAINT `genre_id` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -17,13 +17,17 @@ if (isset($_SESSION['username'])) {
 }
 
 
+
+	
+	
 $eventName = "";
 $des = "";
 $date = "";
 $time = "";
-$cat = 1;
+$cat = "";
 $n = "";
 $flag = false;
+$msg="";
 /*if(isset($_GET['ci']))
  {
  $title="Направи ги потребните измени за курсот ".$_GET['ci'];
@@ -45,9 +49,10 @@ if (isset($_POST['submit'])) {
 	$date = $_POST['date'];
 	$time = $_POST['time'];
 	$msg = "";
+	$msg1 = "";
 
 	$cat = $_POST['cat'];
-	$place_id = $_POST['place'];
+	$place_id = $_POST['scene'];
 
 	$ext = explode(".", $_FILES["file"]["name"]);
 	$extension = $ext[count($ext) - 1];
@@ -67,7 +72,8 @@ if (isset($_POST['submit'])) {
 			move_uploaded_file($_FILES["file"]["tmp_name"], "images/" . $_FILES["file"]["name"]);
 			move_uploaded_file($_FILES["file1"]["tmp_name"], "images/" . $_FILES["file1"]["name"]);
 			//header('Location: upload.php');
-			echo " <p > Успешно прикачување! <p>";
+			//echo " <p > Успешно прикачување! <p>";
+			$msg1="Успешно прикачување на сликите!";
 			$now = date("Y-m-d H:i");
 			$n = $_FILES["file"]["name"];
 			$n1 = $_FILES["file1"]["name"];
@@ -77,7 +83,7 @@ if (isset($_POST['submit'])) {
 		}
 	} else {
 
-		echo " <p > Невалиден формат! Внесете .jpg, .png или .gif формат. <p>";
+		//echo " <p > Невалиден формат! Внесете .jpg, .png или .gif формат. <p>";
 		$flag = false;
 		//header('Location: upload.php');
 	}
@@ -91,84 +97,74 @@ if (isset($_POST['submit'])) {
 			if (mysqli_num_rows($result) > 0) {
 				$msg = "Веќе постои настан со истото име!";
 			} else {
-
-				$query1 = "INSERT INTO periods (period_date, period_time)
-	 				VALUES('" . $date . "','" . $time . "')";
-				if (mysqli_query($link, $query1)) {
-					$org=$_SESSION['user_id'];
-					$query = "INSERT INTO events(event_name, event_description, category_id, org_id, event_largeImg, event_smallImg)
-	 				VALUES('" . $eventName . "','" . $des . "','" . $cat . "' ,'" . $org . "' ,'" . $n . "','" . $n1 . "')";
-
-					if (mysqli_query($link, $query)) {
-						
-						//header("Location: dashboard.php");
-
-						
-						$re= mysqli_query($link, "SELECT eventId FROM events WHERE event_name LIKE '$eventName'");
-						if($re)
-						{
-							$row = mysqli_fetch_assoc($re);
-							$event_id = $row['eventId'];
-						}
-						//$tt=$time+":00";
-						$re1 = mysqli_query($link, "SELECT periodId FROM periods WHERE period_date LIKE '$date' AND period_time LIKE '$time' ");
-						
-						if($re1)
-						{
-							$row1 = mysqli_fetch_assoc($re1);
-							$period_id = $row1['periodId'];
-					//	
-						
-
-						if ($event_id != null && $period_id != null ) {
-							
-							
-								$query2 = "INSERT INTO event_details (period_id ,  event_id, place_id)	
-							VALUES('" . $period_id . "','" . $event_id . "','" . $place_id . "')";
-							if (mysqli_query($link, $query2)) {
-								$msg = "Успешно додаден настан! ";
-							} else {
-								$msg="Неуспешно поврзување на табелите tabeli";
-							}
-							
-								
-							
-						}
-							else
-								{
-									$msg="Неуспешно читање од lista";
-								}
-							
-							}
-						else {
-							$msg="Неуспешно читање од база (period)";
-						}
-						
-
-						
-
-					} else {
-								$msg = "Настанот не беше додаден, обидете се повторно! ne nastan ";
-						//$msg += $cat;
-					}
-
-				}
+				
+				$query1="INSERT INTO events(event_name, event_description, period_date, period_time, genre_id, small_img, big_img, scene)
+				 VALUES('$eventName','$des','$date','$time','$cat','$n','$n1', '$place_id') ";
+				 $row=mysqli_query($link, $query1);
+				 if($row)
+				 {
+				 	$msg="Успешно додадовте претстава!";
+					
+				 }
+				 else {
+					 $msg="Неуспешно додадавање, Обидете се повторно.";
+				 }
 
 
- else {
-					$msg = "Периодот не беше додаден, обидете се повторно! ne period ";
-					//$msg += $cat;
-				}
-
-			
 		}
-		}
+	}
 
  else {
 			$msg = "Пополнете ги сите полиња site";
 			//$msg+=$cat;
 		}
 		}
+	else {
+		$msg="Неуспешно прикачување.";
+	}
+	
+	function rand_string($len, $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') {
+		$string = '';
+		for ($i = 0; $i < $len; $i++) {
+			$pos = rand(0, strlen($chars) - 1);
+			$string .= $chars{$pos};
+		}
+		return $string;
+	}
+	
+		$query = "SELECT event_id FROM events WHERE event_name LIKE '$eventName'";
+			$result = mysqli_query($link, $query);			
+			$row1 = mysqli_fetch_assoc($result);
+			$event= $row1['event_id'];
+			
+$num = 600;
+//$type = "";
+//$price = "";
+//$auto = "";
+for($i=1;$i<=30;$i++)
+	{
+		$ticket_row= $i  ;
+		for($j=1; $j<=20;$j++)
+		{
+			$ticket_seat=$j;
+			$code = rand_string(10);
+			//echo "ROW: ". $ticket_row . "SEAT: ". $ticket_seat;
+			$query1="INSERT INTO tickets(row, seat, code, event_id)
+				 VALUES('$ticket_row','$ticket_seat','$code','$event') ";
+				 $row=mysqli_query($link, $query1);
+				 if(!$row)
+				 {
+				 	$msg="Неуспешно додадени билети!";
+					
+				 }
+				 
+			
+		}
+		
+	}
+	
+	
+	
 
 }
 ?>
@@ -206,15 +202,15 @@ include_once 'navBar.php';
 
 <?php
 if (isset($_POST['submit'])) {
-	echo "<h5 style=color:red>" . $msg . "</h5>";
+	echo "<h5 style=color:red>" . $msg . $msg1. "</h5>";
 }
 ?>
-<h3 style="color:gray">Внесување на нов настан</h3>
+<h3 style="color:gray">Внесување на нова претстава</h3>
 <br />
 
 <form action="" method="post"  enctype="multipart/form-data" >
 <div class="form-group">
-<label for="event">Име на настанот </label>
+<label for="event">Име на претставата </label>
 <input type="text" class="form-control" name="event" id="event" value="<?php echo $eventName; ?>">
 
 <label for="des">Опис:</label>
@@ -223,44 +219,30 @@ if (isset($_POST['submit'])) {
 <label for="date"> Датум: (gggg-mm-dd) </label>
 <br/>
 <input type="text" class="form-control" name="date" id="date" value="<?php echo $date; ?>">
-<label for="time"> Времe: (hh:mm)</label>
+<label for="time"> Времe: (hh:mm:ss)</label>
 <br/>
 <input type="text" class="form-control" name="time" id="time" value="<?php echo $time; ?>">
 <label> Категорија:</label>
 <br/>
-<?php $query = "SELECT * FROM categories ";
+<?php $query = "SELECT * FROM genres ";
 	//select na vekepostoecki kategorii
 	print "<select name='cat' id='cat'>";
 	$result = mysqli_query($link, $query);
 	if ($result) {
 		while ($row = mysqli_fetch_assoc($result)) {
-			print "<option value='" . $row['categoryId'] . "' ";
+			print "<option value='" . $row['id'] . "' ";
 
-			print ">" . $row['category_name'] . "</option>";
+			print ">" . $row['name'] . "</option>";
 		}
 	}
 	print "</select><br/>";
 ?>
 
-<label> Место:</label>
+<label> Сцена:</label>
 <br/>
-
-<?php
-$query = "SELECT * FROM places ";
-//select na vekepostoecki mesta
-print "<select name='place'>";
-$result = mysqli_query($link, $query);
-if ($result) {
-	while ($row = mysqli_fetch_assoc($result)) {
-		print "<option value='" . $row['placeId'] . "' ";
-
-		print ">" . $row['place_name'] . "</option>";
-	}
-}
-print "</select><br/>";
-?>
-
-</div>
+<input type="radio" name="scene" value="big" checked="true">Голема сцнеа
+<input type="radio" name="scene" value="small":> Мала сцена
+<br/>
 
 <label for="file" > Голема слика: </label>
 <input  type="file"  value="Избери Слика:" name="file" id="file"  />
@@ -269,7 +251,7 @@ print "</select><br/>";
 <label for="file1" > Мала слика: </label>
 <input  type="file"  value="Избери Слика:" name="file1" id="file1"  />
 <br/>
-
+</div>
 <input  class="btn btn-default" type="submit"  value="Прикачи" name="submit" id="submit"  />
 
 </form>
