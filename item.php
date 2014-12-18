@@ -45,6 +45,9 @@
 									$time=$event['period_time'];
 									$date=$event['period_date'];
 									
+                        		$prices=mysqli_query($link, "SELECT * FROM tickets WHERE event_id LIKE '$eventID'");
+								$pr=mysqli_fetch_assoc($prices);
+									$price=$pr['price'];
 								
                         ?>
                 <div class="thumbnail">
@@ -54,13 +57,14 @@
                       
                       <div class="col-md-12">
                       	<div class="col-md-6">
-                        <h3 class="text-left"><a href="#"><?php echo $event['event_name']?></a>
+                        <h3 class="text-left" ><a href="#"> <?php echo $event['event_name']?></a>
                         </h3>
                         </div>
                         
                         <div class="col-md-6">
                         
-                          <h3 class="text-right"><?php echo $time. $date ?>
+                          <h3 class="text-right text-primary"  ><?php echo $time.' часот' ?>
+                          	  <h3 class="text-right text-primary"  ><?php echo $date; ?>
                         </h3>
                         </div>
                          <div class="col-md-12">
@@ -71,11 +75,11 @@
                          <div class="col-md-12">
                        <div class="col-md-8">
                          
-					<div class="huge"> <h3>Цена на билет:</h3></div>         
+					<div class="huge"> <h3>Цена на билет: <b> <?php echo $price . "денари"; ?></b></h3></div>         
                        </div>
                        
                         <div class="col-md-4 col-md-offset-0"  >
-                        <a class="btn btn-info" href="chooseSeat.php">Продолжи со одбирање место</a>
+                        <h3> <a class="btn btn-info" href="chooseSeat.php">Продолжи со одбирање место</a></h3>
                     </div>  
    					
 					 				

@@ -1,11 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.2.11
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Generation Time: Dec 17, 2014 at 09:29 PM
--- Server version: 5.6.21
--- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -16,15 +8,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
---
--- Database: `e-tickets`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `boughttickets`
---
 
 DROP TABLE IF EXISTS `boughttickets`;
 DROP TABLE IF EXISTS `buyback`;
@@ -57,11 +40,6 @@ INSERT INTO `boughttickets` (`bought_id`, `event_id`, `ticket_id`, `user_id`) VA
 (9, 6, 23, 4),
 (10, 7, 24, 4);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `buyback`
---
 
 CREATE TABLE IF NOT EXISTS `buyback` (
 `buyback_id` int(11) NOT NULL,
@@ -70,11 +48,7 @@ CREATE TABLE IF NOT EXISTS `buyback` (
   `event_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `events`
---
 
 CREATE TABLE IF NOT EXISTS `events` (
 `event_id` int(11) NOT NULL,
@@ -88,9 +62,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `scene` varchar(30)   
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Dumping data for table `events`
---
+
 
 INSERT INTO `events` (`event_id`, `event_name`, `event_description`, `period_date`, `period_time`, `genre_id`, `small_img`, `big_img`, `scene`) VALUES
 (1, 'Сината птица', 'Нашите секакви дејанија и дела, расфрлани во тесната рамка на нашите кратки животи, се скаменети споменици со коишто живееме секојдневно, комуницираме со нив, се препираме или другаруваме со нив. За луѓето од творештвото, делото е нешто со што се обидува да содејствува со бесконечното Време кое пред 12-ина милијарди години почнало да тече, кога во „Големиот Тресок“ настанало сè што е видливо и невидливо во новонастанатиот бескраен простор на вселената. Создавајќи монументи со кои пловиме по континуитетот на временскиот брзак, се обидуваме барем за еден момент да го замрзнеме неумоливото брзање на вселената, а притоа многу добро знаеме дека тоа ќе ни успее само ако го преживееме мраз-студеното сечило на судот на времето. Всушност, се работи за победа над смртта и за слава на животот.\r\nПотрагата по сината птица е потрага по нас самите, потрага по нашата среќа – и тоа среќата дефинирана како суштински контакт со себеси, со сопствените копнежи, соништа и мисли (нештата од кои, всушност луѓето се направени). Единствената смисла е постојано да се трага и бара – само така може да се создаде светот на убавината (онаа иста убавина за која Достоевски смета дека ќе го спаси светот).', '2015-01-28', '20:00:00', 5, 'img1', 'img2', 'big'),
@@ -101,11 +73,6 @@ INSERT INTO `events` (`event_id`, `event_name`, `event_description`, `period_dat
 (6, 'Огнени јазици', 'Претставата  "Огнени јазици" го драматизира прашањето што е преводот и колку е тој воопшто можен? Примерот на светите браќа Кирил и Методиј ни кажаува дека тој и тоа како е можен. Во деветтиот век тие ја преведоа Библијата на славјански јазик, ја создадоа кирилицата и помогнаа во христијанизирањето на славјанскиот свет. Од сите овие прични, тие денес го носат името апостоли на Славјаните. ', '2015-02-08', '18:00:00', 4, 'img1', 'img2', 'big'),
 (7, 'Изгубени германци', 'Овој текст е базиран на вистинска приказна. По Втората светска војна, во Југославија, од високи инстанции од Белград, во Македонија доаѓа строго доверлива команда до инстанциите: да се испратат луѓе и голема механизација во напуштен стар рудник, на тромеѓата помеѓу Југославија, Грција и Бугарија. Наредбава е малку чудна бидејќи целото локално население знае дека рудникот го напуштиле некои Французи, уште во 18 век. Копај, копај – ништо. Прашањето е зошто ваква чудна наредба? Одговорот е во архивите на берлинскиот Рајхстаг. Разузнавачките служби на сојузниците, по паѓањето на Третиот Рајх, успеваат да најдат крајно педантно архивирана документација која докажува дека рудникот работел за време на војната. И дека остварувал големи приходи. Кој да се сомнева во германската прецизност!', '2015-02-14', '21:00:00', 4, 'img1', 'img2', 'big');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `genres`
---
 
 CREATE TABLE IF NOT EXISTS `genres` (
 `id` int(11) NOT NULL,
@@ -123,41 +90,29 @@ INSERT INTO `genres` (`id`, `name`, `description`) VALUES
 (4, 'Трагикомедија', 'Трагикомедијата е драмска творба во која се испреплетуваат комични и трагични елементи.'),
 (5, 'Драма', 'Драма (во потесна смисла на зборот) како посебен вид не е ниту трагична, ниту комична, туку реална. Во неа доминираат теми и мотиви од секојдневниот живот');
 
--- --------------------------------------------------------
 
---
--- Table structure for table `tickets`
---
 
 CREATE TABLE IF NOT EXISTS `tickets` (
 `ticket_id` int(11) NOT NULL,
   `row` int(11) NOT NULL,
   `seat` int(11) NOT NULL,
   `code` varchar(100) NOT NULL,
-  `event_id` int(11) NOT NULL
+  `event_id` int(11) NOT NULL,
+  `price` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tickets`
---
 
-INSERT INTO `tickets` (`ticket_id`, `row`, `seat`, `code`, `event_id`) VALUES
-(1, 1, 10, 'ABS7777', 1),
-(15, 3, 6, '89NNNK',1),
-(16, 1, 3, 'OIM9i9i',1),
-(17, 3, 5, '7d8s7dh',1),
-(18, 1, 2, 'htbt8e8',1),
-(19, 2, 2, 'grji889',1),
-(20, 1, 2, 'dadm777',1),
-(21, 1, 11, 'ABS7778',1),
-(23, 10, 5, 'GFG263',1),
-(24, 10, 6, 'JNJN888',1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
+INSERT INTO `tickets` (`ticket_id`, `row`, `seat`, `code`, `event_id`, `price`) VALUES
+(1, 1, 10, 'ABS7777', 1, 300),
+(15, 3, 6, '89NNNK',1, 300),
+(16, 1, 3, 'OIM9i9i',1, 300),
+(17, 3, 5, '7d8s7dh',1, 300),
+(18, 1, 2, 'htbt8e8',1, 300),
+(19, 2, 2, 'grji889',1, 300),
+(20, 1, 2, 'dadm777',1, 300),
+(21, 1, 11, 'ABS7778',1, 300),
+(23, 10, 5, 'GFG263',1, 300),
+(24, 10, 6, 'JNJN888',1, 300);
 
 CREATE TABLE IF NOT EXISTS `users` (
 `user_id` int(11) NOT NULL,
@@ -167,9 +122,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `usertype` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Dumping data for table `users`
---
+
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `usertype`) VALUES
 (1, 'marija', 'marijapass', 'marija@yahoo.com', 'Корисник'),
@@ -179,87 +132,46 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `usertype`) VAL
 (5, 'user2', 'user2pass', 'user2@yahoo.com', 'Корисник'),
 (6, 'admin', 'adminpass', 'admin@yahoo.com', 'Администратор');
 
---
--- Indexes for dumped tables
---
 
---
--- Indexes for table `boughttickets`
---
 ALTER TABLE `boughttickets`
  ADD PRIMARY KEY (`bought_id`), ADD KEY `user_id` (`user_id`), ADD KEY `event_id` (`event_id`), ADD KEY `ticket_id` (`ticket_id`);
 
---
--- Indexes for table `buyback`
---
+
 ALTER TABLE `buyback`
  ADD PRIMARY KEY (`buyback_id`), ADD KEY `user_id` (`user_id`), ADD KEY `ticket_id` (`ticket_id`), ADD KEY `event_id` (`event_id`);
 
---
--- Indexes for table `events`
---
 ALTER TABLE `events`
  ADD PRIMARY KEY (`event_id`), ADD KEY `genre_id` (`genre_id`);
 
---
--- Indexes for table `genres`
---
+
 ALTER TABLE `genres`
  ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `tickets`
---
+
 ALTER TABLE `tickets`
  ADD PRIMARY KEY (`ticket_id`), ADD KEY `event_id` (`event_id`);
 
---
--- Indexes for table `users`
---
 ALTER TABLE `users`
  ADD PRIMARY KEY (`user_id`);
 
---
--- AUTO_INCREMENT for dumped tables
---
 
---
--- AUTO_INCREMENT for table `boughttickets`
---
 ALTER TABLE `boughttickets`
 MODIFY `bought_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT for table `buyback`
---
+
 ALTER TABLE `buyback`
 MODIFY `buyback_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `events`
---
+
 ALTER TABLE `events`
 MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `genres`
---
+
 ALTER TABLE `genres`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `tickets`
---
+
 ALTER TABLE `tickets`
 MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
---
--- AUTO_INCREMENT for table `users`
---
+
 ALTER TABLE `users`
 MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `boughttickets`
---
 
 
 ALTER TABLE `boughttickets`
@@ -267,18 +179,13 @@ ADD CONSTRAINT `boughttickets_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users`
 ADD CONSTRAINT `boughttickets_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `events` (`event_id`),
 ADD CONSTRAINT `boughttickets_ibfk_3` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`ticket_id`);
 
---
--- Constraints for table `buyback`
---
+
 ALTER TABLE `buyback`
 ADD CONSTRAINT `buyback_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
 ADD CONSTRAINT `buyback_ibfk_2` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`ticket_id`),
 ADD CONSTRAINT `buyback_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `events` (`event_id`);
 
 
---
--- Constraints for table `events`
---
 
 ALTER TABLE `tickets`
 ADD CONSTRAINT `event_id` FOREIGN KEY (`event_id`) REFERENCES `events` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE;
