@@ -264,15 +264,16 @@ $sold=$s['sold'];
             	<h5><b>Продадени билети за престојните 5 настани</b></h5>
             	<?php
             	//progress bars percentage
-				$events=mysqli_query($link, "select distinct e.event_name,e.eventId from events e, event_details ed, periods p where e.eventId=ed.event_id and ed.period_id=p.periodId order by p.period_date, p.period_time limit 5");
+				$events=mysqli_query($link, "select distinct e.event_id, e.event_name,e.event_id from events e order by e.period_date, e.period_time limit 5");
 				while ($row=mysqli_fetch_assoc($events)){
 				//get tickets number
-				$query3="Select count(*) as no_tickets from tickets t, events e, event_details ed where t.details_id=ed.event_detailsId AND ed.event_id=e.eventId and e.eventId=$row[eventId]";
-				$n=mysqli_query($link, $query3);
-				$num=mysqli_fetch_assoc($n);
-				$total_tickets=$num['no_tickets'];
+				//$query3="Select count(*) as no_tickets from tickets t, events e, event_details ed where t.details_id=ed.event_detailsId AND ed.event_id=e.eventId and e.eventId=$row[eventId]";
+				//$n=mysqli_query($link, $query3);
+				//$num=mysqli_fetch_assoc($n);
+				$total_tickets=750;
+				//$num['no_tickets'];
 				//get sold tickets number
-				$sold=mysqli_query($link, "Select count(*) as sold from events e, event_details ed, tickets t, has_ticket ht where e.eventId=ed.event_id AND ed.event_detailsId=t.details_id AND t.ticket_id=ht.ticket_id AND e.eventId=$row[eventId]");
+				$sold=mysqli_query($link, "Select count(*) as sold from events e, boughttickets t where e.event_id=t.event_id AND e.event_id=$row[event_id]");
 				$s=mysqli_fetch_assoc($sold);
 				$sold_tickets=$s['sold'];
 				$percent=$sold_tickets/$total_tickets*100;
