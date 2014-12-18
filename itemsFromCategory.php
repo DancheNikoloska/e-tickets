@@ -32,10 +32,10 @@
 					
 					<div class="row">
 							<?php
-							// da se prikazuvaat 9 nastani po strana
+							// da se prikazuvaat 6 nastani po strana
 							    $rec_limit=6;
 								// vkupno nastani vo baza
-								$retval = mysqli_query($link, "SELECT COUNT(*) FROM events WHERE activated LIKE 1 ");
+								$retval = mysqli_query($link, "SELECT COUNT(*) FROM events  ");
 								$row       = mysqli_fetch_array($retval);
 								$rec_count = $row[0];
 								$offset=0;
@@ -49,9 +49,9 @@
 								}
 								$left_rec = $rec_count - ($page * $rec_limit);
 							// selekcija na site aktivni nastani od odbranata kategorija
-							$events=mysqli_query($link, "SELECT * FROM events WHERE activated LIKE 1 AND category_id LIKE '$id' LIMIT $offset, $rec_limit");
+							$events=mysqli_query($link, "SELECT * FROM events WHERE genre_id LIKE '$id' LIMIT $offset, $rec_limit");
 								while ($event=mysqli_fetch_assoc($events)) {
-									$eventID=$event['eventId'];		
+									$eventID=$event['event_id'];		
 							?>
 						<div class="col-sm-4 col-lg-4 col-md-4">
 							<div class="thumbnail">

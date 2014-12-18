@@ -9,9 +9,9 @@
 								if (isset($_GET['id'])) {
 								    $id=$_GET['id'];
 								}
-						$categories=mysqli_query($link, "SELECT * FROM categories");
+						$categories=mysqli_query($link, "SELECT * FROM genres");
 						while ($cat=mysqli_fetch_assoc($categories)) {
-							$tmp=$cat['categoryId'];	
+							$tmp=$cat['id'];	
 							//proverka koja kategorija e aktivna , za da se dodeli soodvetnata klasa :)
 							if($id==$tmp){
 								$class="list-group-item  active";
@@ -21,7 +21,7 @@
 							}		
 							
 					?>
-						<a href='<?php echo "ItemsFromCategory.php?id=$tmp"?>' class='<?php echo $class ?>'><?php echo$cat['category_name'] ?></a>
+						<a href='<?php echo "ItemsFromCategory.php?id=$tmp"?>' class='<?php echo $class ?>'><?php echo$cat['name'] ?></a>
 							<?php } ?>
 					</div>
 	</div>

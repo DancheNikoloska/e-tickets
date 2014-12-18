@@ -82,7 +82,7 @@
                             <a class="active" href="eventsAdmin.php"><i class="fa fa-bell-o fa-fw"></i> Настани</a>
                             
                         </li>
-                    e
+                    
                         <li>
                             <a href="usersAdmin.php"><i class="fa fa-users fa-fw"></i> Корисници </a>
                         </li>

@@ -33,7 +33,7 @@ if (isset($_POST['sub'])) {
 			}*/
 			
 			
-			header('Location: homeOrganizator.php');
+			header('Location: homeUser.php');
 			//echo "Welcome " . $_SESSION['username'];
 		} else {
 			echo "err";
