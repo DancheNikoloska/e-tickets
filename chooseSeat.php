@@ -92,8 +92,8 @@
 	for($i=0;$i<11;$i++){
 	  $hall[0][]=0;
 	}
-	//create 4 seats in 2 row
-	for($i=0;$i<4;$i++){
+	//create 7 seats in 2 row
+	for($i=0;$i<7;$i++){
 	  $hall[1][]=0;
 	}
 	//create 7 seats in 3 row
