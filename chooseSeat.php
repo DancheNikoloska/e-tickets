@@ -26,7 +26,12 @@
 <body>
 
     <!-- Navigation -->
-    <?php
+    <?php session_start();
+	if(!isset($_SESSION['username'])){
+		echo "<script type='text/javascript'>alert('Морате да бидете најавени за да одберете место');</script>";
+		header('Location: login.php');
+		
+	}
 	include_once 'navBar.php';
  ?>			
     <!-- Page Content -->

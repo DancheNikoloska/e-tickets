@@ -2,14 +2,14 @@
 session_start();
 //prvo mora da provereme dali nekoj e veke najaven, ako e prenasocuvame
 if (isset($_SESSION['username'])) {
-	//tuka namesto homepage ke se ide na logout ili ke se jave "you are logged in as Drn Drnko do you want to log out"
+	//tuka namesto homepage ke se ide na logout ili ke se jave "you are logged in as XXXX do you want to log out"
 	//header("Location: homepage.html");
 	$flag = 1;
 } else {
 	$flag = 0;
 }
 
-//inaku ne e najaven i proveruvame dali bilo klinato submit na formata
+//inaku ne e najaven i proveruvame dali bilo kliknato submit na formata
 if (isset($_POST['sub'])) {
 	include_once 'database.php';
 	include_once 'user_validation.php';
@@ -24,25 +24,15 @@ if (isset($_POST['sub'])) {
 		if ($q) {
 			$row = mysqli_fetch_assoc($q);
 			$_SESSION['user_id']=$row["id"];
-			//$_SESSION['username']=$row["username"];
-		/*	if ($row['role_type'] == 'professor') {
-				header('Location: dashboard.php');
-			} else if ($row['role_type'] == 'admin') {
-				header('Location: dashboard.php');
-			} else if ($row['role_type'] == 'student') {
-				header('Location: studentoverview.php');
-			}*/
-			
-			
+			//$_SESSION['username']=$row["username"];			
 			header('Location: homeUser.php');
 			//echo "Welcome " . $_SESSION['username'];
 		} else {
-			echo "err";
+			echo "ERROR: Проблем при најавување, обидете се повторно :)";
 		}
 	} else {
-		
-		
-		print '<span style=float:right;color:red>Невалидни податоци!&nbsp </span><br>';
+		// dokolku se vnesat nevalidni podatoci, se pojavuva alert
+		echo "<script type='text/javascript'>alert('Невалидни податоци');</script>";
 	}
 }
 ?>
@@ -52,9 +42,6 @@ if (isset($_POST['sub'])) {
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="">
-		<meta name="author" content="">
-
 		  <title>Е-tickets- електронски сајт за билети</title>
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.css" rel="stylesheet">
@@ -69,18 +56,13 @@ if (isset($_POST['sub'])) {
 		<?php include_once 'navBar.php'; ?>
 
 		<div class="container">
-
 			<div class="row">
-
 				<div class="col-lg-12">
 					<h1 class="page-header"><small>Најавете се на e-tickets!</small></h1>
-
 				</div>
-
 			</div>
 
 			<div class="row">
-
 				<div class="col-md-6">
 					<img class="img-responsive" src="http://wp-unit4-uk.s3.amazonaws.com/wp-content/uploads/sites/6/2013/06/Mobile-working.jpg">
 				</div>
@@ -98,39 +80,16 @@ if (isset($_POST['sub'])) {
 
 						<div class="checkbox">
 							<label>
-								<input type="checkbox">
-								Запамети ме</input> <a href="#" class="tab"> Ја заборавивте вашата лозинка?</a> </label>
+								<input type="checkbox">	Запамети ме</input> 
 						</div>
-						<button type="submit" name="sub" class="btn btn-default">
-							Најава
+						<button type="submit" name="sub" class="btn btn-info pull-right">
+							Најави се
 						</button>
 					</form>
 
 				</div>
 
 			</div>
-
-			<!-- Team Member Profiles -->
-
-			<div class="container">
-
-				<hr>
-
-				<footer>
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="row well">
-
-								<p align="center">
-									2014  ФИНКИ |    Факултет за информатички науки и компјутерско инженерство
-								</p>
-							</div>
-
-						</div>
-					</div>
-				</footer>
-
-			</div><!-- /.container -->
 
 			<!-- Bootstrap core JavaScript -->
 			<!-- Placed at the end of the document so the pages load faster -->

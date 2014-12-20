@@ -21,7 +21,7 @@
 <body>
 
     <!-- Navigation -->
-    <?php
+    <?php session_start();
 	include_once 'navBar.php';
  ?>			
     <!-- Page Content -->
@@ -50,70 +50,25 @@
                         		$prices=mysqli_query($link, "SELECT * FROM tickets WHERE event_id LIKE '$eventID'");
 								$pr=mysqli_fetch_assoc($prices);
 									$price=$pr['price'];
+									//formatiranje za poubav prikaz na casot, da ne pokazuva i sekundi 
+								$timeFormated=substr($time, 0, -3);
 								
                         ?>
-                <div class="thumbnail">
-                    <img class="img-responsive" src="http://placehold.it/800x300" alt="">
+			<div class="thumbnail">
+                    <img class="img-responsive" src="http://placehold.it/800x300" alt=""/>
                     <div class="caption-full">
-                      <!--  <h4 class="pull-right">$24.99</h4> -->
-                      
-                      <div class="col-md-12">
-                      	<div class="col-md-6">
-                        <h3 class="text-left" ><a href="#"> <?php echo $event['event_name']?></a>
-                        </h3>
-                        </div>
-                        
-                        <div class="col-md-6">
-                        
-                          <h3 class="text-right text-primary"  ><?php echo $time.' часот' ?>
-                          	  <h3 class="text-right text-primary"  ><?php echo $date; ?>
-                        </h3>
-                        </div>
-                         <div class="col-md-12">
+                        <h4 class="pull-right"><?php echo $price . "денари"; ?></h4>
+                        <h4><a><?php echo $event['event_name']?></a></h4>
+                        <h4 class="text-info" ><?php echo "Датум: ".$date."  | ".$timeFormated.' часот' ?></h4>
                         <p><?php echo $event['event_description']?></p>
-                        </div>
-                        
-                         </div>
-                         <div class="col-md-12">
-                       <div class="col-md-8">
-                         
-					<div class="huge"> <h3>Цена на билет: <b> <?php echo $price . "денари"; ?></b></h3></div>         
-                       </div>
-                       
-                        <div class="col-md-4 col-md-offset-0"  >
+                    </div>
+                    
+                    <div class="col-md-4 pull-right"  >
                         <h3> <a class="btn btn-info" href="chooseSeat.php">Продолжи со одбирање место</a></h3>
                     </div>  
-   					
-					 				
-						
-					</div>	
-                        <?php 
-                       		//$periodsID=array();
-							$placeID;
-							//selektiranje na detali za nastanot, potocno na lokacija, i site vreminja na nastanot
-                        	//$details=mysqli_query($link, "SELECT * FROM event_details WHERE event_id LIKE '$eventID'");
-					   		//while ($dets=mysqli_fetch_assoc($details)) {
-					   			//$placeID=$dets['place_id'];
-								//array_push($periodsID,$dets['period_id']);
-							}
-							//selekcija na podatoci za mestoto na odrzuvanje na nastanot so pomos na id-to za mesto zemeno od prethodnoto kveri
-							//$location=mysqli_query($link, "SELECT * FROM places WHERE placeId LIKE '$placeID'");
-					   	//	while ($places=mysqli_fetch_assoc($location)) {
-					   		//	$place=$places['place_name'];
-							//	$adress=$places['place_address'];
-						?>						
-							
-                                   
-                   	
-                                       
-                </div>
-					 	
-									 
-					 
-               		
-               		
-                   
-					</div>                    
+ 
+                </div>	
+                <?php }?>                
            
 
             </div>
@@ -121,23 +76,6 @@
         </div>
 
     </div>
-    <!-- /.container -->
-
-    <div class="container">
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-        </footer>
-
-    </div>
-    <!-- /.container -->
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
