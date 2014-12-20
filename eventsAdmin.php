@@ -1,4 +1,12 @@
-
+<?php 
+include_once 'database.php';
+if(isset($_GET['event_id'])) 
+{
+	$userid=$_GET['event_id'];
+	$q=mysqli_query($link, "Delete from events where event_id=$event_id");
+	header('Location: eventsAdmin.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -114,8 +122,8 @@
   				<th class="text-center">Име на настан</th>
   				<th class="text-center">Датум</th>
   				<th class="text-center">Продадени билети</th>
-  				<th class="text-center">Измени</th>
-  				<th class="text-center">Активирај</th>
+  				<th class="text-center">Измени настан</th>
+  				<th class="text-center">Избриши настан</th>
   			</tr>
   			<?php 
   			include_once 'database.php';
@@ -149,8 +157,8 @@
 	  			 "<td class=\"text-center\">$datum</td>".
 	  			 "<td class=\"text-center\">$sold_tickets / $total_tickets</td>".
 	  			 "<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[event_id]\">Измени</a></td>".
-	  			// "<td class=\"text-center\"><a href=\"admin_activateEvent.php?eventid=$row[eventId]\">". ($row['activated']==1 ? 'Деактивирај' : 'Активирај').
-	  			 "</a></td></tr>";
+	  			 "<td class=\"text-center\"><a href=\"eventsAdmin.php?event_id=$row[event_id]\" onclick=\"return confirm('Дали сте сигурни дека сакате да го избришете настанот?')\">Избриши</a>".
+	  			 "</td>";
   			
   			}
 
@@ -160,8 +168,8 @@
   				"<td class=\"text-center\">$datum</td>".
   				"<td class=\"text-center\">$sold_tickets / $total_tickets</td>".
   				"<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[event_id]\">Измени</a></td>".
-  			//	"<td class=\"text-center\"><a href=\"admin_activateEvent.php?eventid=$row[eventId]\">". ($row['activated']==1 ? 'Деактивирај' : 'Активирај'). 
-  			"</a></td></tr>";
+  			"<td class=\"text-center\"><a href=\"eventsAdmin.php?event_id=$row[event_id]\" onclick=\"return confirm('Дали сте сигурни дека сакате да го избришете настанот?')\">Избриши</a>".
+	  			 "</td></tr>";
   			
 				}
 				

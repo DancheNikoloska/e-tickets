@@ -225,7 +225,7 @@ $total=$t['total'];
                                     <i class="fa fa-male fa-5x"></i>
                                 </div>
                                  <div class="col-xs-9 text-right">
-                                    <div class="huge"><?php echo $total;?></div>
+                                    <div class="huge"><?php echo "+";?></div>
                                     <div>Додади претстава!</div>
                                 </div>                              
                             </div>
@@ -292,8 +292,8 @@ $total=$t['total'];
             	 ?>
             	 <h5><?php echo $row['event_name']; ?></h5>
 	            <div class="progress">
-	  			<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $percent."%" ?>">
-	    		<span><?php echo round($percent,1)."%"; ?></span>
+	  			<div class="progress-bar progress-bar-info active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $percent."%" ?>">
+	    		<span style="color:black;"><?php echo round($percent,1)."%"; ?></span>
 	    		</div>
 				</div>
 				<?php } ?>
