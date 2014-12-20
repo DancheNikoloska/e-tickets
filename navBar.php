@@ -7,7 +7,7 @@
 			
 <div class="container">
 				<div class="navbar-header">					
-					<a class="navbar-brand" href="homeUser.php">E-tickets - Бидете секаде каде што ќе посакате </a>
+					<a class="navbar-brand" href="homeUser.php">E-theatre - Гледајте ја вашата омилена претстава </a>
 
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->

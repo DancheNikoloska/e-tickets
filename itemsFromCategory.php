@@ -32,24 +32,16 @@
 					
 					<div class="row">
 							<?php
-							// da se prikazuvaat 6 nastani po strana
-							    $rec_limit=6;
-								// vkupno nastani vo baza
-								$retval = mysqli_query($link, "SELECT COUNT(*) FROM events  ");
-								$row       = mysqli_fetch_array($retval);
-								$rec_count = $row[0];
-								$offset=0;
-								$numpages=($rec_count/$rec_limit)+1;
-								// vo zavisnost od toa koja strana e odbrana da se presmeta offset za selektiranje podatoci od baza
-								if (isset($_GET['page'])&& ($_GET['page']<=0 || $_GET['page']>=$numpages)) {
-									$page   = $_GET['page'] + 1;
-									$offset = $rec_limit * $page;
+							  	// da se prikazuvaat 6 nastani po strana	
+							   $num_rec_per_page=6;							
+								if (isset($_GET["page"])) {
+									 $page  = $_GET["page"]; 
 								} else {
-									$page   = 0;
-								}
-								$left_rec = $rec_count - ($page * $rec_limit);
+								    $page=1; }	
+								$start_from = ($page-1) * $num_rec_per_page; 								
+
 							// selekcija na site aktivni nastani od odbranata kategorija
-							$events=mysqli_query($link, "SELECT * FROM events WHERE genre_id LIKE '$id' LIMIT $offset, $rec_limit");
+							$events=mysqli_query($link, "SELECT * FROM events WHERE genre_id LIKE '$id' LIMIT $start_from, $num_rec_per_page");
 								while ($event=mysqli_fetch_assoc($events)) {
 									$eventID=$event['event_id'];		
 							?>
@@ -71,21 +63,23 @@
 					
 						<div class="pull-right">
 
-					<ul class="pagination">
-						<?php
+					<ul class="pagination">										
 						
-						//stranicenje
-						  $prevPage=$page-1; 
-						  $nextPage=$page+1;
+						<?php //izbroj kolku zapisi ima vkupno vo tabelata
+							$rs_result = mysqli_query($link,"SELECT * FROM events WHERE genre_id LIKE '$id'"); //run the query
+							$total_records = mysqli_num_rows($rs_result);  //count number of records
+							$total_pages = ceil($total_records / $num_rec_per_page); 
 						?>
-					  <li><a href='<?php echo "itemsFromCategory.php?page=$prevPage"?>'>&laquo;</a></li>
-					  <?php for($i=1;$i<=$numpages;$i++){
+					<!-- prva strana -->
+					  <li><a href='<?php echo "itemsFromCategory.php?page=1&id=$id"?>'>&laquo;</a></li>
+					  <?php for($i=1;$i<=$total_pages;$i++){
 						 ?>
-					  <li><a href='<?php echo "itemsFromCategory.php?page=$i"?>'><?php echo $i; ?></a></li>
+					  <li><a href='<?php echo "itemsFromCategory.php?page=$i&id=$id"?>'><?php echo $i; ?></a></li>
 					  <?php } ?>
-					  <li><a href='<?php echo "itemsFromCategory.php?page=$nextPage"?>'>&raquo;</a></li>
+					  <!-- posledna strana -->
+					  <li><a href='<?php echo "itemsFromCategory.php?page=$total_pages&id=$id"?>'>&raquo;</a></li>
 					  
-					</ul>
+					</ul> 
 					</div>
 
 				</div>
