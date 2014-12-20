@@ -19,7 +19,7 @@
     
     <!--jquery-seat -->
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="css/jquery.seat-charts.css">
+		<!--<link rel="stylesheet" type="text/css" href="css/jquery.seat-charts.css">-->
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
@@ -82,19 +82,22 @@
   //create matrix
     $hall= array();
 	//create 5 rows
-	for($i=0;$i<5;$i++){
+	for($i=0;$i<11;$i++){
 	  $hall[$i]=array();
 	}
-	//create 3 seats in 1 row
-	for($i=0;$i<3;$i++){
+	
+	//create seats
+	
+	//create 11 seats in 1 row
+	for($i=0;$i<11;$i++){
 	  $hall[0][]=0;
 	}
 	//create 4 seats in 2 row
 	for($i=0;$i<4;$i++){
 	  $hall[1][]=0;
 	}
-	//create 4 seats in 3 row
-	for($i=0;$i<4;$i++){
+	//create 7 seats in 3 row
+	for($i=0;$i<7;$i++){
 	  $hall[2][]=0;
 	}
 	//create 7 seats in 4 row
@@ -105,7 +108,32 @@
 	for($i=0;$i<2;$i++){
 	  $hall[4][]=0;
 	}
-  //ZA OVA CELOTO KE SI IMATE FUNKCIJA ====================
+	//create 7 seats in 6 row
+	for($i=0;$i<7;$i++){
+	  $hall[5][]=0;
+	}
+	//create 4 seats in 7 row
+	for($i=0;$i<4;$i++){
+	  $hall[6][]=0;
+	}
+	//create 2 seats in 8 row
+	for($i=0;$i<2;$i++){
+	  $hall[7][]=0;
+	}
+	//create 9 seats in 9 row
+	for($i=0;$i<9;$i++){
+	  $hall[8][]=0;
+	}
+	//create 9 seats in 10 row
+	for($i=0;$i<9;$i++){
+	  $hall[9][]=0;
+	}
+	//create 9 seats in 11 row
+	for($i=0;$i<9;$i++){
+	  $hall[10][]=0;
+	}
+ 
+ 
   
  
  $conn=mysqli_connect('localhost','root','','e-tickets');
