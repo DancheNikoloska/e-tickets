@@ -60,7 +60,7 @@
 							<div id="legend"></div>
 						</div> -->
 						
-						<?php 
+						<?php /*
 							for($i=1;$i<=20;$i++){
 								for($j=1;$j<=5;$j++){
 									?>
@@ -74,7 +74,77 @@
 					 
 					<br />			
 					<?php 		}
-						 ?>
+						*/ ?>
+					
+					<table cellspacing="10">
+						<?php
+  //ZA OVA  FUNKCIJA ====================
+  //create matrix
+    $hall= array();
+	//create 5 rows
+	for($i=0;$i<5;$i++){
+	  $hall[$i]=array();
+	}
+	//create 3 seats in 1 row
+	for($i=0;$i<3;$i++){
+	  $hall[0][]=0;
+	}
+	//create 4 seats in 2 row
+	for($i=0;$i<4;$i++){
+	  $hall[1][]=0;
+	}
+	//create 4 seats in 3 row
+	for($i=0;$i<4;$i++){
+	  $hall[2][]=0;
+	}
+	//create 7 seats in 4 row
+	for($i=0;$i<7;$i++){
+	  $hall[3][]=0;
+	}
+	//create 2 seats in 5 row
+	for($i=0;$i<2;$i++){
+	  $hall[4][]=0;
+	}
+  //ZA OVA CELOTO KE SI IMATE FUNKCIJA ====================
+  
+ 
+ $conn=mysqli_connect('localhost','root','','e-tickets');
+ $sql = "select * from tickets";
+ $result= mysqli_query($conn,$sql);
+ while($data = mysqli_fetch_assoc($result)){
+   $hall[$data["row"]][$data["seat"]]=1;
+ }
+
+ 
+ 
+ //draw hall
+ for($i=0;$i<sizeof($hall);$i++){
+    echo "<tr>";
+	for($j=0;$j<sizeof($hall[$i]);$j++){
+	if($hall[$i][$j]==1){
+	  echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"return false;\" style=\"background: red;\">";
+	   
+	  echo "</td>";
+	}else{
+	  echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"clickMe(this,".$i.",".$j.")\">";
+	  
+	  echo "</td>";
+	  }
+	}
+	echo "<tr>";
+ }
+  ?>
+
+  </table>
+  <script>
+ function clickMe(element,row,seat){
+    //var xmlhttp = new XMLHttpRequest();
+	//xmlhttp.open("GET", "update_seat.php?row="+row+"&seat="+seat);
+	//xmlhttp.send();
+	element.style.background= 'red';
+ };
+</script>
+					
 					</div>
 				</div>
 			</div>                    
@@ -105,8 +175,8 @@
     <script src="js/bootstrap.min.js"></script>
     
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-		<script src="js/jquery.seat-charts.js"></script>		
-		<script src="js/sala.js"></script>
+		<!--<script src="js/jquery.seat-charts.js"></script>-->		
+		<!--<script src="js/sala.js"></script>-->
 
 </body>
 
