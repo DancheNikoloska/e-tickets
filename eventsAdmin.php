@@ -2,7 +2,7 @@
 include_once 'database.php';
 if(isset($_GET['event_id'])) 
 {
-	$userid=$_GET['event_id'];
+	$event_id=$_GET['event_id'];
 	$q=mysqli_query($link, "Delete from events where event_id=$event_id");
 	header('Location: eventsAdmin.php');
 }

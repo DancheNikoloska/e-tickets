@@ -16,6 +16,7 @@ if (isset($_SESSION['username'])) {
 //varijabli
 $eventName = "";
 $des = "";
+$price="";
 $date = "";
 $time = "";
 $cat = "";
@@ -42,12 +43,12 @@ if (isset($_POST['submit'])) {
 	$des = $_POST['des'];
 	$date = $_POST['date'];
 	$time = $_POST['time'];
+	$price = $_POST['price'];
 	$msg = "";
 	$msg1 = "";
 
 	$cat = $_POST['cat'];
-	$place_id = $_POST['scene'];
-
+	
 	$ext = explode(".", $_FILES["file"]["name"]);
 	$extension = $ext[count($ext) - 1];
 	//print_r($_FILES);
@@ -93,8 +94,8 @@ if (isset($_POST['submit'])) {
 				$msg = "Веќе постои настан со истото име!";
 			} else {
 
-				$query1 = "INSERT INTO events(event_name, event_description, period_date, period_time, genre_id, small_img, big_img, scene)
-				 VALUES('$eventName','$des','$date','$time','$cat','$n','$n1', '$place_id') ";
+				$query1 = "INSERT INTO events(event_name, event_description, period_date, period_time, genre_id, small_img, big_img)
+				 VALUES('$eventName','$des','$date','$time','$cat','$n','$n1') ";
 				$row = mysqli_query($link, $query1);
 				if ($row) {
 					$msg = "Успешно додадовте претстава!";
@@ -127,32 +128,8 @@ if (isset($_POST['submit'])) {
 	$event = $row1['event_id'];
 
 	$num = 600;
-	//$type = "";
-	//$price = "";
-	//$auto = "";
 	
-	//dodavanje na bileti
-	for ($i = 1; $i <= 30; $i++) {
-		$ticket_row = $i;
-		for ($j = 1; $j <= 20; $j++) {
-			$ticket_seat = $j;
-			$code = rand_string(10);
-			$prices = mysqli_query($link, "SELECT * FROM tickets WHERE event_id LIKE '$eventID'");
-			$pr = mysqli_fetch_assoc($prices);
-			$price = $pr['price'];
-			//echo "ROW: ". $ticket_row . "SEAT: ". $ticket_seat;
-			$query1 = "INSERT INTO tickets(row, seat, code, event_id, price)
-				 VALUES('$ticket_row','$ticket_seat','$code','$event','$price') ";
-			$row = mysqli_query($link, $query1);
-			if (!$row) {
-				$msg = "Неуспешно додадени билети!";
-
-			}
-
-		}
-
-	}
-
+	
 }
 ?>
 
@@ -205,9 +182,10 @@ if (isset($_POST['submit'])) {
 <input type="text" class="form-control" name="date" id="date" value="<?php echo $date; ?>">
 <label for="time"> Времe: (hh:mm:ss)</label>
 <br/>
-<input type="text" class="form-control" name="price" id="price" value="<?php echo $price; ?>">
-<br/>
 <input type="text" class="form-control" name="time" id="time" value="<?php echo $time; ?>">
+<label for="time"> Цена на билет:</label>
+<br/>
+<input type="text" class="form-control" name="price" id="price" value="<?php echo $price; ?>">
 <label> Категорија:</label>
 <br/>
 <?php $query = "SELECT * FROM genres ";
@@ -224,11 +202,6 @@ if (isset($_POST['submit'])) {
 	print "</select><br/>";
 ?>
 
-<label> Сцена:</label>
-<br/>
-<input type="radio" name="scene" value="big" checked="true">Голема сцнеа
-<input type="radio" name="scene" value="small":> Мала сцена
-<br/>
 
 <label for="file" > Голема слика: </label>
 <input  type="file"  value="Избери Слика:" name="file" id="file"  />
