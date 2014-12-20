@@ -21,6 +21,13 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 		<!--<link rel="stylesheet" type="text/css" href="css/jquery.seat-charts.css">-->
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+	<style>
+		td{
+         height: 50px;
+         width: 50px;
+         border: 1px solid black;
+        }
+	</style>
 </head>
 
 <body>
@@ -88,12 +95,9 @@
 	
 	//create seats
 	
-	//create 11 seats in 1 row
-	for($i=0;$i<11;$i++){
-	  $hall[0][]=0;
-	}
+	
 	//create 7 seats in 2 row
-	for($i=0;$i<7;$i++){
+	for($i=0;$i<11;$i++){
 	  $hall[1][]=0;
 	}
 	//create 7 seats in 3 row
@@ -134,9 +138,9 @@
 	}
  
  
-  
  
- $conn=mysqli_connect('localhost','root','','e-tickets');
+ 
+ $conn=$link;
  $sql = "select * from tickets";
  $result= mysqli_query($conn,$sql);
  while($data = mysqli_fetch_assoc($result)){
@@ -146,7 +150,7 @@
  
  
  //draw hall
- for($i=0;$i<sizeof($hall);$i++){
+ for($i=1;$i<sizeof($hall);$i++){
     echo "<tr>";
 	for($j=0;$j<sizeof($hall[$i]);$j++){
 	if($hall[$i][$j]==1){
