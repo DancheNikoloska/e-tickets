@@ -23,7 +23,7 @@ function validateLogin($connection, $lozinka, $user) {
 	$salt = "baklava";
 	//$lozinka = md5($lozinka);
 	if (strlen($lozinka) > 0 && strlen($user) > 0) {
-		echo $lozinka;
+		//echo $lozinka;
 		$q = mysqli_query($connection, "SELECT * FROM users WHERE password='$lozinka' AND username='$user'");
 		if (mysqli_num_rows($q) > 0) {
 			return true;
