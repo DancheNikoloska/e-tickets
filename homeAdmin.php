@@ -57,7 +57,7 @@ if(!empty($_SESSION['username'])) {
 <?php 
 include_once 'database.php';
 //citanje od podatoci od baza broj na nastani
-$query=mysqli_query($link,"Select count(*) as novi_nastani from events");
+$query=mysqli_query($link,"Select count(*) as novi_nastani from events where active='1'");
 $n_nastani=mysqli_fetch_assoc($query);
 $br_nastani=$n_nastani['novi_nastani'];
 //citanje od podatoci od baza broj na korsnici

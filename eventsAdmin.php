@@ -1,11 +1,13 @@
 <?php 
+
 include_once 'database.php';
 if(isset($_GET['event_id'])) 
 {
 	$event_id=$_GET['event_id'];
-	$q=mysqli_query($link, "Delete from events where event_id=$event_id");
-	header('Location: eventsAdmin.php');
+	mysqli_query($link,"UPDATE events SET active = IF(active=0,1,0) where event_id=$event_id");
+	header("Location: eventsAdmin.php"); 
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,7 +125,7 @@ if(isset($_GET['event_id']))
   				<th class="text-center">Датум</th>
   				<th class="text-center">Продадени билети</th>
   				<th class="text-center">Измени настан</th>
-  				<th class="text-center">Избриши настан</th>
+  				<th class="text-center">Деактивирај настан</th>
   			</tr>
   			<?php 
   			include_once 'database.php';
@@ -151,29 +153,31 @@ if(isset($_GET['event_id']))
 			
 			if ($row['event_id']%2==0){
 			
-  			
+  				$ac=($row['active']==1 ? 'Деактивирај' : 'Активирај');
 	  			echo "<tr class='info'>" .
 	  			 "<td class=\"text-center\"> $row[event_name] </td>".
 	  			 "<td class=\"text-center\">$datum</td>".
 	  			 "<td class=\"text-center\">$sold_tickets / $total_tickets</td>".
 	  			 "<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[event_id]\">Измени</a></td>".
-	  			 "<td class=\"text-center\"><a href=\"eventsAdmin.php?event_id=$row[event_id]\" onclick=\"return confirm('Дали сте сигурни дека сакате да го избришете настанот?')\">Избриши</a>".
-	  			 "</td>";
+	  			 "<td class=\"text-center\"><a href=\"eventsAdmin.php?event_id=$row[event_id]\">". $ac;
+-  			"</a></td></tr>";
+	  			
   			
   			}
 
 			else{
+				$ac=($row['active']==1 ? 'Деактивирај' : 'Активирај');
   				echo "<tr>".
   				"<td class=\"text-center\"> $row[event_name]</td>".
   				"<td class=\"text-center\">$datum</td>".
   				"<td class=\"text-center\">$sold_tickets / $total_tickets</td>".
   				"<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[event_id]\">Измени</a></td>".
-  			"<td class=\"text-center\"><a href=\"eventsAdmin.php?event_id=$row[event_id]\" onclick=\"return confirm('Дали сте сигурни дека сакате да го избришете настанот?')\">Избриши</a>".
-	  			 "</td></tr>";
+  			"<td class=\"text-center\"><a href=\"eventsAdmin.php?event_id=$row[event_id]\">".  $ac;
+-  			"</a></td></tr>";
   			
 				}
-				
-			}
+				}
+			
 			?>
 			</table>
            

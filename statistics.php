@@ -33,7 +33,6 @@
     	a:hover,a:focus {text-decoration: none;}
     </style>
 
-   
 </head>
 
 <body>
@@ -114,7 +113,7 @@
 <!--toggle navigation -->
 <!--tabs-->
 <ul class="nav nav-tabs" role="tablist" id="myTab">
-  <li role="presentation"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Категории</a></li>
+  <li role="presentation"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Најгледани претстави</a></li>
  
   <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Временски период</a></li>
   <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Продадени билети</a></li>
@@ -123,64 +122,23 @@
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane" id="home">
   	<!-- tab1 -->  	
+ <div class="panel panel-default">
+                        <div class="panel-heading">
+                           Најгледани претстави
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="bar-example"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
   </div>
-  <div role="tabpanel" class="tab-pane" id="profile">
-  	<div style="margin-left:100px; margin-top: 20px;">
-  			<table style="border-collapse: separate; border-spacing: 5px;">
-  <tr>
-	<td width="26" height="20" align="center" valign="middle" bgcolor="red"  style="color:#FFFFFF;" title="Редица: 3 |   Столче: 7">1</td>
-
-    <td id="st8" width="36" height="20" align="center" valign="middle" bgcolor="#666666" onclick="func(st8)"  style="color:#FFFFFF; cursor:pointer;" title="Редица: 3 |   Столче: 8">8</td>
-
-    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"   style="color:#FFFFFF;cursor:pointer;" title="Редица: 3 |   Столче: 9">9</td>
-
-    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"   style="color:#FFFFFF;cursor:pointer;" title="Редица: 3 |   Столче: 10">10</td>
-
-    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"  style="cursor:pointer; color:#FFFFFF" title="Редица: 3 |   Столче: 11">11</td>
-
-    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666" style="cursor:pointer; color:#FFFFFF" title="Редица: 3 |   Столче: 12">12</td>
-    <td width="26" height="20" align="center" valign="middle" bgcolor="red"  style="color:#FFFFFF; cursor:pointer;" title="Редица: 3 |   Столче: 7">1</td>
-</tr>
-<tr>
-	<td width="26" height="20" align="center" valign="middle" bgcolor="red"  style="color:#FFFFFF; cursor:pointer;" title="Редица: 3 |   Столче: 7">2</td>
-
-    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"   style="color:#FFFFFF; cursor:pointer;" title="Редица: 3 |   Столче: 8">8</td>
-
-    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"   style="color:#FFFFFF;cursor:pointer;" title="Редица: 3 |   Столче: 9">9</td>
-
-    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"   style="color:#FFFFFF;cursor:pointer;" title="Редица: 3 |   Столче: 10">10</td>
-
-    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"  style="cursor:pointer; color:#FFFFFF" title="Редица: 3 |   Столче: 11">11</td>
-
-    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666" style="cursor:pointer; color:#FFFFFF" title="Редица: 3 |   Столче: 12">12</td>
-    <td width="26" height="20" align="center" valign="middle" bgcolor="red"  style="color:#FFFFFF; cursor:pointer;" title="Редица: 3 |   Столче: 7">2</td>
-
-</tr>
-<tr>
-	<td width="26" height="20" align="center" valign="middle" bgcolor="red"  style="color:#FFFFFF; cursor:pointer;" title="Редица: 3 |   Столче: 7">3</td>
-
-    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"   style="color:#FFFFFF; cursor:pointer;" title="Редица: 3 |   Столче: 8">8</td>
-
-    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"   style="color:#FFFFFF;cursor:pointer;" title="Редица: 3 |   Столче: 9">9</td>
-
-    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"   style="color:#FFFFFF;cursor:pointer;" title="Редица: 3 |   Столче: 10">10</td>
-
-    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666"  style="cursor:pointer; color:#FFFFFF" title="Редица: 3 |   Столче: 11">11</td>
-
-    <td width="36" height="20" align="center" valign="middle" bgcolor="#666666" style="cursor:pointer; color:#FFFFFF" title="Редица: 3 |   Столче: 12">12</td>
-    <td width="26" height="20" align="center" valign="middle" bgcolor="red"  style="color:#FFFFFF; cursor:pointer;" title="Редица: 3 |   Столче: 7">3</td>
-
-</tr>
-
-
-</table>
-</div>
-  </div>
+ 
   <div role="tabpanel" class="tab-pane" id="messages">
-  		<!-- tab3 -->
+  		<!-- tab2 -->
   </div>
   <div role="tabpanel" class="tab-pane active" id="settings">
-  		 <!-- diagram -->
+  		 <!-- tab3-->
             <br>
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -228,51 +186,27 @@
 
 <?php
 include_once 'database.php';
-//diagram 
-//oktomvri
-$d=mysqli_query($link, "select c.category_name, count(*) as sold from categories c, events e, event_details ed, tickets t, has_ticket ht, periods p where c.categoryId=e.category_id and e.eventId=ed.event_id and ed.period_id=p.periodId and t.details_id=ed.event_detailsId and t.ticket_id=ht.ticket_id and p.period_date between '2015-10-01' and '2015-11-01' group by c.category_name");
-$oktomvri = array("Спорт"=>"0", "Музика"=>"0", "Кино"=>"0", "Театар"=>"0");
-while($row=mysqli_fetch_assoc($d))
-{
-	if ($row['category_name']=='Спорт') {$oktomvri['Спорт']=$row['sold'];}
-	if ($row['category_name']=='Музика') {$oktomvri['Музика']=$row['sold'];}
-	if ($row['category_name']=='Кино') {$oktomvri['Кино']=$row['sold'];}
-	if ($row['category_name']=='Театар') {$oktomvri['Театар']=$row['sold'];}
-	
-}
-//noemvri
-$d=mysqli_query($link, "select c.category_name, count(*) as sold from categories c, events e, event_details ed, tickets t, has_ticket ht, periods p where c.categoryId=e.category_id and e.eventId=ed.event_id and ed.period_id=p.periodId and t.details_id=ed.event_detailsId and t.ticket_id=ht.ticket_id and p.period_date between '2015-11-01' and '2015-12-01' group by c.category_name");
-$noemvri = array("Спорт"=>"0", "Музика"=>"0", "Кино"=>"0", "Театар"=>"0");
-while($row=mysqli_fetch_assoc($d))
-{
-	if ($row['category_name']=='Спорт') {$noemvri['Спорт']=$row['sold'];}
-	if ($row['category_name']=='Музика') {$noemvri['Музика']=$row['sold'];}
-	if ($row['category_name']=='Кино') {$noemvri['Кино']=$row['sold'];}
-	if ($row['category_name']=='Театар') {$noemvri['Театар']=$row['sold'];}
-	
-}
-//dekemvri
-$d=mysqli_query($link, "select c.category_name, count(*) as sold from categories c, events e, event_details ed, tickets t, has_ticket ht, periods p where c.categoryId=e.category_id and e.eventId=ed.event_id and ed.period_id=p.periodId and t.details_id=ed.event_detailsId and t.ticket_id=ht.ticket_id and p.period_date between '2014-12-01' and '2015-01-01' group by c.category_name");
-$dekemvri = array("Спорт"=>"0", "Музика"=>"0", "Кино"=>"0", "Театар"=>"0");
-while($row=mysqli_fetch_assoc($d))
-{
-	if ($row['category_name']=='Спорт') {$dekemvri['Спорт']=$row['sold'];}
-	if ($row['category_name']=='Музика') {$dekemvri['Музика']=$row['sold'];}
-	if ($row['category_name']=='Кино') {$dekemvri['Кино']=$row['sold'];}
-	if ($row['category_name']=='Театар') {$dekemvri['Театар']=$row['sold'];}
-	
-}
-//januari
-$d=mysqli_query($link, "select c.category_name, count(*) as sold from categories c, events e, event_details ed, tickets t, has_ticket ht, periods p where c.categoryId=e.category_id and e.eventId=ed.event_id and ed.period_id=p.periodId and t.details_id=ed.event_detailsId and t.ticket_id=ht.ticket_id and p.period_date between '2015-01-01' and '2015-02-01' group by c.category_name");
-$januari = array("Спорт"=>"0", "Музика"=>"0", "Кино"=>"0", "Театар"=>"0");
-while($row=mysqli_fetch_assoc($d))
-{
-	if ($row['category_name']=='Спорт') {$januari['Спорт']=$row['sold'];}
-	if ($row['category_name']=='Музика') {$januari['Музика']=$row['sold'];}
-	if ($row['category_name']=='Кино') {$januari['Кино']=$row['sold'];}
-	if ($row['category_name']=='Театар') {$januari['Театар']=$row['sold'];}
-	
-}
+
+//get sold tickets for october
+$q3=mysqli_query($link, "select count(*) as sold from boughttickets bt, events e where bt.event_id=e.event_id and e.period_date > '2014-09-31' and e.period_date < '2014-11-01'");
+$row3=mysqli_fetch_assoc($q3);
+$soldOct=$row3['sold'];
+ //get sold tickets for november
+$q4=mysqli_query($link, "select count(*) as sold from boughttickets bt, events e where bt.event_id=e.event_id and e.period_date > '2014-10-31' and e.period_date < '2014-12-01'");
+$row4=mysqli_fetch_assoc($q4);
+$soldNov=$row4['sold'];
+//get sold tickets for december
+$q5=mysqli_query($link, "select count(*) as sold from boughttickets bt, events e where bt.event_id=e.event_id and e.period_date > '2014-11-31' and e.period_date < '2015-01-01'");
+$row5=mysqli_fetch_assoc($q5);
+$soldDec=$row5['sold'];
+//get sold tickets for january
+$q=mysqli_query($link, "select count(*) as sold from boughttickets bt, events e where bt.event_id=e.event_id and e.period_date > '2014-12-31' and e.period_date < '2015-02-01'");
+$row1=mysqli_fetch_assoc($q);
+$soldJan=$row1['sold'];
+//get sold tickets for february
+$q2=mysqli_query($link, "select count(*) as sold from boughttickets bt, events e where bt.event_id=e.event_id and e.period_date > '2015-01-31' and e.period_date < '2015-03-01'");
+$row2=mysqli_fetch_assoc($q2);
+$soldFev=$row2['sold'];
 ?>
 
   
@@ -280,38 +214,51 @@ Morris.Area({
         element: 'morris-area-chart',
         data: [{
             period: 'Октомври 2014',
-            sport: '<?php echo $oktomvri['Спорт']; ?>',
-            muzika: '<?php echo $oktomvri['Музика']; ?>',
-            kino: '<?php echo $oktomvri['Кино']; ?>',
-            teatar: '<?php echo $oktomvri['Театар']; ?>'
+            bileti: '<?php echo $soldOct; ?>',
+           
         }, {
             period: 'Ноември 2014',
-             sport: '<?php echo $noemvri['Спорт']; ?>',
-            muzika: '<?php echo $noemvri['Музика']; ?>',
-            kino: '<?php echo $noemvri['Кино']; ?>',
-            teatar: '<?php echo $noemvri['Театар']; ?>'
+             bileti: '<?php echo $soldNov; ?>',
+            
             
         }, {
             period: 'Декември 2014',
-            sport: '<?php echo $dekemvri['Спорт']; ?>',
-            muzika: '<?php echo $dekemvri['Музика']; ?>',
-            kino: '<?php echo $dekemvri['Кино']; ?>',
-            teatar: '<?php echo $dekemvri['Театар']; ?>'
+            bileti: '<?php echo $soldDec; ?>',
+            
         }, {
-            period: 'Јануари 2014',
-            sport: '<?php echo $januari['Спорт']; ?>',
-            muzika: '<?php echo $januari['Музика']; ?>',
-            kino: '<?php echo $januari['Кино']; ?>',
-            teatar: '<?php echo $januari['Театар']; ?>'
+            period: 'Јануари 2015',
+            bileti: '<?php echo $soldJan; ?>',
+           
+        },
+        {
+            period: 'Февруари 2014',
+            bileti: '<?php echo $soldFev;?>',
+           
         }],
         xkey: 'period',
-        ykeys: ['sport', 'muzika', 'kino','teatar'],
-        labels: ['Спорт', 'Музика', 'Кино','Театар'],
+        ykeys: ['bileti'],
+        labels: ['Вкупно продадени билети'],
         pointSize: 2,
         hideHover: 'auto',
         parseTime: false,
         resize: true
     });
+    
+    Morris.Bar({
+  element: 'bar-example',
+  data: [
+    { y: '2006', a: 100, b: 90 },
+    { y: '2007', a: 75,  b: 65 },
+    { y: '2008', a: 50,  b: 40 },
+    { y: '2009', a: 75,  b: 65 },
+    { y: '2010', a: 50,  b: 40 },
+    { y: '2011', a: 75,  b: 65 },
+    { y: '2012', a: 100, b: 90 }
+  ],
+  xkey: 'y',
+  ykeys: ['a', 'b'],
+  labels: ['Series A', 'Series B']
+});
 	</script>
     <script>
     	function func (st) {
@@ -319,6 +266,8 @@ Morris.Area({
 		  
 		}
     </script>
+
+  
 </html>
 
 

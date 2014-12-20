@@ -94,8 +94,8 @@ if (isset($_POST['submit'])) {
 				$msg = "Веќе постои настан со истото име!";
 			} else {
 
-				$query1 = "INSERT INTO events(event_name, event_description, period_date, period_time, genre_id, small_img, big_img)
-				 VALUES('$eventName','$des','$date','$time','$cat','$n','$n1') ";
+				$query1 = "INSERT INTO events(event_name, event_description, period_date, period_time, genre_id, small_img, big_img,active)
+				 VALUES('$eventName','$des','$date','$time','$cat','$n','$n1',1) ";
 				$row = mysqli_query($link, $query1);
 				if ($row) {
 					$msg = "Успешно додадовте претстава!";
