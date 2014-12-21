@@ -23,9 +23,18 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	<style>
 		td{
-         height: 50px;
-         width: 50px;
+         height: 20px;
+         width: 20px;
          border: 1px solid black;
+         border-radius: 7px;
+         font-size: 12px;
+         text-align: center;
+        }
+        table{
+        	border-spacing: 2px;
+            border-collapse: separate;
+            margin-left: 5%;
+            margin-top: 4%;
         }
 	</style>
 </head>
@@ -83,88 +92,173 @@
 					<?php 		}
 						*/ ?>
 					
-					<table cellspacing="10">
-						<?php
-  //ZA OVA  FUNKCIJA ====================
+					<table cellspacing="5" rowspacing="3">
+  <?php
+  
+  //Nadolu kodot e strasen :D, ama mora taka ===
   //create matrix
+  
+  function defineHall(){
     $hall= array();
-	//create 5 rows
-	for($i=0;$i<11;$i++){
+	//create rows
+	
+	for($i=1;$i<18;$i++){
 	  $hall[$i]=array();
 	}
+
 	
 	//create seats
 	
-	
-	//create 7 seats in 2 row
-	for($i=0;$i<11;$i++){
+	//1
+	for($i=0;$i<=18;$i++){
 	  $hall[1][]=0;
 	}
-	//create 7 seats in 3 row
-	for($i=0;$i<7;$i++){
+    //2
+	for($i=0;$i<=18;$i++){
 	  $hall[2][]=0;
 	}
-	//create 7 seats in 4 row
-	for($i=0;$i<7;$i++){
+	//3
+	for($i=0;$i<=18;$i++){
 	  $hall[3][]=0;
 	}
-	//create 2 seats in 5 row
-	for($i=0;$i<2;$i++){
+    
+	//4
+	for($i=0;$i<=18;$i++){
 	  $hall[4][]=0;
 	}
-	//create 7 seats in 6 row
-	for($i=0;$i<7;$i++){
+    
+	//5
+	for($i=0;$i<=18;$i++){
 	  $hall[5][]=0;
 	}
-	//create 4 seats in 7 row
-	for($i=0;$i<4;$i++){
+	
+	//6
+	for($i=0;$i<=18;$i++){
 	  $hall[6][]=0;
 	}
-	//create 2 seats in 8 row
-	for($i=0;$i<2;$i++){
+	
+	//7
+	for($i=0;$i<=20;$i++){
 	  $hall[7][]=0;
 	}
-	//create 9 seats in 9 row
-	for($i=0;$i<9;$i++){
+	//8
+	for($i=0;$i<=20;$i++){
 	  $hall[8][]=0;
 	}
-	//create 9 seats in 10 row
-	for($i=0;$i<9;$i++){
+	
+	//9
+	for($i=0;$i<=20;$i++){
 	  $hall[9][]=0;
 	}
-	//create 9 seats in 11 row
-	for($i=0;$i<9;$i++){
+	
+	//10
+	for($i=0;$i<=20;$i++){
 	  $hall[10][]=0;
 	}
+	
+	//11
+	for($i=0;$i<=20;$i++){
+	  $hall[11][]=0;
+	}
+	//12
+	for($i=0;$i<=20;$i++){
+	  $hall[12][]=0;
+	}
+	//13
+	for($i=0;$i<=20;$i++){
+	  $hall[13][]=0;
+	}
+	//14
+	for($i=0;$i<=20;$i++){
+	  $hall[14][]=0;
+	}
+	//15
+	for($i=0;$i<=20;$i++){
+	  $hall[15][]=0;
+	}
+	//16
+	for($i=0;$i<=20;$i++){
+	  $hall[16][]=0;
+	}
+	//17
+	for($i=0;$i<=20;$i++){
+	  $hall[17][]=0;
+	}
+	//18
+	for($i=0;$i<=20;$i++){
+	  $hall[18][]=0;
+	}
+	return $hall;
+}
  
+  $hall=defineHall();
  
- 
- 
- $conn=$link;
+
  $sql = "select * from tickets";
- $result= mysqli_query($conn,$sql);
+ $result= mysqli_query($link,$sql);
  while($data = mysqli_fetch_assoc($result)){
    $hall[$data["row"]][$data["seat"]]=1;
  }
 
  
- 
- //draw hall
+ function drawHall($hall){
  for($i=1;$i<sizeof($hall);$i++){
-    echo "<tr>";
-	for($j=0;$j<sizeof($hall[$i]);$j++){
-	if($hall[$i][$j]==1){
-	  echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"return false;\" style=\"background: red;\">";
+    echo "<tr style=\"margin-right:50%\">";
+	//spacing tr
+	if($i==7){
+	  echo "<tr style=\"height:10px\"></tr>";
+	  echo "<tr style=\"height:10px\"></tr>";
+	}
+	//spacing tr
+	if($i==15){
+	 echo "<tr style=\"height:10px;\"></tr>";
+	  echo "<tr style=\"height:10px\"></tr>";
+	}
+	for($j=1;$j<sizeof($hall[$i]);$j++){
+	
+	if($i<=6){
+	 //spacing td
+	 if($j==3){
+	   echo "<td style=\"border: white !important\"></td>";
+	   echo "<td style=\"border: white !important\"></td>";
+	 }
+	 //spacing td
+	 if($j==17){
+	   echo "<td style=\"border: white !important\"></td>";
+	   echo "<td style=\"border: white !important\"></td>";
+	 }
+	  if($hall[$i][$j]==1){
+	  echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"return false;\" style=\"background: red;\">$j";
 	   
 	  echo "</td>";
 	}else{
-	  echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"clickMe(this,".$i.",".$j.")\">";
+	  echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"clickMe(this,".$i.",".$j.")\">$j";
+	  
+	  echo "</td>";
+	  }
+	  
+	}else{
+	//spacing td
+	  if($j==1){
+	    echo "<td style=\"border: white !important\"></td>";
+	  }
+	   if($hall[$i][$j]==1){
+	  
+	  echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"return false;\" style=\"background: red;\">$j";
+	   
+	  echo "</td>";
+	}else{
+	  echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"clickMe(this,".$i.",".$j.")\">$j";
 	  
 	  echo "</td>";
 	  }
 	}
+	
+	}
 	echo "<tr>";
- }
+	
+ }}
+ drawHall($hall);
   ?>
 
   </table>
@@ -173,7 +267,11 @@
     //var xmlhttp = new XMLHttpRequest();
 	//xmlhttp.open("GET", "update_seat.php?row="+row+"&seat="+seat);
 	//xmlhttp.send();
-	element.style.background= 'red';
+	if(element.style.backgroundColor!='red'){
+	  element.style.backgroundColor='red';
+	}else{
+	  element.style.backgroundColor='white'
+	}
  };
 </script>
 					
