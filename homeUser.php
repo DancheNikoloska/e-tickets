@@ -71,7 +71,7 @@
 								$start_from = ($page-1) * $num_rec_per_page; 								
 
 							//selekcija na site aktivni nastani za prikazuvanje
-							$events=mysqli_query($link, "SELECT * FROM events LIMIT $start_from, $num_rec_per_page");
+							$events=mysqli_query($link, "SELECT * FROM events WHERE active LIKE 1 LIMIT $start_from, $num_rec_per_page");
 								while ($event=mysqli_fetch_assoc($events)) {
 									$eventID=$event['event_id'];	
 							?>
@@ -97,7 +97,7 @@
 					<ul class="pagination">										
 						
 						<?php //izbroj kolku zapisi ima vkupno vo tabelata
-							$rs_result = mysqli_query($link,"SELECT * FROM events"); //run the query
+							$rs_result = mysqli_query($link,"SELECT * FROM events WHERE active LIKE 1"); //run the query
 							$total_records = mysqli_num_rows($rs_result);  //count number of records
 							$total_pages = ceil($total_records / $num_rec_per_page); 
 						?>
