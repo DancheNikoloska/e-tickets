@@ -55,7 +55,7 @@
 								
                         ?>
 			<div class="thumbnail">
-                    <img class="img-responsive" src="http://placehold.it/800x300" alt=""/>
+                    <img class="img-responsive" src="images/<?php echo $event['big_img'].".jpg";?>" alt="http://placehold.it/800x300"/>
                     <div class="caption-full">
                         <h4 class="pull-right"><?php echo $price . "денари"; ?></h4>
                         <h4><a><?php echo $event['event_name']?></a></h4>

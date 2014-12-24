@@ -47,7 +47,7 @@
 							?>
 						<div class="col-sm-4 col-lg-4 col-md-4">
 							<div class="thumbnail">
-								<img src="http://placehold.it/320x150" alt="">
+								<img src="images/<?php echo $event['big_img'].".jpg";?>" alt="http://placehold.it/320x150" >
 								<div class="caption">
 									<!--<h4 class="pull-right">$24.99</h4>  &id=$id-->
 									<h4><a href='<?php echo "item.php?ev=$eventID&id=$id"?>'><?php echo $event['event_name'] ?></a></h4>

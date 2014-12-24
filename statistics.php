@@ -33,6 +33,7 @@
     	a:hover,a:focus {text-decoration: none;}
     </style>
 
+   
 </head>
 
 <body>
@@ -122,23 +123,15 @@
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane" id="home">
   	<!-- tab1 -->  	
- <div class="panel panel-default">
-                        <div class="panel-heading">
-                           Најгледани претстави
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div id="bar-example"></div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
   </div>
- 
+  <div role="tabpanel" class="tab-pane" id="profile">
+  	<!-- tab2 -->
+  </div>
   <div role="tabpanel" class="tab-pane" id="messages">
-  		<!-- tab2 -->
+  		<!-- tab3 -->
   </div>
   <div role="tabpanel" class="tab-pane active" id="settings">
-  		 <!-- tab3-->
+  		 <!-- diagram -->
             <br>
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -243,22 +236,6 @@ Morris.Area({
         parseTime: false,
         resize: true
     });
-    
-    Morris.Bar({
-  element: 'bar-example',
-  data: [
-    { y: '2006', a: 100, b: 90 },
-    { y: '2007', a: 75,  b: 65 },
-    { y: '2008', a: 50,  b: 40 },
-    { y: '2009', a: 75,  b: 65 },
-    { y: '2010', a: 50,  b: 40 },
-    { y: '2011', a: 75,  b: 65 },
-    { y: '2012', a: 100, b: 90 }
-  ],
-  xkey: 'y',
-  ykeys: ['a', 'b'],
-  labels: ['Series A', 'Series B']
-});
 	</script>
     <script>
     	function func (st) {
@@ -266,8 +243,6 @@ Morris.Area({
 		  
 		}
     </script>
-
-  
 </html>
 
 
