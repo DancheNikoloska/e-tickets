@@ -31,7 +31,11 @@
     <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <style>
     	a:hover,a:focus {text-decoration: none;}
+    	.highcharts-button{visibility: hidden;}
     </style>
+<script src="js/jquery.js"></script>
+<script src="js/highcharts1.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
 
    
 </head>
@@ -115,21 +119,25 @@
 <!--tabs-->
 <ul class="nav nav-tabs" role="tablist" id="myTab">
   <li role="presentation"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Најгледани претстави</a></li>
- 
-  <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Временски период</a></li>
+  <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Префериран драмски вид</a></li>
   <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Продадени билети</a></li>
 </ul>
 
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane" id="home">
-  	<!-- tab1 -->  	
-  </div>
-  <div role="tabpanel" class="tab-pane" id="profile">
-  	<!-- tab2 -->
+  	<!-- tab1 -->  
   </div>
   <div role="tabpanel" class="tab-pane" id="messages">
-  		<!-- tab3 -->
+  		<!-- tab2 -->
+  		<br>
+  		<div class="panel panel-default">
+  			<div class="panel-heading">
+                            Префериран драмски вид
+            </div>
+  		<div id="container" style="height: 400px; width: 800px"></div>	
+  		</div>
   </div>
+  
   <div role="tabpanel" class="tab-pane active" id="settings">
   		 <!-- diagram -->
             <br>
@@ -165,7 +173,7 @@
     
    
 </body>
-	<script src="js/jquery.js"></script>
+	
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/plugins/morris/raphael.min.js"></script>
     <script src="js/plugins/morris/morris.min.js"></script>
@@ -202,7 +210,22 @@ $row2=mysqli_fetch_assoc($q2);
 $soldFev=$row2['sold'];
 ?>
 
-  
+//pie chart data
+<?php 
+include_once 'database.php';
+$komedija=mysqli_query($link, "select count(*) as komedija from boughttickets bt, events e, genres g where bt.event_id=e.event_id and e.genre_id=g.id and g.name='Комедија'");
+$row1=mysqli_fetch_assoc($komedija);
+$kom=$row1['komedija'];
+$tragedija=mysqli_query($link, "select count(*) as tragedija from boughttickets bt, events e, genres g where bt.event_id=e.event_id and e.genre_id=g.id and g.name='Трагедија'");
+$row2=mysqli_fetch_assoc($tragedija);
+$tr=$row2['tragedija'];
+$tk=mysqli_query($link, "select count(*) as tk from boughttickets bt, events e, genres g where bt.event_id=e.event_id and e.genre_id=g.id and g.name='Трагикомедија'");
+$row3=mysqli_fetch_assoc($tk);
+$tkom=$row3['tk'];
+$drama=mysqli_query($link, "select count(*) as drama from boughttickets bt, events e, genres g where bt.event_id=e.event_id and e.genre_id=g.id and g.name='Драма'");
+$row4=mysqli_fetch_assoc($drama);
+$dr=$row4['drama'];
+?>
 Morris.Area({
         element: 'morris-area-chart',
         data: [{
@@ -243,6 +266,50 @@ Morris.Area({
 		  
 		}
     </script>
+    <script>
+$(function () {
+
+    $(document).ready(function () {
+
+        // Build the chart
+        $('#container').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: ''
+            },
+            tooltip: {
+                pointFormat: '<b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: false,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: '',
+                data: [
+                    ['Комедија',   <?php echo $kom; ?>],
+                    ['Трагедија',       <?php echo $tr;?>],
+                    ['Трагикомедија',    <?php echo $tkom;?>],
+                    ['Драма',    <?php echo $dr;?>]
+                    
+                ]
+            }]
+        });
+    });
+
+});
+</script>
 </html>
 
 
