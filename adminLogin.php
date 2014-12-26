@@ -1,11 +1,10 @@
  <?php
 session_start();
 $error='';
-//logiranje na doministrator
+//logiranje na administrator
 //prvo mora da provereme dali nekoj e veke najaven, ako e prenasocuvame
 if (isset($_SESSION['username'])) {
-	//tuka namesto homepage ke se ide na logout ili ke se jave "you are logged in as Drn Drnko do you want to log out"
-	//header("Location: homepage.html");
+	
 	$flag = 1;
 } else {
 	$flag = 0;

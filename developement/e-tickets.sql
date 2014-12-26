@@ -45,7 +45,8 @@ CREATE TABLE IF NOT EXISTS `buyback` (
 `buyback_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `ticket_id` int(11) NOT NULL,
-  `event_id` int(11) NOT NULL
+  `event_id` int(11) NOT NULL,
+  `time_reserved` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 

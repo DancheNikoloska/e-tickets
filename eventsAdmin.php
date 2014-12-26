@@ -1,5 +1,23 @@
 <?php 
 
+
+session_start();
+
+if(!empty($_SESSION['username'])) {
+
+   $user=$_SESSION['username'];
+   $_SESSION["type"]="admin";
+   $flag=1;
+
+}else{
+
+  header("Location: adminLogin.php");
+   
+  $flag=0;
+
+}
+
+
 include_once 'database.php';
 if(isset($_GET['event_id'])) 
 {
@@ -75,6 +93,17 @@ if(isset($_GET['event_id']))
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
+                    <?php	if ($flag==1){ ?>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                        
+                            <a href="logout.php">
+                                Logout
+                            </a>
+                        <?php   } ?>
+                          
+                        </li>
+                    </ul>
                     
                 </li>
                 <!-- /.dropdown -->

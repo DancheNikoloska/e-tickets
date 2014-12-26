@@ -9,7 +9,7 @@ if(!empty($_SESSION['username'])) {
 
 }else{
 
-  $user="Најавете се!";
+  header("Location: adminLogin.php");
    
   $flag=0;
 
@@ -94,12 +94,7 @@ $total=$t['total'];
             <!-- /.navbar-header -->
 	
             <ul class="nav navbar-top-links navbar-right">
-            	<li>
-            		<?php if ($user=="Најавете се!")
-                	echo '<a href="adminLogin.php">Најавете се!</a>';
-					else
-                	echo '<a href="#">'. $user .'</a>'; ?>
-            	</li>
+            	
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>

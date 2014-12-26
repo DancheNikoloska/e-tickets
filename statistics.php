@@ -1,4 +1,20 @@
+<?php
+session_start();
 
+if(!empty($_SESSION['username'])) {
+
+   $user=$_SESSION['username'];
+   $_SESSION["type"]="admin";
+   $flag=1;
+
+}else{
+
+  header("Location: adminLogin.php");
+   
+  $flag=0;
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,6 +88,17 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
+                    <?php	if ($flag==1){ ?>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                        
+                            <a href="logout.php">
+                                Logout
+                            </a>
+                        <?php   } ?>
+                          
+                        </li>
+                    </ul>
                     
                 </li>
                 <!-- /.dropdown -->
@@ -126,6 +153,13 @@
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane" id="home">
   	<!-- tab1 -->  
+  	<br>
+  		<div class="panel panel-default">
+  			<div class="panel-heading">
+  				Најгледани претстави
+  				</div>
+  	<div id="bar" style="width: 800px; height: 400px;"></div>
+  </div>
   </div>
   <div role="tabpanel" class="tab-pane" id="messages">
   		<!-- tab2 -->
@@ -226,6 +260,21 @@ $drama=mysqli_query($link, "select count(*) as drama from boughttickets bt, even
 $row4=mysqli_fetch_assoc($drama);
 $dr=$row4['drama'];
 ?>
+
+<!--horizontal bar data-->
+<?php 
+$totalevents=mysqli_query($link,"select e.event_name as name, count(*) as tickets from events e, boughttickets bt where e.event_id=bt.event_id group by e.event_name order by tickets desc");
+//$rowEvents=mysqli_fetch_assoc($totalevents);
+$arrayEvents=array();
+$arrayTickets=array();
+while($row=mysqli_fetch_assoc($totalevents))
+{
+	array_push($arrayEvents,$row['name']);
+	array_push($arrayTickets,$row['tickets']);
+}
+
+?>
+
 Morris.Area({
         element: 'morris-area-chart',
         data: [{
@@ -309,6 +358,60 @@ $(function () {
     });
 
 });
+</script>
+<script>
+	$(function () {
+    $('#bar').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: ''
+        },
+        tooltip: {
+                pointFormat: '<b></b>'
+              },
+        xAxis: {
+            categories: [
+            <?php 
+            $count = count($arrayEvents);
+			for ($i = 0; $i < $count; $i++) {
+			echo "'".$arrayEvents[$i]."'".", ";
+			}
+            ?>
+            ],
+            
+        },
+        yAxis: {
+        	min:0,
+           tickInterval: 1            
+        },
+       
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: false
+                }
+            }
+        },
+        
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Вкупно продадени билети',
+            data: [<?php 
+            $count = count($arrayTickets);
+			for ($i = 0; $i < $count; $i++) {
+			echo $arrayTickets[$i].", ";
+			}
+            
+            ?>]
+          				
+        }]
+    });
+});
+
 </script>
 </html>
 
