@@ -23,7 +23,7 @@ if (isset($_POST['sub'])) {
 		$q = mysqli_query($link, "SELECT * FROM users WHERE username='$user'");
 		if ($q) {
 			$row = mysqli_fetch_assoc($q);
-			$_SESSION['user_id']=$row["id"];
+			$_SESSION['user_id']=$row["user_id"];
 			//$_SESSION['username']=$row["username"];			
 			header('Location: homeUser.php');
 			//echo "Welcome " . $_SESSION['username'];

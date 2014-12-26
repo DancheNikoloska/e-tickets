@@ -10,6 +10,9 @@
     <meta name="author" content="">
 
     <title>E-Ticket Shop</title>
+    
+    <!-- jquery -->
+    <script src="js/jquery.js" ></script>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +38,36 @@
             border-collapse: separate;
             margin-left: 5%;
             margin-top: 4%;
+            cursor: pointer;
+           
         }
+        .FixedHeightContainer
+		{
+			margin-top: -41%;
+			margin-left: 55%;
+  			float:left;
+  			height: 470px;
+  			width:260px; 
+  			padding:3px; 
+    		background:#d9534f;
+    		border-radius: 4px;
+		}
+		.Content
+		{
+  			height:370px;
+   			overflow:auto;
+    		background:#fff;
+		}
+		.items{
+			height: 50px;
+			margin: 5px;
+			border-radius: 3px;
+			border: 3px solid grey;
+			vertical-align: middle;
+		}
+		.items_content{
+			padding-top: 0.8em;
+		}
 	</style>
 </head>
 
@@ -43,7 +75,7 @@
 
     <!-- Navigation -->
     <?php session_start();
-	if(!isset($_SESSION['username'])){
+	if(!isset($_SESSION['username']) || !isset($_REQUEST["event_id"])){
 		echo "<script type='text/javascript'>alert('Морате да бидете најавени за да одберете место');</script>";
 		header('Location: login.php');
 		
@@ -59,38 +91,6 @@
             <div class="col-md-9">
            	   <div class="wrapper">
 					<div class="container">
-						<!--<div id="seat-map" class="col-md-6">
-							<div class="front-indicator">Front</div>
-					
-						</div>
-						<div class="booking-details col-md-3">
-							<h2>Booking Details</h2>
-					
-							<h3> Selected Seats (<span id="counter">0</span>):</h3>
-							<ul id="selected-seats"></ul>
-					
-							Total: <b>$<span id="total">0</span></b>
-					
-							<button class="checkout-button">Checkout &raquo;</button>
-					
-							<div id="legend"></div>
-						</div> -->
-						
-						<?php /*
-							for($i=1;$i<=20;$i++){
-								for($j=1;$j<=5;$j++){
-									?>
-									<div class="first-class col-sm-offset">
-									<span>
-									<input type="checkbox">
-									<?php echo $j+($i); ?>
-									</span>
-									</div>
-					 <?php			} ?>
-					 
-					<br />			
-					<?php 		}
-						*/ ?>
 					
 					<table cellspacing="5" rowspacing="3">
   <?php
@@ -194,10 +194,15 @@
   $hall=defineHall();
  
 
- $sql = "select * from tickets";
+ $sql = "select * from tickets where event_id=".$_REQUEST["event_id"]." and ticket_id in (select ticket_id from boughttickets)";
  $result= mysqli_query($link,$sql);
  while($data = mysqli_fetch_assoc($result)){
    $hall[$data["row"]][$data["seat"]]=1;
+ }
+ $sql = "select * from tickets where event_id=".$_REQUEST["event_id"]." and ticket_id in (select ticket_id from buyback)";
+ $result= mysqli_query($link,$sql);
+ while($data = mysqli_fetch_assoc($result)){
+   $hall[$data["row"]][$data["seat"]]=2;
  }
 
  
@@ -228,10 +233,15 @@
 	   echo "<td style=\"border: white !important\"></td>";
 	 }
 	  if($hall[$i][$j]==1){
-	  echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"return false;\" style=\"background: red;\">$j";
+	  echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"return false;\" style=\"background: grey;\">$j";
 	   
 	  echo "</td>";
-	}else{
+	}else if($hall[$i][$j]==2){
+		echo "<td row=\"".$i."\" style=\"background: red;\" seat=\"".$j."\" onclick=\"clickMe(this,".$i.",".$j.")\">$j";
+	  
+	    echo "</td>";
+	}
+	else{
 	  echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"clickMe(this,".$i.",".$j.")\">$j";
 	  
 	  echo "</td>";
@@ -242,12 +252,19 @@
 	  if($j==1){
 	    echo "<td style=\"border: white !important\"></td>";
 	  }
+	  
+	  
 	   if($hall[$i][$j]==1){
 	  
-	  echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"return false;\" style=\"background: red;\">$j";
+	  echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"return false;\" style=\"background: grey;\">$j";
 	   
 	  echo "</td>";
-	}else{
+	}else if($hall[$i][$j]==2){
+		echo "<td row=\"".$i."\" style=\"background: red;\" seat=\"".$j."\" onclick=\"clickMe(this,".$i.",".$j.")\">$j";
+	  
+	    echo "</td>";
+	}
+	else{
 	  echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"clickMe(this,".$i.",".$j.")\">$j";
 	  
 	  echo "</td>";
@@ -262,6 +279,37 @@
   ?>
 
   </table>
+  <div class="FixedHeightContainer">
+   <h2>Избрани седишта</h2>
+    <div class="Content" id="contentTickets">
+      <?php
+        //get user
+         $q = mysqli_query($link, "SELECT * FROM users WHERE username='".$_SESSION["username"]."'");
+		
+		 $row = mysqli_fetch_assoc($q);
+		 $_SESSION['user_id']=$row["user_id"];
+		
+		 
+        
+        
+		$sql = ("SELECT * FROM buyback,tickets where buyback.ticket_id=tickets.ticket_id and buyback.user_id=".$_SESSION["user_id"]." and tickets.event_id=".$_REQUEST["event_id"]);
+         $result= mysqli_query($link,$sql);
+		 $total=0;
+         while($data = mysqli_fetch_assoc($result)){
+           echo "<div id=".$data["row"]."-".$data["seat"]." class=\"items\">";
+			echo "<div class=\"items_content\">";
+			 echo "<span>&nbsp&nbsp&nbsp&nbspРед:".$data["row"]."&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>";
+			 echo "Седиште:". $data["seat"]; 
+			 echo "<span style=\"float:right;height:40px;width: 30px;\" class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>";
+		    echo "</div>";
+		   echo "</div>";
+		   $total+=150;
+        }
+      ?>
+    </div>
+    <h4 style="margin-top: 5px;padding-left: 10px;" >Вкупно: <span id="totalPrice" style="float: right;"><?php echo $total."ден."; ?></span></h4>
+    
+  </div>
   <script>
  function clickMe(element,row,seat){
     //var xmlhttp = new XMLHttpRequest();
@@ -269,8 +317,42 @@
 	//xmlhttp.send();
 	if(element.style.backgroundColor!='red'){
 	  element.style.backgroundColor='red';
+	  //add in buyback database
+	  var xmlhttp = new XMLHttpRequest();
+	  var tmp1= ("update_seat.php?row="+row+"&seat="+seat+"&user_id="+<?php echo $_SESSION['user_id']; ?>+"&event_id="+<?php echo $_REQUEST["event_id"]; ?>+"&status=1");
+	  xmlhttp.open("GET", tmp1);
+	  
+	  xmlhttp.send();
+	  //update right div
+	  var ticket=$(
+	    "<div id="+row+"-"+seat+" class=\"items\">"
+			+"<div class=\"items_content\">"+
+			"<span>&nbsp&nbsp&nbsp&nbspРед:"+row+"&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>"
+			+"Седиште:" +seat+
+			"<span style=\"float:right;height:40px;width: 30px;\" class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>"
+		    +"</div>"
+		   +"</div>"
+	  );
+	  $("#contentTickets").append(ticket);
+	  //update vkupno
+	  var val1=parseInt($("#totalPrice").text());
+	  val1+=150;
+	  document.getElementById("totalPrice").innerText=(val1+"ден.");
 	}else{
-	  element.style.backgroundColor='white'
+	  
+	  element.style.backgroundColor='white';
+	  //remove from buyback database
+	  var xmlhttp = new XMLHttpRequest();
+	  var tmp= ("update_seat.php?row="+row+"&seat="+seat+"&user_id="+String(<?php echo $_SESSION['user_id']; ?>)+"&event_id="+String(<?php echo $_REQUEST["event_id"]; ?>)+"&status=0");
+	  xmlhttp.open("GET", tmp);
+	  alert(tmp);
+	  xmlhttp.send();
+	  //update right div
+	  $("#"+row+"-"+seat).remove();
+	  //update vkupno
+	  var val1=parseInt($("#totalPrice").text());
+	  val1-=150;
+	  document.getElementById("totalPrice").innerText=(val1+"ден.");
 	}
  };
 </script>
