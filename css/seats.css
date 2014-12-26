@@ -1,0 +1,50 @@
+       td{
+         height: 20px;
+         width: 20px;
+         border: 1px solid black;
+         border-radius: 7px;
+         font-size: 12px;
+         text-align: center;
+        }
+        table{
+        	border-spacing: 2px;
+            border-collapse: separate;
+            margin-left: 5%;
+            margin-top: 4%;
+            cursor: pointer;
+           
+        }
+        .FixedHeightContainer
+		{
+			margin-top: -41%;
+			margin-left: 55%;
+  			float:left;
+  			height: 470px;
+  			width:260px; 
+  			padding:3px; 
+    		background:#d9534f;
+    		border-radius: 4px;
+		}
+		.Content
+		{
+  			height:370px;
+   			overflow:auto;
+    		background:#fff;
+		}
+		.items{
+			height: 50px;
+			margin: 5px;
+			border-radius: 3px;
+			border: 3px solid grey;
+			vertical-align: middle;
+		}
+		.items_content{
+			padding-top: 0.8em;
+		}
+		#legend{
+			display:inline-table;
+			width: 20%;
+			position: relative;
+			top: -19em;
+			left: 7.8em;
+		}

@@ -30,49 +30,7 @@
 		<!--<link rel="stylesheet" type="text/css" href="css/jquery.seat-charts.css">-->
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	<style>
-		td{
-         height: 20px;
-         width: 20px;
-         border: 1px solid black;
-         border-radius: 7px;
-         font-size: 12px;
-         text-align: center;
-        }
-        table{
-        	border-spacing: 2px;
-            border-collapse: separate;
-            margin-left: 5%;
-            margin-top: 4%;
-            cursor: pointer;
-           
-        }
-        .FixedHeightContainer
-		{
-			margin-top: -41%;
-			margin-left: 55%;
-  			float:left;
-  			height: 470px;
-  			width:260px; 
-  			padding:3px; 
-    		background:#d9534f;
-    		border-radius: 4px;
-		}
-		.Content
-		{
-  			height:370px;
-   			overflow:auto;
-    		background:#fff;
-		}
-		.items{
-			height: 50px;
-			margin: 5px;
-			border-radius: 3px;
-			border: 3px solid grey;
-			vertical-align: middle;
-		}
-		.items_content{
-			padding-top: 0.8em;
-		}
+		@import url('css/seats.css');
 	</style>
 </head>
 
@@ -86,10 +44,8 @@
 		
 	}
 	include_once 'navBar.php';
- ?>		
-    <div id="legend">
-    	
-    </div>	
+ ?>	 
+   
     <!-- Page Content -->
     <div class="container">
 
@@ -374,6 +330,15 @@
 
    </div>
     <!-- /.container -->
+     <div id="legend">
+    	<div style="display:inline-block;height: 20px;width: 20px;background: grey;border-radius: 5px;margin-right:3px;"></div>
+    	 <span>Зафатени</span><br>
+    	<div style="display:inline-block;height: 20px;width: 20px;background: red;border-radius: 5px;margin-right:3px;"></div>
+    	 <span>Резервирани од Вас*</span> <br>
+    	
+    	 <hr style="width: 245px; margin: 2px;">
+    	<div style="color: red;margin-top: 7px;width: 10%;display:inline;">*Резервациите се бришат по 30 минути доколку билетот не се купи.</div>
+    </div>	
 
     <div class="container">
         <hr>
