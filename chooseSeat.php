@@ -1,6 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <?php include_once 'database.php'?>
+<?php
+//delete all reservations older than 30 min
+ include_once 'delete_reservations.php';
+?>
 <head>
 
     <meta charset="utf-8">
@@ -345,7 +350,7 @@
 	  var xmlhttp = new XMLHttpRequest();
 	  var tmp= ("update_seat.php?row="+row+"&seat="+seat+"&user_id="+String(<?php echo $_SESSION['user_id']; ?>)+"&event_id="+String(<?php echo $_REQUEST["event_id"]; ?>)+"&status=0");
 	  xmlhttp.open("GET", tmp);
-	  alert(tmp);
+	  //alert(tmp);
 	  xmlhttp.send();
 	  //update right div
 	  $("#"+row+"-"+seat).remove();
