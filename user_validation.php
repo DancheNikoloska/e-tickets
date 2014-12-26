@@ -1,7 +1,11 @@
 <?php
+
+//funkcii za validacija na vlezovite pri logiranje i registracija na koisnikot
+
+
+//se validira e-meil
 function validateEmail($connection, $email) {
 	
-	//funkcii za validacija na vlezovite pri logiranje
 	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 		return false;
 	} else {
@@ -19,6 +23,8 @@ function validateEmail($connection, $email) {
 		return false;
 	}
 }
+
+//se poveruva dali korisnikot vnel tocni podtoci
 function validateLogin($connection, $lozinka, $user) {
 	$salt = "baklava";
 	//$lozinka = md5($lozinka);
@@ -32,6 +38,8 @@ function validateLogin($connection, $lozinka, $user) {
 		}
 	}
 }
+
+//se proveruva dali e logiran adminot
 function validateLoginAdmin($connection, $lozinka, $user) {
 	//$salt = "baklava";
 	//$lozinka = md5($salt . $lozinka);
@@ -44,6 +52,8 @@ function validateLoginAdmin($connection, $lozinka, $user) {
 		}
 	}
 }
+
+//se validira vneseniot password, dali e dovolno kompliciran
 function validatePassword($connection, $lozinka) {
 	if (strlen($lozinka) < 8) {
 		return false;
@@ -58,6 +68,8 @@ function validatePassword($connection, $lozinka) {
 		return true;
 	}
 }
+
+//se proveruva dali veke postoi korisnicko ime
 function validateUsername($connection, $user) {
 	$user = htmlspecialchars($user, ENT_QUOTES, 'UTF-8');
 	if (strlen($user) > 0) {
@@ -75,35 +87,9 @@ function validateUsername($connection, $user) {
 		return false;
 	}
 }
+
+//se proveruva dali korisnikot e admin
 function isAdmin($connection, $username) {
-	$username = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
-	if (strlen($username) > 0) {
-		$q = mysqli_query($connection, "SELECT * FROM users WHERE username='$username'");
-		$row = mysql_fetch_assoc($q);
-		if ($row['role_type'] == 'admin') {
-			return true;
-		} else {
-			return false;
-		}
-	} else {
-		return false;
-	}
-}
-function isProfesor($connection, $username) {
-	$username = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
-	if (strlen($username) > 0) {
-		$q = mysqli_query($connection, "SELECT * FROM USERS WHERE username='$username'");
-		$row = mysql_fetch_assoc($q);
-		if ($row['role_type'] == 'admin') {
-			return true;
-		} else {
-			return false;
-		}
-	} else {
-		return false;
-	}
-}
-function isStudent($connection, $username) {
 	$username = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
 	if (strlen($username) > 0) {
 		$q = mysqli_query($connection, "SELECT * FROM users WHERE username='$username'");
