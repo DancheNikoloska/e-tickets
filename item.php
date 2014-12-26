@@ -64,7 +64,7 @@
                     </div>
                     
                     <div class="col-md-4 pull-right"  >
-                        <h3> <a class="btn btn-info" href="chooseSeat.php">Продолжи со одбирање место</a></h3>
+                        <h3> <a class="btn btn-info" href="chooseSeat.php?event_id=<?php echo $event['event_id'];?>">Продолжи со одбирање место</a></h3>
                     </div>  
  
                 </div>	

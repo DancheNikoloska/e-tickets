@@ -86,7 +86,10 @@
 		
 	}
 	include_once 'navBar.php';
- ?>			
+ ?>		
+    <div id="legend">
+    	
+    </div>	
     <!-- Page Content -->
     <div class="container">
 
