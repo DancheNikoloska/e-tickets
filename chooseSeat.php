@@ -44,6 +44,13 @@
 		
 	}
 	include_once 'navBar.php';
+	
+	//ensure user_id is in session
+	  $q = mysqli_query($link, "SELECT * FROM users WHERE username='".$_SESSION["username"]."'");
+		
+		 $row = mysqli_fetch_assoc($q);
+		 $_SESSION['user_id']=$row["user_id"];
+		
  ?>	 
    
     <!-- Page Content -->
@@ -157,16 +164,25 @@
  
   $hall=defineHall();
  
-
+ //get bought tickets
  $sql = "select * from tickets where event_id=".$_REQUEST["event_id"]." and ticket_id in (select ticket_id from boughttickets)";
  $result= mysqli_query($link,$sql);
  while($data = mysqli_fetch_assoc($result)){
    $hall[$data["row"]][$data["seat"]]=1;
  }
- $sql = "select * from tickets where event_id=".$_REQUEST["event_id"]." and ticket_id in (select ticket_id from buyback)";
+ 
+ //get tickets reserved by the same user
+ $sql = "select * from tickets where event_id=".$_REQUEST["event_id"]." and ticket_id in (select ticket_id from buyback where user_id=".$_SESSION["user_id"].")";
  $result= mysqli_query($link,$sql);
  while($data = mysqli_fetch_assoc($result)){
    $hall[$data["row"]][$data["seat"]]=2;
+ }
+ 
+ //get tickets reserved by another user
+ $sql = "select * from tickets where event_id=".$_REQUEST["event_id"]." and ticket_id not in (select ticket_id from buyback where user_id=".$_SESSION["user_id"].") and ticket_id in (select ticket_id from buyback)";
+ $result= mysqli_query($link,$sql);
+ while($data = mysqli_fetch_assoc($result)){
+   $hall[$data["row"]][$data["seat"]]=3;
  }
 
  
@@ -205,6 +221,11 @@
 	  
 	    echo "</td>";
 	}
+	else if($hall[$i][$j]==3){
+	  	echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"return false;\" style=\"background: grey;\">$j";
+	  
+	    echo "</td>";
+	}
 	else{
 	  echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"clickMe(this,".$i.",".$j.")\">$j";
 	  
@@ -225,6 +246,11 @@
 	  echo "</td>";
 	}else if($hall[$i][$j]==2){
 		echo "<td row=\"".$i."\" style=\"background: red;\" seat=\"".$j."\" onclick=\"clickMe(this,".$i.",".$j.")\">$j";
+	  
+	    echo "</td>";
+	}
+	else if($hall[$i][$j]==3){
+	  	echo "<td row=\"".$i."\" seat=\"".$j."\" onclick=\"return false;\" style=\"background: grey;\">$j";
 	  
 	    echo "</td>";
 	}
@@ -264,7 +290,7 @@
 			echo "<div class=\"items_content\">";
 			 echo "<span>&nbsp&nbsp&nbsp&nbspРед:".$data["row"]."&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>";
 			 echo "Седиште:". $data["seat"]; 
-			 echo "<span style=\"float:right;height:40px;width: 30px;\" class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>";
+			 echo "<span onclick=\"deleteItem(".$data["seat"].",".$data["row"].",".$_REQUEST["event_id"].")\" style=\"cursor:pointer;float:right;height:40px;width: 30px;\" class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>";
 		    echo "</div>";
 		   echo "</div>";
 		   $total+=150;
@@ -275,6 +301,14 @@
     
   </div>
   <script>
+ function deleteItem(seat,row,event){
+ 	var xmlhttp = new XMLHttpRequest();
+	  var tmp= ("update_seat.php?row="+row+"&seat="+seat+"&user_id="+String(<?php echo $_SESSION['user_id']; ?>)+"&event_id="+String(<?php echo $_REQUEST["event_id"]; ?>)+"&status=0");
+	  xmlhttp.open("GET", tmp);
+	  //alert(tmp);
+	  xmlhttp.send();
+	 location.reload();
+ }
  function clickMe(element,row,seat){
 
 	if(element.style.backgroundColor!='red'){
@@ -291,7 +325,7 @@
 			+"<div class=\"items_content\">"+
 			"<span>&nbsp&nbsp&nbsp&nbspРед:"+row+"&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>"
 			+"Седиште:" +seat+
-			"<span style=\"float:right;height:40px;width: 30px;\" class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>"
+			"<span onclick=\"deleteItem("+seat+","+row+","+<?php echo $_REQUEST["event_id"];?>+")\" style=\"cursor:pointer;float:right;height:40px;width: 30px;\" class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>"
 		    +"</div>"
 		   +"</div>"
 	  );
@@ -337,7 +371,9 @@
     	 <hr style="width: 245px; margin: 2px;">
     	<div style="color: red;margin-top: 7px;width: 10%;display:inline;">*Резервациите се бришат по 30 минути доколку билетот не се купи.</div>
     </div>	
-
+    
+    <a href="shoppingCart.php" style="width: 10em;color: #222222;font-weight:bold; float: right; margin-right: 107px;margin-top: 5px;" class="btn btn-danger">Купи</a>
+    
     <div class="container">
         <hr>
         <!-- Footer -->
