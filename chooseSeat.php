@@ -276,11 +276,9 @@
   </div>
   <script>
  function clickMe(element,row,seat){
-    //var xmlhttp = new XMLHttpRequest();
-	//xmlhttp.open("GET", "update_seat.php?row="+row+"&seat="+seat);
-	//xmlhttp.send();
+
 	if(element.style.backgroundColor!='red'){
-	  element.style.backgroundColor='red';
+	  element.style.backgroundColor="red";
 	  //add in buyback database
 	  var xmlhttp = new XMLHttpRequest();
 	  var tmp1= ("update_seat.php?row="+row+"&seat="+seat+"&user_id="+<?php echo $_SESSION['user_id']; ?>+"&event_id="+<?php echo $_REQUEST["event_id"]; ?>+"&status=1");
