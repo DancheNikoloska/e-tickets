@@ -7,7 +7,7 @@
                   <div class="span6 inner-span">
                         <!--Demo Product details -->
                         <table>
-                        <tr><h3> DIGITAL SLR CAMERA </h3></tr>
+                        <tr><h3>  </h3></tr>
                         <tr><img src="img/camera.jpg" width="300" height="250"/></tr>
                         <tr><td><p class="lead"> Buyer Credentials:</p></td></tr>
                         <tr><td>Email-id:&nbsp;&nbsp;&nbsp;<input type="text" id="buyer_email" name="buyer_email" readonly></input> </td></tr>

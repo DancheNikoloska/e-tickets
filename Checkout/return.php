@@ -144,10 +144,10 @@
     			<p>Transaction ID: <?php  echo($transactionId);?> </p>
     			<p>Transaction Type: <?php  echo($transactionType);?> </p>
     			<p>Payment Total Amount: <?php  echo($amt);?> </p>
-    			<p>Currency Code: <?php  echo($currencyCode);?> </p>
+    			<p>Currency Code: <?php  echo"MKD";?> </p>
     			<p>Payment Status: <?php  echo($paymentStatus);?> </p>
     			<p>Payment Type: <?php  echo($paymentType);?> </p>
-    			<h3> Click <a href='index.php'>here </a> to return to Home Page</h3>
+    			<h3> Click <a href='../homeUser.php'>here </a> to return to Home Page</h3>
     			</div>
     		</span>
     		<span class="span3">
