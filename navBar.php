@@ -17,6 +17,7 @@
 						<?php //proverka za najaven korsnik 
 						if ($flag)
 						{
+							echo "<li><a class='glyphicon glyphicon-shopping-cart' href='shoppingCart.php'></a></li>";
 							echo "<li><a href='userProfile.php'><span style=color:#999999 >Најавени сте како</span> <span style=color:#31DEF5;> $_SESSION[username]</span></a></li>";
 							echo "<li><a href='logout.php'>Одјави се</a></li>";
 						} 
