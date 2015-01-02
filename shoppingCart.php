@@ -29,7 +29,6 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-8">
-					<form >
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								<div class="panel-title">
@@ -110,19 +109,25 @@
 								
 							<div class="panel-footer">
 								<div class="row text-center">
-									<div class="col-xs-9">										
+									<div class="col-xs-8">										
 										<!-- suma na cenite na igrite -->
 										<h4 class="text-right"><p id="total">Вкупно: <?php echo $totalPrice; ?> ден.</p></h4>							
 									</div>
-									<div class="col-xs-3">									
+									<div class="col-xs-4">									
 										 <!-- da gi brise site igri od sesija i da izvesti oti e izvrsena simulacija na kupuvanje -->
-										 <a id="btnBuy" class="btn btn-success btn-block" href='<?php ?>'> Купи </a>
+										 <form action="Checkout/paypal_ec_redirect.php" method="POST">
+										      <input type="hidden" name="PAYMENTREQUEST_0_AMT" value='<?php echo $totalPrice; ?>'></input>
+										      <input type="hidden" name="METHOD" value="SetExpressCheckout"></input>
+										      <input type="hidden" name="currencyCodeType" value="EUR"></input>
+										      <input type="hidden" name="paymentType" value="Sale"></input>
+										      <!--Pass additional input parameters based on your shopping cart. For complete list of all the parameters click here -->
+										      <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png" alt="Check out with PayPal"></input>
+										</form>
 									</div>
 								</div>
 							</div>
-								
+							
 						</div>
-					</form>
 				</div>					
 		</div>
 
