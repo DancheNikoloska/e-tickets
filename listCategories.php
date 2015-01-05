@@ -25,4 +25,13 @@
 						<a href='<?php echo "ItemsFromCategory.php?id=$tmp"?>' class='<?php echo $class ?>'><?php echo$cat['name'] ?></a>
 							<?php } ?>
 					</div>
+					<!--facebook integration  -->
+					
+		
+		<div width="262px" class="fb-like-box" data-href="https://www.facebook.com/etheatremk" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>		
+	
+		
+					
 	</div>
+	
+		

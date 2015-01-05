@@ -18,7 +18,8 @@
 	</head>
 
 	<body>
-
+	
+		
 		<!-- Navigation -->
 		<?php session_start();
 			include_once 'navBar.php'; ?>
