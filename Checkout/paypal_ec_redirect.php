@@ -1,5 +1,5 @@
 <?php
-
+	
    require_once("paypal_functions.php");
   
    //Call to SetExpressCheckout using the shopping parameters collected from the shopping form on index.php and few from config.php 

@@ -1,8 +1,9 @@
 <?php 
+
 	/*
 	* Call to GetExpressCheckoutDetails and DoExpressCheckoutPayment APIs
 	*/
-
+	
 	require_once ("paypal_functions.php"); 
 
 	/*
@@ -99,9 +100,22 @@
 	$resArrayDoExpressCheckout = ConfirmPayment ( $finalPaymentAmount );
 	$ackDoExpressCheckout = strtoupper($resArrayDoExpressCheckout["ACK"]);
 	include('header.php');
+		//se vklucuva stranata preku koja se brisat biletite od rezerviran i se dodavaat vo kupeni 
+	include_once '../buyTickets.php';
+		foreach($_SESSION as $key => $val)
+		{		
+		    if ($key !== 'username')
+		    {
+		      unset($_SESSION[$key]);		
+		    }		
+		}
 
-	session_unset();   // free all session variables
-	session_destroy(); //destroy session
+		
+
+	//session_unset();   // free all session variables
+	//session_destroy(); //destroy session
+	
+	
 	if( $ackDoExpressCheckout == "SUCCESS" || $ackDoExpressCheckout == "SUCCESSWITHWARNING" )
 	{
 		$transactionId		= $resArrayDoExpressCheckout["PAYMENTINFO_0_TRANSACTIONID"]; // ' Unique transaction ID of the payment. Note:  If the PaymentAction of the request was Authorization or Order, this value is your AuthorizationID for use with the Authorization & Capture APIs. 
