@@ -92,21 +92,9 @@
 				<tr><td>Total Amount:</td><td><?php echo $totalAmt   		?></td></tr>
 				<tr><td>Currency Code:</td><td><?php echo "МКД"   	?></td></tr>
 				<tr><td>&nbsp;</td></tr>
-				<tr><td><h3>Shipping Method</h3></td></tr>
+				
 				<form action="return.php" name="order_confirm" method="POST">
-					<tr><td>Shipping methods: </td><td><select name="shipping_method" id="shipping_method" style="width: 250px;" class="required-entry">
-						<option value="">Please select a shipping method...</option>
-						<optgroup label="United Parcel Service" style="font-style:normal;">
-						<option value="2.00">
-						Worldwide Expedited - $2.00</option>
-						<option value="3.00">
-						Worldwide Express Saver - $3.00</option>
-						</optgroup>
-						<optgroup label="Flat Rate" style="font-style:normal;">
-						<option value="0.00">
-						Fixed - $0.00</option>
-						</optgroup>
-						</select><br></td></tr>
+					
 					<tr><td><input type="Submit" name="confirm" alt="Check out with PayPal" class="btn btn-primary btn-large" value="Confirm Order"></td></tr>
 				</form>
 			</tbody>
