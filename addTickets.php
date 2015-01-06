@@ -1,4 +1,5 @@
 <?php
+ include_once 'delete_reservations.php';
 include_once 'database.php';
 
 session_start();

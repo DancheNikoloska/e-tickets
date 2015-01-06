@@ -1,5 +1,5 @@
 <?php
-
+ include_once 'delete_reservations.php';
 //funkcii za validacija na vlezovite pri logiranje i registracija na koisnikot
 
 

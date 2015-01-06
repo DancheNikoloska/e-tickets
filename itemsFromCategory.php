@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<?php include_once 'database.php'?>
+<?php include_once 'database.php';
+ include_once 'delete_reservations.php';
+?>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">

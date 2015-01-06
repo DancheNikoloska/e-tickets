@@ -5,6 +5,7 @@
 					
 					<div class="list-group">
 						<?php	
+						 include_once 'delete_reservations.php';
 						//citanje na ID-to pratu preku get baranje	
 						 $id=0;				
 								if (isset($_GET['id'])) {

@@ -1,4 +1,5 @@
  <?php
+  include_once 'delete_reservations.php';
 session_start();
 $error='';
 //logiranje na administrator

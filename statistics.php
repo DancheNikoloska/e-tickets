@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+ include_once 'delete_reservations.php';
 if(!empty($_SESSION['username'])) {
 
    $user=$_SESSION['username'];

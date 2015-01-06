@@ -1,4 +1,5 @@
 <?php
+ include_once 'delete_reservations.php';
 include_once 'database.php';
 $flaguser = $flagemail = $flagloz = $flagloz2 = 1;
 session_start();

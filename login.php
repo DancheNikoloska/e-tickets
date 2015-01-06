@@ -1,4 +1,5 @@
 <?php
+ include_once 'delete_reservations.php';
 session_start();
 //prvo mora da provereme dali nekoj e veke najaven, ako e prenasocuvame
 if (isset($_SESSION['username'])) {

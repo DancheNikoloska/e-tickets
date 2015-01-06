@@ -1,4 +1,5 @@
 <?php
+ include_once 'delete_reservations.php';
 session_start();
 $type=$_SESSION["type"];
 if(session_destroy()) // Destroying All Sessions
