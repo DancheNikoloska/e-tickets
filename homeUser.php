@@ -55,14 +55,20 @@
 									<li data-target="#carousel-example-generic" data-slide-to="2"></li>
 								</ol>
 								<div class="carousel-inner">
-									<div class="item active">
+									<div class="item active">									
+									<a href='<?php echo "item.php?ev=7&id=7"?>'>
 										<img class="slide-image" src="images/cover1.jpg" alt="http://placehold.it/800x300">
+										</a>
 									</div>
 									<div class="item">
+										<a href='<?php echo "item.php?ev=6&id=6"?>'>
 										<img class="slide-image" src="images/cover2.jpg" alt="http://placehold.it/800x300">
+										</a>
 									</div>
 									<div class="item">
+										<a href='<?php echo "item.php?ev=4&id=4"?>'>
 										<img class="slide-image" src="images/cover3.jpg" alt="http://placehold.it/800x300">
+										</a>
 									</div>
 								</div>
 								<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
