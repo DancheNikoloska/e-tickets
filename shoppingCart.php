@@ -57,7 +57,7 @@
 										//gi naogame site rezervirani bileti od korisnikot
 										$tickets=mysqli_query($link, "SELECT * FROM buyback WHERE user_id LIKE '$uID'");
 										//gi definirame site promenlivi sto ke gi koristime za prikazuvanje na informacii
-										$row; $seat; $code; $price; $name; $date; $time; $img; $buybackID; $totalPrice=0;
+										$row; $seat; $code; $price; $name=""; $date; $time; $img; $buybackID; $totalPrice=0;
 										while ($ticket=mysqli_fetch_assoc($tickets)) {
 											$buybackID=$ticket['buyback_id'];
 											$ticketID=$ticket['ticket_id'];
@@ -112,25 +112,21 @@
 							<div class="panel-footer">
 								<div class="row text-center">
 									<div class="col-xs-8">										
-										<!-- suma na cenite na igrite -->
+										<!-- suma na cenite na biletite -->
 										<h4 class="text-right"><p id="total">Вкупно: <?php echo $totalPrice; ?> ден.</p></h4>							
 									</div>
 									<div class="col-xs-4">									
 										<!--PayPal integracija-->
-										<form class="form" action="Checkout/paypal_ec_redirect.php" method="POST">
-											
-											<input type="hidden" name="METHOD" value="SetExpressCheckout"></input>
-											<input type="hidden" name="L_PAYMENTREQUEST_0_NAME1" value='<?php echo $name; ?>'></input>
-									      <input type="hidden" name="PAYMENTREQUEST_0_AMT" value='<?php echo $totalPrice; ?>'></input>
-									      <input type="hidden" name="currencyCodeType" value="USD"></input>
-									      <input type="hidden" name="paymentType" value="Sale"></input>
-									       <input type="hidden" name="CARTBORDERCOLOR" value="#990000"></input>
-									      <input type="hidden" name="LOGOIMG" value='<?php echo "images/MNT_Logo.jpg"; ?>'></input>
-
-									      <!--Pass additional input parameters based on your shopping cart. For complete list of all the parameters click here -->
-									      <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png" alt="Check out with PayPal"></input>
-										</form>
-									</div>
+										<form action="Checkout/paypal_ec_redirect.php" method="POST">
+     <input type="hidden" name="PAYMENTREQUEST_0_AMT" value='<?php echo $totalPrice; ?>'></input>
+      <input type="hidden" name="currencyCodeType" value="USD"></input>
+      <input type="hidden" name="paymentType" value="Sale"></input>
+      <!--Pass additional input parameters based on your shopping cart. For complete list of all the parameters click here -->
+      <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png" alt="Check out with PayPal"></input>
+</form>
+										
+										
+										</div>
 								</div>
 							</div>
 							
