@@ -79,10 +79,6 @@ if (isset($_POST['sub'])) {
 							<input type="password" class="form-control" name="pass" id="Password1" placeholder="">
 						</div>
 
-						<div class="checkbox">
-							<label>
-								<input type="checkbox">	Запамети ме</input> 
-						</div>
 						<button type="submit" name="sub" class="btn btn-info pull-right">
 							Најави се
 						</button>
