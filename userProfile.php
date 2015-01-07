@@ -48,17 +48,17 @@
 						    <tbody>
 							<?php 
 								$u=$_SESSION['username'];
-								$user=mysqli_query($link, "SELECT * FROM users WHERE username LIKE '$u'");
+								$user=mysqli_query($link, "SELECT distinct * FROM users WHERE username LIKE '$u'");
 								$userID=mysqli_fetch_assoc($user);
 								$uID=$userID['user_id'];
 								//gi naogame site rezervirani bileti od korisnikot
-								$tickets=mysqli_query($link, "SELECT * FROM boughttickets WHERE user_id LIKE '$uID'");
+								$tickets=mysqli_query($link, "SELECT distinct * FROM boughttickets WHERE user_id LIKE '$uID'");
 								//gi naogame site kupeni bileti od korisnikot
 								while ($ticket=mysqli_fetch_assoc($tickets)) {
 									$eventID=$ticket['event_id'];
 									$ticketID=$ticket['ticket_id']; 
 									
-									$eventInfoPrev=mysqli_query($link, "SELECT * FROM events WHERE event_id LIKE '$eventID' 
+									$eventInfoPrev=mysqli_query($link, "SELECT distinct * FROM events WHERE event_id LIKE '$eventID' 
 															AND period_date < (NOW()) ORDER BY period_date,period_time ASC");
 									while ($ev=mysqli_fetch_assoc($eventInfoPrev)) {
 										$name=$ev['event_name'];
@@ -70,7 +70,7 @@
 						        <td><?php echo $time; ?></td>
 						        <td><?php echo $name; ?></td>
 						        <?php 
-						        	$code=mysqli_query($link, "SELECT * from tickets WHERE ticket_id='$ticketID'");
+						        	$code=mysqli_query($link, "SELECT distinct * from tickets WHERE ticket_id='$ticketID'");
 									while($c=mysqli_fetch_assoc($code)){	
 						        ?>
 						        <td><?php echo $c['code']; ?></td>
@@ -93,11 +93,11 @@
 						    </tr>
 						    <tbody>
 							<?php 
-							$tickets=mysqli_query($link, "SELECT * FROM boughttickets WHERE user_id LIKE '$uID'");
+							$tickets=mysqli_query($link, "SELECT distinct * FROM boughttickets WHERE user_id LIKE '$uID'");
 								while ($ticket=mysqli_fetch_assoc($tickets)) {
 									$eventID=$ticket['event_id'];
 									$ticketID=$ticket['ticket_id']; 										
-									$eventInfoNext=mysqli_query($link, "SELECT * FROM events WHERE event_id LIKE '$eventID' 
+									$eventInfoNext=mysqli_query($link, "SELECT distinct * FROM events WHERE event_id LIKE '$eventID' 
 															AND period_date > (NOW()) ORDER BY period_date,period_time ASC");
 									while ($ev1=mysqli_fetch_assoc($eventInfoNext)) {
 										$name1=$ev1['event_name'];
@@ -109,7 +109,7 @@
 						        <td><?php echo $time1; ?></td>
 						        <td><?php echo $name1; ?></td>
 						        <?php 
-						        	$code=mysqli_query($link, "SELECT * from tickets WHERE ticket_id='$ticketID'");
+						        	$code=mysqli_query($link, "SELECT distinct * from tickets WHERE ticket_id='$ticketID'");
 									while($c=mysqli_fetch_assoc($code)){	
 						        ?>
 						        <td><?php echo $c['code']; ?></td>

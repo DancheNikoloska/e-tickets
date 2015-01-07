@@ -26,6 +26,7 @@ if (isset($_POST['submit'])) {
 		if ($q) {
 			$row = mysqli_fetch_assoc($q);
 			$_SESSION['user_id']=$row["id"];
+			$_SESSION["type"]="admin";
 			
 			header('Location: homeAdmin.php');
 			

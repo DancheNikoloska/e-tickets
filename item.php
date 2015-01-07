@@ -63,7 +63,9 @@
                         <h4 class="text-info" ><?php echo "Датум: ".$date."  | ".$timeFormated.' часот' ?></h4>
                         <p><?php echo $event['event_description']?></p>
                     </div>
-                    
+                      <div class="col-md-4 pull-left"  >
+                        <h3> <a class="btn btn-info" href="homeUser.php">Назад</a></h3>
+                    </div> 
                     <div class="col-md-4 pull-right"  >
                         <h3> <a class="btn btn-info" href="chooseSeat.php?event_id=<?php echo $event['event_id'];?>">Продолжи со одбирање место</a></h3>
                     </div>  
