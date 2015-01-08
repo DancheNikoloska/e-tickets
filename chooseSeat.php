@@ -375,17 +375,24 @@
     <a href="shoppingCart.php" style="width: 10em;color: #222222;font-weight:bold; float: right; margin-right: 107px;margin-top: 5px;" class="btn btn-danger">Купи</a>
     
     <div class="container">
-        <hr>
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-        </footer>
-    </div>
-    <!-- /.container -->
+
+				<hr>
+
+				<footer>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="row well">
+
+								<p align="center">
+									2014  ФИНКИ |    Факултет за информатички науки и компјутерско инженерство
+								</p>
+							</div>
+
+						</div>
+					</div>
+				</footer>
+
+			</div><!-- /.container -->
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>

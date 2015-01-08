@@ -59,8 +59,6 @@ if (isset($_POST['submit'])) {
 		//header('Location: upload.php');
 	}
 
-	//if ($flag) {
-
 		if ($event_name != null && $des != null && $date != null && $time != null) {
 			//promeni vo baza 
 			  $q="UPDATE events e set e.event_name='$_POST[event]', e.event_description='$_POST[des]', e.genre_id='$_POST[cat]',  e.period_date='$_POST[date]', e.period_time='$_POST[time]' WHERE e.event_id=$eventid";
@@ -81,8 +79,6 @@ if (isset($_POST['submit'])) {
 			
 		}
 	}
-
-//}
 ?>
 
 <!DOCTYPE html>
@@ -264,6 +260,26 @@ if (isset($_POST['submit'])) {
     <!-- /#wrapper -->
 
   <!-- jQuery -->
+  
+  div class="container">
+
+				<hr>
+
+				<footer>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="row well">
+
+								<p align="center">
+									2014  ФИНКИ |    Факултет за информатички науки и компјутерско инженерство
+								</p>
+							</div>
+
+						</div>
+					</div>
+				</footer>
+
+			</div><!-- /.container -->
     
    
 </body>

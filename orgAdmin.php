@@ -158,6 +158,26 @@ $e=mysqli_query($link,"select * from events e, users u where e.org_id=u.id and u
 
   <!-- jQuery -->
     
+    <div class="container">
+
+				<hr>
+
+				<footer>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="row well">
+
+								<p align="center">
+									2014  ФИНКИ |    Факултет за информатички науки и компјутерско инженерство
+								</p>
+							</div>
+
+						</div>
+					</div>
+				</footer>
+
+			</div><!-- /.container -->
+
    
 </body>
 	<script src="js/jquery.js"></script>

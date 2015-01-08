@@ -1,6 +1,4 @@
 <?php 
-
-
 session_start();
 
 if(!empty($_SESSION['username'])) {
@@ -224,6 +222,25 @@ if(isset($_GET['event_id']))
 
   <!-- jQuery -->
     
+   <div class="container">
+
+				<hr>
+
+				<footer>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="row well">
+
+								<p align="center">
+									2014  ФИНКИ |    Факултет за информатички науки и компјутерско инженерство
+								</p>
+							</div>
+
+						</div>
+					</div>
+				</footer>
+
+			</div><!-- /.container -->
    
 </body>
 	<script src="js/jquery.js"></script>

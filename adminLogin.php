@@ -85,24 +85,12 @@ if (isset($_POST['submit'])) {
                                     
 
                                 <span><?php echo $error; ?></span><br>
-                            <div class="input-group">
-                                      <div class="checkbox">
-                                      	
-                                        <label>
-                                          <input id="login-remember" type="checkbox" name="remember" value="1"> Запамети ме
-                                        </label>
-                                      </div>
-                                    </div>
-
 
                                 <div style="margin-top:10px" class="form-group">
                                     <!-- Button -->
 
-                                    <div class="col-sm-12 controls">
-                                    	<input name="submit" type="submit" value="Најава" id="btn-login" class="btn btn-success" />
-                                      
-                                     
-
+                                    <div class="col-sm-12 controls pull-right">
+                                    	<input name="submit" type="submit" value="Најава" id="btn-login" class="btn btn-success" />       
                                     </div>
                                 </div>
 

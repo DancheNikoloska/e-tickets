@@ -24,19 +24,7 @@ $cat = "";
 $n = "";
 $flag = false;
 $msg = "";
-/*if(isset($_GET['ci']))
- {
- $title="Направи ги потребните измени за курсот ".$_GET['ci'];
- $query = "SELECT * FROM courses WHERE course_name LIKE ".$_GET['ci'];
- $result = mysqli_query($link, $query);
- while ($course=mysql_fetch_assoc($result))
- {
- $courseName = $course['course_name'];
- $level = $course['course_name'];
- $semester = $course['course_name'];
- $credits = $_POST['credits'];
- }
- }*/
+
 
 if (isset($_POST['submit'])) {
 //zemanje na vrednosti
@@ -68,8 +56,7 @@ if (isset($_POST['submit'])) {
 
 			move_uploaded_file($_FILES["file"]["tmp_name"], "images/" . $_FILES["file"]["name"]);
 			move_uploaded_file($_FILES["file1"]["tmp_name"], "images/" . $_FILES["file1"]["name"]);
-			//header('Location: upload.php');
-			//echo " <p > Успешно прикачување! <p>";
+			
 			$msg1 = "Успешно прикачување на сликите!";
 			$now = date("Y-m-d H:i");
 			$n = $_FILES["file"]["name"];
@@ -79,10 +66,8 @@ if (isset($_POST['submit'])) {
 
 		}
 	} else {
-
 		//echo " <p > Невалиден формат! Внесете .jpg, .png или .gif формат. <p>";
 		$flag = false;
-		//header('Location: upload.php');
 	}
 
 	if ($flag) {
@@ -128,8 +113,7 @@ if (isset($_POST['submit'])) {
 	$row1 = mysqli_fetch_assoc($result);
 	$event = $row1['event_id'];
 
-	$num = 600;
-	
+	$num = 600;	
 	
 }
 ?>
@@ -223,21 +207,24 @@ if (isset($_POST['submit'])) {
 <!-- Team Member Profiles -->
 
 <div class="container">
-<footer>
-<div class="row">
-<div class="col-lg-12">
-<div class="row well">
 
-<p align="center">
-2013  ФИНКИ |    Факултет за информатички науки и компјутерско инженерство
-</p>
-</div>
+				<hr>
 
-</div>
-</div>
-</footer>
+				<footer>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="row well">
 
-</div><!-- /.container -->
+								<p align="center">
+									2014  ФИНКИ |    Факултет за информатички науки и компјутерско инженерство
+								</p>
+							</div>
+
+						</div>
+					</div>
+				</footer>
+
+			</div><!-- /.container -->
 
 <!-- Bootstrap core JavaScript -->
 <!-- Placed at the end of the document so the pages load faster -->

@@ -137,6 +137,28 @@
 
 		</div>
 		<!-- /.container -->
+		
+		
+		<div class="container">
+
+				<hr>
+
+				<footer>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="row well">
+
+								<p align="center">
+									2014  ФИНКИ |    Факултет за информатички науки и компјутерско инженерство
+								</p>
+							</div>
+
+						</div>
+					</div>
+				</footer>
+
+			</div><!-- /.container -->
+
 
 
 

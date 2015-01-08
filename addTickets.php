@@ -64,17 +64,15 @@ if (isset($_POST['submit'])) {
 
 				} else {
 					$msg = "Билетите не беа додадени, обидете се повторно! povtorno ";
-					//$msg += $cat;
 				}
 
 			}
 
 		} else {
-			$msg = "Неточно ID на настан netocno";
+			$msg = "Неточно ID на настан";
 		}
 	} else {
-		$msg = "Пополнете ги сите полиња polinja";
-		//$msg+=$cat;
+		$msg = "Пополнете ги сите полиња";
 	}
 }
 ?>
@@ -162,21 +160,24 @@ print "</select><br/>";
 <!-- Team Member Profiles -->
 
 <div class="container">
-<footer>
-<div class="row">
-<div class="col-lg-12">
-<div class="row well">
 
-<p align="center">
-2013  ФИНКИ |    Факултет за информатички науки и компјутерско инженерство
-</p>
-</div>
+				<hr>
 
-</div>
-</div>
-</footer>
+				<footer>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="row well">
 
-</div><!-- /.container -->
+								<p align="center">
+									2014  ФИНКИ |    Факултет за информатички науки и компјутерско инженерство
+								</p>
+							</div>
+
+						</div>
+					</div>
+				</footer>
+
+			</div><!-- /.container -->
 
 <!-- Bootstrap core JavaScript -->
 <!-- Placed at the end of the document so the pages load faster -->
