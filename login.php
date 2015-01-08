@@ -3,9 +3,10 @@
 session_start();
 //prvo mora da provereme dali nekoj e veke najaven, ako e prenasocuvame
 if (isset($_SESSION['username'])) {
-	//tuka namesto homepage ke se ide na logout ili ke se jave "you are logged in as XXXX do you want to log out"
-	//header("Location: homepage.html");
+	//ako e najaven se prenasocuva kon pocetna strana
+	
 	$flag = 1;
+	header("Location: homeUser.php");
 } else {
 	$flag = 0;
 }

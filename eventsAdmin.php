@@ -1,9 +1,9 @@
 <?php 
 session_start();
 
-if(!empty($_SESSION['username'])) {
+if(!empty($_SESSION['adminname'])) {
 
-   $user=$_SESSION['username'];
+   $user=$_SESSION['adminname'];
    $_SESSION["type"]="admin";
    $flag=1;
 

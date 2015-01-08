@@ -4,28 +4,32 @@ session_start();
 $error='';
 //logiranje na administrator
 //prvo mora da provereme dali nekoj e veke najaven, ako e prenasocuvame
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['adminname'])) {
 	
 	$flag = 1;
 } else {
 	$flag = 0;
+	}
+//ako e najaven korisnik
+if (isset($_SESSION['username']))
+{
+	header("Location: homeUser.php");
 }
-
 //inaku ne e najaven i proveruvame dali bilo klinato submit na formata
 if (isset($_POST['submit'])) {
 	include_once 'database.php';
 	include_once 'user_validation.php';
-	$user = $_POST['username'];
-	$pass = $_POST['password'];
+	$userAdmin = $_POST['adminname'];
+	$passAdmin = $_POST['adminpass'];
 	
 
 	if (validateLoginAdmin($link, $pass, $user) == true) {
 		//ovde doagjame ako ne bil prethodno najaven i e kliknato submit, i go najavuvame samo so toa so piseme u $_SESSION koj e najaven
-		$_SESSION['username'] = $user;
-		$q = mysqli_query($link, "SELECT * FROM users WHERE username='$user'");
+		$_SESSION['adminname'] = $userAdmin;
+		$q = mysqli_query($link, "SELECT * FROM users WHERE username='$userAdmin'");
 		if ($q) {
 			$row = mysqli_fetch_assoc($q);
-			$_SESSION['user_id']=$row["id"];
+			$_SESSION['userAdmin_id']=$row["id"];
 			$_SESSION["type"]="admin";
 			
 			header('Location: homeAdmin.php');

@@ -1,4 +1,20 @@
+<?php 
+session_start();
+ include_once 'delete_reservations.php';
+if(!empty($_SESSION['adminname'])) {
 
+   $userAdmin=$_SESSION['adminname'];
+   $_SESSION["type"]="admin";
+   $flag=1;
+
+}else{
+
+  header("Location: adminLogin.php");
+   
+  $flag=0;
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

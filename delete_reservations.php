@@ -1,7 +1,7 @@
 <?php
  include_once 'database.php';
  //get and delete from tickets
- $query ="SELECT ticket_id from byuback where time_reserved < (NOW() - INTERVAL 3 MINUTE)";
+ $query ="SELECT ticket_id from buyback where time_reserved < (NOW() - INTERVAL 3 MINUTE)";
  $result= mysqli_query($link,$query);
  
  //create second connection to db
