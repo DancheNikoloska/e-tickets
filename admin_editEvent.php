@@ -164,14 +164,12 @@ if (isset($_POST['submit'])) {
                             <a class="active" href="eventsAdmin.php"><i class="fa fa-bell-o fa-fw"></i> Настани</a>
                             
                         </li>
+                        
                         <li>
-                            <a href="#"><i class="fa fa-male fa-fw"></i> Организатори </a>
+                            <a href="usersAdmin.php"><i class="fa fa-users fa-fw"></i> Корисници </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-users fa-fw"></i> Корисници </a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Статистики </a>
+                            <a href="statistics.php"><i class="fa fa-bar-chart-o fa-fw"></i> Статистики </a>
                            
                         </li>
                                                
@@ -243,7 +241,7 @@ if (isset($_POST['submit'])) {
 		<?php echo $smallImg; ?> <input  type="file"  value="Избери Слика:" name="file1" id="file1"  />
 		<br/>
 		
-		<input  class="btn btn-default" type="submit"  value="Прикачи" name="submit" id="submit"  />
+		<input  class="btn btn-default" type="submit"  value="Измени" name="submit" id="submit"  />
 		
 		</form>
            
@@ -261,7 +259,7 @@ if (isset($_POST['submit'])) {
 
   <!-- jQuery -->
   
-  div class="container">
+  <div class="container">
 
 				<hr>
 
