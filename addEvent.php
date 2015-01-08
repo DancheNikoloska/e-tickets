@@ -2,9 +2,9 @@
  include_once 'delete_reservations.php';
 include_once 'database.php';
 session_start();
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['adminname'])) {
 
-	$user = $_SESSION['username'];
+	$user = $_SESSION['adminname'];
 	$flag = 1;
 	//echo $_SESSION['username'];
 	//echo $_SESSION['user_id'];
@@ -12,7 +12,7 @@ if (isset($_SESSION['username'])) {
 
 	$user = "Најавете се!";
 	$flag = 0;
-	header("Location: login.php");
+	header("Location: adminLogin.php");
 }
 //varijabli
 $eventName = "";
@@ -188,11 +188,11 @@ if (isset($_POST['submit'])) {
 ?>
 
 
-<label for="file" > Голема слика: </label>
+<label for="file" > Мала слика: </label>
 <input  type="file"  value="Избери Слика:" name="file" id="file"  />
 <br/>
 
-<label for="file1" > Мала слика: </label>
+<label for="file1" > Голема слика: </label>
 <input  type="file"  value="Избери Слика:" name="file1" id="file1"  />
 <br/>
 </div>

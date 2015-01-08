@@ -162,6 +162,7 @@
     			<p>Payment Status: <?php  echo($paymentStatus);?> </p>
     			<p>Payment Type: <?php  echo($paymentType);?> </p>
     			<h3> Click <a href='../homeUser.php'>here </a> to return to Home Page</h3>
+    			<h4 style="color:#08c;">Напомена: Кодовите за купените билети кои треба да ги покажете на билетара можете да ги најдете на Вашата профилна страница.</h4>
     			</div>
     		</span>
     		<span class="span3">
