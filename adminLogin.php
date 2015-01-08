@@ -20,7 +20,8 @@ if (isset($_POST['submit'])) {
 	include_once 'user_validation.php';
 	$user = $_POST['username'];
 	$pass = $_POST['password'];
-	
+	echo $user;
+	echo $pass;
 
 	if (validateLoginAdmin($link, $pass, $user) == true) {
 		//ovde doagjame ako ne bil prethodno najaven i e kliknato submit, i go najavuvame samo so toa so piseme u $_SESSION koj e najaven

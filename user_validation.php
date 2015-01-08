@@ -42,6 +42,7 @@ function validateLogin($connection, $lozinka, $user) {
 function validateLoginAdmin($connection, $lozinka, $user) {
 	//$salt = "baklava";
 	//$lozinka = md5($salt . $lozinka);
+	$lozinka = md5($lozinka);
 	if (strlen($lozinka) > 0 && strlen($user) > 0) {
 		$q = mysqli_query($connection, "SELECT * FROM users WHERE password='$lozinka' AND username='$user' AND usertype='Администратор'");
 		if (mysqli_num_rows($q) > 0) {
