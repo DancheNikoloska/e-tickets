@@ -372,7 +372,7 @@
     	<div style="color: red;margin-top: 7px;width: 10%;display:inline;">*Резервациите се бришат по 30 минути доколку билетот не се купи.</div>
     </div>	
     
-    <a href="shoppingCart.php" style="width: 10em;color: #222222;font-weight:bold; float: right; margin-right: 107px;margin-top: 5px;" class="btn btn-danger">Купи</a>
+    <a href="shoppingCart.php" style="width: 10em;color: #222222;font-weight:bold; float: right; margin-right: 107px;margin-top: 5px;" class="btn btn-danger">Резервирај</a>
     
     <div class="container">
 

@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
 	$lozinka = $_POST['pass'];
 	$lozinka2 = $_POST['pass2'];
 	$email = $_POST['email'];
-	$tip = $_POST['role'];
+	$tip = "корисник";
 	if ($tip == "Корисник") {$tip = "korisnik";
 	}
 
@@ -24,11 +24,11 @@ if (isset($_POST['submit'])) {
 	if ($lozinka != $lozinka2)
 		$flagloz2 = 0;
 	if ($flaguser && $flagemail && $flagloz && $flagloz2)
-	 {	$salt = "baklava";
-		//$lozinka = md5($lozinka);
-		echo $lozinka;
+	 {
+		$lozinka1 = md5($lozinka);
+		
 		//zapisuvanje vo baza za noviot korsnik
-		$q = mysqli_query($link, "INSERT INTO users(username,password,email,usertype) VALUES('$user','$lozinka','$email','$tip')");
+		$q = mysqli_query($link, "INSERT INTO users(username,password,email,usertype) VALUES('$user','$lozinka1','$email','$tip')");
 		if ($q) {
 			header("Location: login.php");
 			print '<span style=float:right;color:blue>Успешна регистрација!&nbsp </span><br>';
@@ -129,13 +129,6 @@ if (isset($_POST['submit'])) {
 							?>
 						</div>
 
-						<div class="form-group">
-							<label>Тип на корисник:</label>
-							<select name="role" class="form-control">
-								<option>Корисник</option>
-								<option selected>Организатор</option>
-							</select>
-						</div>
 						<button type="submit" name="submit" class="btn btn-default">
 							Регистрација
 						</button>
