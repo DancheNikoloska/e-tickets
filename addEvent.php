@@ -1,7 +1,7 @@
-<?php
+<?php 
+session_start();
  include_once 'delete_reservations.php';
 include_once 'database.php';
-session_start();
 if (isset($_SESSION['adminname'])) {
 
 	$user = $_SESSION['adminname'];
@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
 
 	$imageFileType = $_FILES["file"]["type"];
 //proverka na promenlivi dali imaat vrednost
-	if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+	if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType !="jpeg" && $imageFileType != "gif") {
 		if ($_FILES["file"]["error"] > 0) {
 			echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
 			$flag = false;
@@ -117,33 +117,127 @@ if (isset($_POST['submit'])) {
 	
 }
 ?>
-
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
+<title>homeAdmin</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<title>Е-tickets- електронски сајт за билети</title>
+    <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
-<!-- Bootstrap core CSS -->
-<link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Add custom CSS here -->
-<link href="css/modern-business.css" rel="stylesheet">
-<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link href="css/plugins/timeline.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="css/plugins/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+   
 </head>
+
 <body>
 
-<?php
-	include_once 'navBar.php';
-?>
-<div class="container">
-<div class="row">
-<div class="col-md-8">
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;border:0px; width:1280px;">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html" style="margin-left: 100px;">E-tickets Admin</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    
+                    <!-- /.dropdown-messages -->
+                </li>
+                <!-- /.dropdown -->
+                
+              
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <?php	if ($flag==1){ ?>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                        
+                            <a href="logout.php">
+                                Logout
+                            </a>
+                        <?php   } ?>
+                          
+                        </li>
+                    </ul>
+                    
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation" style="margin-left: 100px;">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                      
+                        <li>
+                            <a href="homeAdmin.php"><i class="fa fa-home fa-fw"></i> Почетна</a>
+                        </li>
+                        <li>
+                            <a href="eventsAdmin.php"><i class="fa fa-bell-o fa-fw"></i> Настани</a>
+                            
+                        </li>
+                
+                        <li>
+                            <a class="active" href="usersAdmin.php"><i class="fa fa-users fa-fw"></i> Корисници </a>
+                        </li>
+                        <li>
+                            <a href="statistics.php"><i class="fa fa-bar-chart-o fa-fw"></i> Статистики </a>
+                           
+                        </li>
+                                               
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper" style="width: 900px; margin-left: 350px;">
+        	<div class="row">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header" style="margin-left: 15px;">Претстави</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="col-lg-12">
+          
 
 <?php
 //html kod
@@ -199,14 +293,23 @@ if (isset($_POST['submit'])) {
 <input  class="btn btn-default" type="submit"  value="Прикачи" name="submit" id="submit"  />
 
 </form>
-</div>
 
-</div>
-</div>
 
-<!-- Team Member Profiles -->
+           
+            <!-- /.row -->
+         </div>   
+            <!-- /.row -->
+        </div>
+        <!--end of row -->
+        </div>
+        <!-- /#page-wrapper -->
 
-<div class="container">
+    
+    <!-- /#wrapper -->
+
+  <!-- jQuery -->
+  
+  <div class="container">
 
 				<hr>
 
@@ -226,11 +329,14 @@ if (isset($_POST['submit'])) {
 
 			</div><!-- /.container -->
 
-<!-- Bootstrap core JavaScript -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/modern-business.js"></script>
-
+    
+   
 </body>
+	<script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+  
+    
 </html>
+
