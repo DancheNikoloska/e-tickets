@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 ﻿
+=======
+>>>>>>> parent of 466bb02... sreduvanje part 8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -126,12 +129,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `usertype`) VALUES
-(1, 'marija', 'd6ddeebe2292284c655890bd90029447', 'marija@yahoo.com', 'Корисник'),
-(2, 'darinka', 'b7a5317ad50e2ae4acfe8471cbb8f860', 'darinka@yahoo.com', 'Корисник'),
-(3, 'danche', 'bfe1549a1ec46597205ad25422d0f60c', 'danche@yahoo.com', 'Корисник'),
-(4, 'user1', '20a0db53bc1881a7f739cd956b740039', 'user1@yahoo.com', 'Корисник'),
-(5, 'user2', '1926f73f97bf1985b2b367730cb75071', 'user2@yahoo.com', 'Корисник'),
-(6, 'admin', '1877fcc1b7ec74e144d319929edb40a9', 'admin@yahoo.com', 'Администратор');
+(1, 'marija', 'marijapass', 'marija@yahoo.com', 'Корисник'),
+(2, 'darinka', 'darinkapass', 'darinka@yahoo.com', 'Корисник'),
+(3, 'danche', 'danchepass', 'danche@yahoo.com', 'Корисник'),
+(4, 'user1', 'user1pass', 'user1@yahoo.com', 'Корисник'),
+(5, 'user2', 'user2pass', 'user2@yahoo.com', 'Корисник'),
+(6, 'admin', 'adminpass', 'admin@yahoo.com', 'Администратор');
 
 
 ALTER TABLE `boughttickets`
