@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿
+=======
+>>>>>>> parent of 466bb02... sreduvanje part 8
 =======
 >>>>>>> parent of 466bb02... sreduvanje part 8
 
