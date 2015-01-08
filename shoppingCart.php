@@ -83,7 +83,7 @@
 									?>
 				
 					<div class="row">
-						<div class="col-xs-2"><img class="img-responsive" src="images/<?php echo $img.".jpg";?>">
+						<div class="col-xs-2"><img class="img-responsive" src="images/<?php echo $img;?>">
 						</div>
 						<div class="col-xs-6">
 							<h4 class="product-name"><strong><?php echo $name;?></strong></h4>
