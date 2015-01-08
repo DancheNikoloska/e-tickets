@@ -19,8 +19,8 @@ if (isset($_SESSION['username']))
 if (isset($_POST['submit'])) {
 	include_once 'database.php';
 	include_once 'user_validation.php';
-	$userAdmin = $_POST['adminname'];
-	$passAdmin = $_POST['adminpass'];
+	$user = $_POST['username'];
+	$pass = $_POST['password'];
 	
 
 	if (validateLoginAdmin($link, $pass, $user) == true) {
