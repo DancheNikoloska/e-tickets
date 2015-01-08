@@ -1,6 +1,8 @@
-<?php 
-session_start();
+<?php
 
+
+session_start();
+$f=false;
 if(!empty($_SESSION['adminname'])) {
 
    $user=$_SESSION['adminname'];
@@ -14,16 +16,31 @@ if(!empty($_SESSION['adminname'])) {
   $flag=0;
 
 }
-
-
-include_once 'database.php';
-if(isset($_GET['event_id'])) 
-{
-	$event_id=$_GET['event_id'];
-	mysqli_query($link,"UPDATE events SET active = IF(active=0,1,0) where event_id=$event_id");
-	header("Location: eventsAdmin.php"); 
+//se zema event id
+if (isset($_GET['eventid'])){
+$eventid=$_GET['eventid'];
+$_SESSION['eventid']=$_GET['eventid'];
 }
+//echo $eventid;
+include_once 'database.php';
 
+//proverka na kod
+if (isset($_POST["code"]))
+{
+	$code=$_POST["code"];
+	$eventid=$_SESSION['eventid'];
+	
+	$query="select * from events e, tickets t where e.event_id=t.event_id and t.code='$code' and e.event_id='$eventid'";
+	$q=mysqli_query($link, $query);
+	//if ($q) echo "ok"; else echo mysqli_error($link);
+	if(mysqli_num_rows($q)==1)
+ 		{$f=true;}
+	else {$f=false;}
+	
+}
+else {
+	$code="";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -139,83 +156,65 @@ if(isset($_GET['event_id']))
         	<div class="row">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header" style="margin-left: 15px;">Настани</h1>
+                    <h1 class="page-header" style="margin-left: 25px;">Проверка на кодови</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="col-lg-12">
+   <?php
+   $eventid=$_SESSION['eventid'];
+   $query=mysqli_query($link,"Select * from events where event_id=$eventid");
+   $row=mysqli_fetch_assoc($query);
+   $eventname=$row['event_name'];
+   $period_date=$row['period_date'];
+   $time=$row['period_time'];
+   $img=$row['big_img'];
+   
+   ?>
+            <div class="col-md-12">
 
-            <table class="table table-striped table-hover">
-  			<tr class="active" align="center">
-  				<th class="text-center">Име на настан</th>
-  				<th class="text-center">Датум</th>
-  				<th class="text-center">Продадени билети</th>
-  				<th class="text-center">Измени настан</th>
-  				<th class="text-center">Е-билети</th>
-  				<th class="text-center">Деактивирај настан</th>
-  				
-  			</tr>
-  			<?php 
-  			include_once 'database.php';
-			//$counter sluzi za boenje na tabelata
-			$counter=0;
-			$query="Select * from events where active=1 order by period_date";
-			$res=mysqli_query($link, $query);
-			while($row=mysqli_fetch_assoc($res))
-			{
-			//get period
-			$query2="Select period_date from events where event_id=$row[event_id]";
-			$d=mysqli_query($link,$query2);
-			$res_datum=mysqli_fetch_assoc($d);
-			$datum=$res_datum['period_date'];
-			//get tickets number
-			//$query3="Select count(*) as no_tickets from boughttickets t, events e where t.event_id=e.event_id AND ed.event_id=e.eventId and e.eventId=$row[event_id]";
-			//$n=mysqli_query($link, $query3);
-			//$num=mysqli_fetch_assoc($n);
-			$total_tickets=750;
-			// $num['no_tickets'];
-			//get sold tickets number
-			$sold=mysqli_query($link, "Select count(*) as no_tickets from boughttickets t, events e where t.event_id=e.event_id AND  e.event_id=$row[event_id]");
-			$s=mysqli_fetch_assoc($sold);
-			$sold_tickets=$s['no_tickets'];
-			
-			
-			
-			
-			if ($counter%2==0){
-			
-  				$ac=($row['active']==1 ? 'Деактивирај' : 'Активирај');
-	  			echo "<tr class='info'>" .
-	  			 "<td class=\"text-center\"> $row[event_name] </td>".
-	  			 "<td class=\"text-center\">$datum</td>".
-	  			 "<td class=\"text-center\">$sold_tickets / $total_tickets</td>".
-	  			 "<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[event_id]\">Измени</a></td>".
-	  			 "<td class=\"text-center\"><a href=\"ticketsChecking.php?eventid=$row[event_id]\">Билети</a></td>".
-	  			 "<td class=\"text-center\"><a href=\"eventsAdmin.php?event_id=$row[event_id]\">". $ac;
--  			"</a></td></tr>";
-			$counter++;
-	  			
-  			
-  			}
-
-			else{
-				$ac=($row['active']==1 ? 'Деактивирај' : 'Активирај');
-  				echo "<tr>".
-  				"<td class=\"text-center\"> $row[event_name]</td>".
-  				"<td class=\"text-center\">$datum</td>".
-  				"<td class=\"text-center\">$sold_tickets / $total_tickets</td>".
-  				"<td class=\"text-center\"><a href=\"admin_editEvent.php?eventid=$row[event_id]\">Измени</a></td>".
-  				"<td class=\"text-center\"><a href=\"ticketsChecking.php?eventid=$row[event_id]\">Билети</a></td>".
-  			"<td class=\"text-center\"><a href=\"eventsAdmin.php?event_id=$row[event_id]\">".  $ac;
--  			"</a></td></tr>";
-			$counter++;
-  			
+           <div class="col-md-8">
+           	
+         <?php 
+         
+         echo  "<img width=\"520px;\" src=\"images/$img\"><br><br>";
+		 echo "<h3>$eventname</h3>";
+		 echo "<h4>Датум: $period_date</h4>";
+		 echo "<h4>Време: $time</h4>";
+		 
+		 
+		
+		 
+		 
+         
+         
+         ?>
+          
+         </div>
+           <div class="col-md-4" style="margin-top: -20px;">
+           	<h3>Пребарај билет</h3><br>
+           	<form action="ticketsChecking.php" method="post">
+           	<input class="form-control" type="text" id="code" name="code"><br>
+           	<input type="submit" class="btn btn-primary" id="submit" value="Пребарај" style="float: right;"></input> <br>
+           	 </form> 
+           	 <br>
+           	 <?php
+           	 if (isset($_POST["code"])){
+           	 if ($f==true){
+          echo   "<i class=\"glyphicon glyphicon-ok-circle huge\" style=\"color:green;\"></i>"; 
+			 }
+			 else
+			 	{
+          echo  "<i class=\"glyphicon glyphicon-remove-circle huge\" style=\"color:red\";></i>"; 
 				}
-				}
-			
-			?>
-			</table>
+			 }    
+                    
+             ?> 
+            
+           	
+           	
+           	
+           </div>
            
            
             <!-- /.row -->
