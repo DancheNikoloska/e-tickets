@@ -14,9 +14,13 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
- 
+    
     <!-- Custom CSS -->
     <link href="css/shop-item.css" rel="stylesheet">
+    <style>
+    .btn-left{float:left !important; margin-left:-15px !important;}
+	.btn-right{float:right !important; margin-right:-45px !important;}
+	</style>
 </head>
 
 <body>
@@ -63,10 +67,10 @@
                         <h4 class="text-info" ><?php echo "Датум: ".$date."  | ".$timeFormated.' часот' ?></h4>
                         <p><?php echo $event['event_description']?></p>
                     </div>
-                      <div class="col-md-4 pull-left"  >
+                      <div class="col-md-4 btn-left">
                         <h3> <a class="btn btn-info" href="homeUser.php">Назад</a></h3>
                     </div> 
-                    <div class="col-md-4 pull-right"  >
+                    <div class="col-md-4 btn-right">
                         <h3> <a class="btn btn-info" href="chooseSeat.php?event_id=<?php echo $event['event_id'];?>">Продолжи со одбирање место</a></h3>
                     </div>  
  

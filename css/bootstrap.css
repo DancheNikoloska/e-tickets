@@ -5234,11 +5234,11 @@ a.thumbnail:focus {
 }
 
 .media > .pull-left {
-  margin-right: 10px;
+  margin-left: -15px;
 }
 
 .media > .pull-right {
-  margin-left: 10px;
+  margin-left: -45px;
 }
 
 .media-list {
