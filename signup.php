@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
 	$lozinka = $_POST['pass'];
 	$lozinka2 = $_POST['pass2'];
 	$email = $_POST['email'];
-	$tip = "корисник";
+	$tip = "Корисник";
 	if ($tip == "Корисник") {$tip = "korisnik";
 	}
 
@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 		$lozinka1 = md5($lozinka);
 		
 		//zapisuvanje vo baza za noviot korsnik
-		$q = mysqli_query($link, "INSERT INTO users(username,password,email,usertype) VALUES('$user','$lozinka1','$email','$tip')");
+		$q = mysqli_query($link, "INSERT INTO users(username,password,email,usertype) VALUES('$user','$lozinka1','$email','Корисник')");
 		if ($q) {
 			header("Location: login.php");
 			print '<span style=float:right;color:blue>Успешна регистрација!&nbsp </span><br>';
