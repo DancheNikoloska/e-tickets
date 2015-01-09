@@ -1,13 +1,13 @@
 <?php
 ini_set('max_execution_time', 3000000);
 session_start();
-if (!isset($_GET['krastavica']) || $_GET['krastavica'] != $_SESSION['krastavica']) {
+if (!isset($_GET['database']) || $_GET['database'] != $_SESSION['database']) {
 	$number = mt_rand(0, 100);
-	$_SESSION['krastavica'] = $number;
-	echo "Hello you have chosen to reinit the E-tickets database if you are sure just click <a href='?krastavica=$number'>this pretty link here</a>";
+	$_SESSION['database'] = $number;
+	echo "Hello you have chosen to reinit the E-tickets database if you are sure just click <a href='?database=$number'>this pretty link here</a>";
 	echo "<br/><br/><h1>Important</h1><p>In order for this to work you must create 'e-tickets' in your mysql</p>";
 } else {
-	unset($_SESSION['krastavica']);
+	unset($_SESSION['database']);
 	$con = mysqli_connect("localhost", "root", "", "e-tickets");
 	// Check connection
 	if (mysqli_connect_errno()) {

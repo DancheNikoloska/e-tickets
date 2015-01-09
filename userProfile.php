@@ -63,11 +63,12 @@
 									while ($ev=mysqli_fetch_assoc($eventInfoPrev)) {
 										$name=$ev['event_name'];
 										$date=$ev['period_date'];
-										$time=$ev['period_time'];									
+										$time=$ev['period_time'];
+										$timeFormated=substr($time, 0, -3);									
 							?>
 						    <tr>
 						        <td><?php echo $date; ?></td>
-						        <td><?php echo $time; ?></td>
+						        <td><?php echo $timeFormated; ?></td>
 						        <td><?php echo $name; ?></td>
 						        <?php 
 						        	$code=mysqli_query($link, "SELECT distinct * from tickets WHERE ticket_id='$ticketID'");
@@ -102,11 +103,12 @@
 									while ($ev1=mysqli_fetch_assoc($eventInfoNext)) {
 										$name1=$ev1['event_name'];
 										$date1=$ev1['period_date'];
-										$time1=$ev1['period_time'];									
+										$time1=$ev1['period_time'];	
+										$timeFormated1=substr($time1, 0, -3);								
 							?>
 						    <tr>
 						        <td><?php echo $date1; ?></td>
-						        <td><?php echo $time1; ?></td>
+						        <td><?php echo $timeFormated1; ?></td>
 						        <td><?php echo $name1; ?></td>
 						        <?php 
 						        	$code=mysqli_query($link, "SELECT distinct * from tickets WHERE ticket_id='$ticketID'");

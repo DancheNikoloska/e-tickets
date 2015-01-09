@@ -57,7 +57,7 @@
 										//gi naogame site rezervirani bileti od korisnikot
 										$tickets=mysqli_query($link, "SELECT * FROM buyback WHERE user_id LIKE '$uID'");
 										//gi definirame site promenlivi sto ke gi koristime za prikazuvanje na informacii
-										$row; $seat; $code; $price; $name=""; $date; $time; $img; $buybackID; $totalPrice=0;
+										$row; $seat; $code; $price; $name=""; $date; $time; $img; $buybackID; $totalPrice=0;$timeFormated;
 										while ($ticket=mysqli_fetch_assoc($tickets)) {
 											$buybackID=$ticket['buyback_id'];
 											$ticketID=$ticket['ticket_id'];
@@ -77,8 +77,8 @@
 												$name=$ev['event_name'];
 												$date=$ev['period_date'];
 												$time=$ev['period_time'];
+												$timeFormated=substr($time, 0, -3);
 												$img=$ev['small_img'];
-												//echo $name." ".$date." ".$time."\n";
 											}
 									?>
 				
@@ -87,7 +87,7 @@
 						</div>
 						<div class="col-xs-6">
 							<h4 class="product-name"><strong><?php echo $name;?></strong></h4>
-							<span class="small"><strong>Време: </strong><?php echo $date."    ".$time?></span> <br />
+							<span class="small"><strong>Време: </strong><?php echo $date."    ".$timeFormated ?></span> <br />
 							<span class="small"><strong>Ред: </strong><?php echo $row?>  <strong>Седиште: </strong><?php echo $seat?></span>
 						</div>
 						<br />

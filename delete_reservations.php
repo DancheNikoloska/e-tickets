@@ -12,6 +12,6 @@
    mysqli_query($link2,$tmp_sql);
  }
  //delete from buyback
- $sql= "DELETE FROM buyback WHERE time_reserved < (NOW() - INTERVAL 3 MINUTE)";
+ $sql= "DELETE FROM buyback WHERE time_reserved < (NOW() - INTERVAL 30 MINUTE)";
  mysqli_query($link, $sql);
 ?>
