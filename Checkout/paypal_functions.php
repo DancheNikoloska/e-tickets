@@ -1,5 +1,5 @@
 <?php
-	
+	//strana za fukncii koi se potrebni za pay pal payment
 	/********************************************
 	Module contains calls to PayPal APIs 
 	********************************************/
@@ -68,6 +68,8 @@
 
 		if(isset($cancelURL))
 		$nvpstr = $nvpstr . "&CANCELURL=" . $cancelURL;
+
+
 
 		//Optional parameters for SetExpressCheckout API call
 		if(isset($paramsArray["currencyCodeType"]))  

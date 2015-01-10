@@ -1,5 +1,5 @@
 <?php 
-
+//strana za API za express checkout
 	/*
 	* Call to GetExpressCheckoutDetails and DoExpressCheckoutPayment APIs
 	*/

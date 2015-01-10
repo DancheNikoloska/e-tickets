@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <?php include('header.php') ?>
    <div class="span5">
-            <!--Form containing item parameters and seller credentials needed for SetExpressCheckout Call-->
+            <!--primer strana-->
             <form class="form" action="paypal_ec_redirect.php" method="POST">
                <div class="row-fluid">
                   <div class="span6 inner-span">

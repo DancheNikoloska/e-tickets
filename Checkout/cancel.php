@@ -1,4 +1,6 @@
-<?php include('header.php'); ?>
+<?php
+//strana za otkazuvanje na procesot na plakanje
+ include('header.php'); ?>
 	<span class="span4">
 	</span>
 	<span class="span5">

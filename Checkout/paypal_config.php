@@ -1,4 +1,5 @@
 <?php
+//strana za konfiguriranje za paypal plakanje
 //Seller Sandbox Credentials- Sample credentials already provided
 define("PP_USER_SANDBOX", "burovska_api1.gmail.com");
 define("PP_PASSWORD_SANDBOX", "2D3RX9NKQCBRVQSS");

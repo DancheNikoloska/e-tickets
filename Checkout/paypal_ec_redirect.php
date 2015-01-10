@@ -1,8 +1,8 @@
 <?php
-	
+	//strana za express check out
    require_once("paypal_functions.php");
   
-   //Call to SetExpressCheckout using the shopping parameters collected from the shopping form on index.php and few from config.php 
+   //Call to SetExpressCheckout using the shopping parameters collected from the shopping form and few from config.php 
 
    $returnURL = RETURN_URL;
    $cancelURL = CANCEL_URL; 

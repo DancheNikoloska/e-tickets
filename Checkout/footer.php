@@ -1,3 +1,4 @@
+<!-- strana za futer za paypal -->
 			</div> <!-- Row-Fluid ends here -->
 		</div>  <!--Container-Fluid ends here -->
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

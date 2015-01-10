@@ -1,5 +1,5 @@
 <?php 
-
+//starna za pregled na naracka
 	/*
 	* Call to GetExpressCheckoutDetails
 	*/

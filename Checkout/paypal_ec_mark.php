@@ -1,6 +1,6 @@
 <?php require_once("paypal_functions.php"); ?>
 <?php
-//'------------------------------------
+//'strana za paypal API
 //' Calls the SetExpressCheckout API call
 //'
 //' The CallMarkExpressCheckout function is defined in the file paypal_functions.php,
